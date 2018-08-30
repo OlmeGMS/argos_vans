@@ -67,10 +67,10 @@ function saveCity(req, res)
 
   City.save((err, cityStored) => {
     if (err){
-      res.status(500).send({message: 'Error nos pudo guardar la ciudad'});
+      res.status(500).send({message: 'Error no se pudo guardar la ciudad'});
     }else {
       if (!cityStored) {
-        res.status(404).send({message: 'L ciuda no ha sido guardada'});
+        res.status(404).send({message: 'La ciudad no ha sido guardada'});
       }else {
         res.status(200).send({city: cityStored});
       }
@@ -90,7 +90,7 @@ function updateCity(req, res)
       if (!cityUpdate) {
         res.status(404).send({message: 'La ciudad no ha sido actualizada'});
       }else {
-        res.status(200).send(city: cityUpdate);
+        res.status(200).send({city: cityUpdate});
       }
     }
   });
@@ -105,7 +105,7 @@ function deleteCity(req, res)
       res.status(500).send({message: 'Error al eliminar la ciudad'});
     }else {
       if (!cityRemove) {
-        res.status(404).send({message: 'La ciuada no pudo ser eliminada'});
+        res.status(404).send({message: 'La ciudad no pudo ser eliminada'});
       }else {
         res.status(200).send({cityRemove});
       }

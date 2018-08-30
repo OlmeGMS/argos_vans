@@ -8,6 +8,13 @@ var app = express();
 // cargar rutas
 var rol_routes = require('./routes/rol');
 var user_routes = require('./routes/user');
+var city_routes = require('./routes/city');
+var location_routes = require('./routes/location');
+var costCenter_routes = require('./routes/costCenter');
+var driverCar_routes = require('./routes/driverCar');
+var car_routes = require('./routes/car');
+var rate_routes = require('./routes/rate');
+var route_routes = require('./routes/route');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -25,6 +32,13 @@ app.use((req, res, next) => {
 // rutas base
 app.use('/api', rol_routes);
 app.use('/api', user_routes);
+app.use('/api', city_routes);
+app.use('/api', location_routes);
+app.use('/api', costCenter_routes);
+app.use('/api', driverCar_routes);
+app.use('/api', car_routes);
+app.use('/api', rate_routes);
+app.use('/api', route_routes);
 
 
 
