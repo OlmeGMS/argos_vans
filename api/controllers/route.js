@@ -43,7 +43,7 @@ function getRoute(req, res)
         message: 'Error en ela petición'
       });
     } else {
-      if (route) {
+      if (!route) {
         res.status(404).send({
           message: 'La ruta no existe'
         });
