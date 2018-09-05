@@ -1,18 +1,20 @@
+
 'use strict'
 
 var jwt = require('jwt-simple');
 var moment = require('moment');
-var secret = 'clave_secreta_examen_celuvans';
+var secret = 'clave_secreta_argos_celuvans';
 
 exports.createToken = function(user){
     var payload = {
       sub: user._id,
       name: user.name,
       surname: user.surname,
-      dni: usser.dni,
+      dni: user.dni,
       email: user.email,
       phone: user.phone,
-      role: user.role,
+      image: user.image,
+      rol: user.rol,
       iat: moment().unix(),
       exp: moment().add(30, 'days').unix
     };

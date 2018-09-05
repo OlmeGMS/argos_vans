@@ -56,11 +56,11 @@ function loginUser(req, res)
       res.status(500).send({message: 'Error en la petición'});
     }else {
       if (!user) {
-        res.status(404).send({message: 'El usuario'});
+        res.status(404).send({message: 'El usuario no existe'});
 
       }else {
         //Comprobar la contraseña
-        bcrypt.compare(password, user,password, function(err, check){
+        bcrypt.compare(password, user.password, function(err, check){
           if (check) {
             //Devolvemos los datos del usuario logueado
             if (params.gethash) {

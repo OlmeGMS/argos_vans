@@ -81,14 +81,14 @@ var Login = function() {
                     },
                     'login-password': {
                         required: true,
-                        minlength: 5
+
                     }
                 },
                 messages: {
-                    'login-email': 'Please enter your account\'s email',
+                    'login-email': 'Por favor digite su email',
                     'login-password': {
-                        required: 'Please provide your password',
-                        minlength: 'Your password must be at least 5 characters long'
+                        required: 'Por favor digite su contraseña',
+
                     }
                 }
             });

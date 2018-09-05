@@ -1,0 +1,88 @@
+<div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+<!-- Main Sidebar -->
+<div id="sidebar">
+  <!-- Wrapper for scrolling functionality -->
+  <div id="sidebar-scroll">
+    <!-- Sidebar Content -->
+    <div class="sidebar-content">
+      <!-- Brand -->
+      <a href="inicio.html" class="sidebar-brand">
+        <i class="fa fa-bus"></i><span class="sidebar-nav-mini-hide"><strong>Celuvans</strong></span>
+      </a>
+      <!-- END Brand -->
+
+      <!-- User Info -->
+      <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
+        <div class="sidebar-user-avatar">
+          <a href="#">
+            <img src="assets/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+          </a>
+        </div>
+        <div class="sidebar-user-name" id="identity_name">{{identity.name}} {{identity.surname}}</div>
+        <div class="sidebar-user-links">
+          <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
+          <a href="javascript:void(0)" [routerLink]="['/mis-datos']" class="enable-tooltip" data-placement="bottom" title="Configuración" ><i class="gi gi-user"></i></a>
+          <a href="index.html" data-toggle="tooltip" data-placement="bottom" title="Cerrar Sesión " (click)="logout()"><i class="gi gi-exit"></i></a>
+        </div>
+      </div>
+      <!-- END User Info -->
+
+      <!-- Theme Colors -->
+      <!-- Change Color Theme functionality can be found in js/app.js - templateOptions() -->
+
+            <!-- END Theme Colors -->
+
+            <!-- Sidebar Navigation -->
+            <ul class="sidebar-nav">
+
+
+              <a href="#" class="sidebar-nav-menu"><span class="sidebar-nav-mini-hide">MENU DE NAVEGACIÓN</span></a>
+
+              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-bus sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Vehículos</span></a>
+              <ul>
+                <li><a href="agregar_vehiculo.html"><i class="fa fa-circle-o"></i> Agregar Vehículos</a></li>
+                <li><a href="marcas.html"><i class="fa fa-circle-o"></i> Marcas</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Modelos</a></li>
+                <li><a href="agregar_carroceria.html"><i class="fa fa-circle-o"></i> Tipos Carrocerias</a></li>
+                <li><a href="blindaje.html"><i class="fa fa-circle-o"></i> Tipo Blindaje</a></li>
+                <li><a href="modelos.html"><i class="fa fa-circle-o"></i> Modelo</a></li>
+                <li><a href="lineas_vehiculo.html"><i class="fa fa-circle-o"></i> Línea</a></li>
+                <li><a href="tipo_vehiculos.html"><i class="fa fa-circle-o"></i> Clase de Vehiculo</a></li>
+              </ul>
+              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-server sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Servicios</span></a>
+              <ul>
+                <li><a href="crear_servicios.html"><i class="fa fa-circle-o"></i> Crear Servicios</a></li>
+                <li><a href="agregar_conductor.html"><i class="fa fa-circle-o"></i> Agregar Conductor</a></li>
+              </ul>
+              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-road sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Rutas</span></a>
+              <ul>
+               <li><a href="crear_ruta.html"><i class="fa fa-circle-o"></i> Crear Ruta</a></li>
+             </ul>
+             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-book sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Contratos</span></a>
+             <ul>
+               <li><a href="agregar_conductor.html"><i class="fa fa-circle-o"></i> Crear Contratos</a></li>
+               <li><a href="prorroga.html"><i class="fa fa-circle-o"></i> Prorrogas</a></li>
+               <li><a href="crear_cliente.html"><i class="fa fa-circle-o"></i> Clientes</a></li>
+
+             </ul>
+             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-file-archive-o sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Informes</span></a>
+             <ul>
+               <li><a href="gasto_ruta.html"><i class="fa fa-circle-o"></i> Gastos Rutas</a></li>
+               <li><a href="ciudades_informe.html"><i class="fa fa-circle-o"></i> Ciudades</a></li>
+               <li><a href="marca_informe.html"><i class="fa fa-circle-o"></i> Cantidad de Vehículos</a></li>
+               <li><a href="prestados_informe.html"><i class="fa fa-circle-o"></i> Servicios Cliente</a></li>
+
+             </ul>
+
+           </ul>
+           <!-- END Sidebar Navigation -->
+
+           <!-- Sidebar Notifications -->
+
+           <!-- END Sidebar Notifications -->
+         </div>
+         <!-- END Sidebar Content -->
+       </div>
+       <!-- END Wrapper for scrolling functionality -->
+     </div>
+     <!-- END Main Sidebar -->
