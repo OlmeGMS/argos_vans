@@ -15,7 +15,12 @@
       <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
         <div class="sidebar-user-avatar">
           <a href="#">
-            <img src="assets/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+            <div class="" *ngIf="identity.image == 'null'">
+              <img src="assets/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+            </div>
+            <div class="" *ngIf="identity.image != 'null'">
+              <img id="image-logged" src="{{url + 'get-image-user/' + identity.image }}" alt="avatar">
+            </div>
           </a>
         </div>
         <div class="sidebar-user-name" id="identity_name">{{identity.name}} {{identity.surname}}</div>
@@ -33,46 +38,21 @@
             <!-- END Theme Colors -->
 
             <!-- Sidebar Navigation -->
-            <ul class="sidebar-nav">
+            <ul class="sidebar-nav" *ngIf="identity && identity.rol == '5b93e53e54cf2f04af4ed4d9'">
 
 
               <a href="#" class="sidebar-nav-menu"><span class="sidebar-nav-mini-hide">MENU DE NAVEGACIÓN</span></a>
 
-              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-bus sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Vehículos</span></a>
+              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-user-secret sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Roles</span></a>
               <ul>
-                <li><a href="agregar_vehiculo.html"><i class="fa fa-circle-o"></i> Agregar Vehículos</a></li>
-                <li><a href="marcas.html"><i class="fa fa-circle-o"></i> Marcas</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Modelos</a></li>
-                <li><a href="agregar_carroceria.html"><i class="fa fa-circle-o"></i> Tipos Carrocerias</a></li>
-                <li><a href="blindaje.html"><i class="fa fa-circle-o"></i> Tipo Blindaje</a></li>
-                <li><a href="modelos.html"><i class="fa fa-circle-o"></i> Modelo</a></li>
-                <li><a href="lineas_vehiculo.html"><i class="fa fa-circle-o"></i> Línea</a></li>
-                <li><a href="tipo_vehiculos.html"><i class="fa fa-circle-o"></i> Clase de Vehiculo</a></li>
+                <li><a [routerLink]="['/roles']"><i class="fa fa-circle-o"></i> Lista Roles</a></li>
+                <li><a [routerLink]="['/crear-rol']"><i class="fa fa-circle-o"></i> Crear Rol</a></li>
               </ul>
-              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-server sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Servicios</span></a>
+              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Usuarios</span></a>
               <ul>
-                <li><a href="crear_servicios.html"><i class="fa fa-circle-o"></i> Crear Servicios</a></li>
-                <li><a href="agregar_conductor.html"><i class="fa fa-circle-o"></i> Agregar Conductor</a></li>
+                <li><a [routerLink]="['/roles']"><i class="fa fa-circle-o"></i> Lista Usuarios</a></li>
+                <li><a [routerLink]="['/crear-rol']"><i class="fa fa-circle-o"></i> Crear Usuario</a></li>
               </ul>
-              <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-road sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Rutas</span></a>
-              <ul>
-               <li><a href="crear_ruta.html"><i class="fa fa-circle-o"></i> Crear Ruta</a></li>
-             </ul>
-             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-book sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Contratos</span></a>
-             <ul>
-               <li><a href="agregar_conductor.html"><i class="fa fa-circle-o"></i> Crear Contratos</a></li>
-               <li><a href="prorroga.html"><i class="fa fa-circle-o"></i> Prorrogas</a></li>
-               <li><a href="crear_cliente.html"><i class="fa fa-circle-o"></i> Clientes</a></li>
-
-             </ul>
-             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-file-archive-o sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Informes</span></a>
-             <ul>
-               <li><a href="gasto_ruta.html"><i class="fa fa-circle-o"></i> Gastos Rutas</a></li>
-               <li><a href="ciudades_informe.html"><i class="fa fa-circle-o"></i> Ciudades</a></li>
-               <li><a href="marca_informe.html"><i class="fa fa-circle-o"></i> Cantidad de Vehículos</a></li>
-               <li><a href="prestados_informe.html"><i class="fa fa-circle-o"></i> Servicios Cliente</a></li>
-
-             </ul>
 
            </ul>
            <!-- END Sidebar Navigation -->

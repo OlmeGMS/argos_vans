@@ -1,6 +1,5 @@
 export class Template {
     constructor(
-      public _id: string,
       public id_employee: string,
       public id_route: string,
       public date_start: string,

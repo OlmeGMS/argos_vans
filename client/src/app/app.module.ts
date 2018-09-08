@@ -11,7 +11,11 @@ import { SildebarComponent } from './sildebar/sildebar.component';
 import { TemplateHeaderComponent } from './template-header/template-header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './components/home.component';
+import { UserTableComponent } from './components/user-table.component';
 import { UserEditComponent } from './components/user-edit.component';
+import { RolListComponent } from './components/rol-list.component';
+import { RolAddComponent } from './components/rol-add.component';
+import { RolEditComponent } from './components/rol-edit.component';
 
 
 @NgModule({
@@ -21,7 +25,12 @@ import { UserEditComponent } from './components/user-edit.component';
     TemplateHeaderComponent,
     FooterComponent,
     HomeComponent,
-    UserEditComponent
+    UserTableComponent,
+    UserEditComponent,
+    RolListComponent,
+    RolAddComponent,
+    RolEditComponent
+
   ],
   imports: [
     BrowserModule,

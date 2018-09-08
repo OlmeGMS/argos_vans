@@ -15,6 +15,7 @@ export class SildebarComponent implements OnInit {
   public user: User;
   public identity;
   public token;
+  public url: string;
 
 
   constructor(
@@ -26,6 +27,9 @@ export class SildebarComponent implements OnInit {
   ngOnInit() {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+    this.url = GLOBAL.url;
+    console.log('o');
+    console.log(this.identity);
   }
 
 

@@ -1772,6 +1772,23 @@ a[data-toggle="lightbox-image"]:hover img {
 }
 
 /* Pricing Table */
+
+  @media (min-width: 415px) {
+    #btn-cancel-table{
+        margin-left: -43px;
+        margin-top: -0px;
+    }
+  }
+
+@media (max-width: 415px) {
+    #btn-cancel-table{
+        margin-left: 15px;
+        margin-top: -25px;
+    }
+}
+
+
+
 .table.table-pricing {
     background-color: #ffffff;
 }
