@@ -11,7 +11,8 @@ var UserSchema = Schema({
   password: String,
   phone: String,
   image: String,
-  rol: { type: Schema.ObjectId, ref: 'Rol'}
+  rol: { type: Schema.ObjectId, ref: 'Rol'},
+  estatus: Boolean
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -48,7 +48,9 @@ function getLocations(req, res)
 
 function getListLocations(req, res)
 {
-  Localidad.find({}, function(err, locations){
+  var find = Localidad.find({}).sort('location');
+
+  find.populate({path: 'id_city'}).exec((err, locations) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -63,7 +65,7 @@ function getListLocations(req, res)
 
 function saveLocation(req, res)
 {
-  var location = new location();
+  var location = new Localidad();
   var params = req.body;
   location.name = params.name;
   location.id_city = params.id_city;

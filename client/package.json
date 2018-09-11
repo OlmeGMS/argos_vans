@@ -25,6 +25,7 @@
     "parsejson": "0.0.3",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.3.1",
+    "timespan": "^2.3.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

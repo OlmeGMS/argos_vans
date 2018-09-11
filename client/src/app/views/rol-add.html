@@ -35,7 +35,7 @@
           <label class="col-md-4 control-label" for="nombre">Nombre<span class="text-danger">*</span></label>
           <div class="col-md-6">
             <input type="text" id="name" #role="ngModel" name="name" class="form-control" [(ngModel)]="rol.name" placeholder="Digite el nombre del rol" value="" required>
-            <span *ngIf="!rol.valid && rol.touched"><p style="color:#b61922;">El nombre del tema es obligatorio.</p></span>
+            <span *ngIf="!rol.valid && rol.touched"><p style="color:#b61922;">El nombre es obligatorio.</p></span>
           </div>
         </div>
 

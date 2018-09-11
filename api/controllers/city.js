@@ -52,7 +52,7 @@ function getListCities(req, res)
       if (!cities) {
         res.status(404).send({message: 'No hay ciudades creadas !!'});
       }else {
-        res.status(200).send({cties: cities});
+        res.status(200).send({cities: cities});
       }
 
     }
@@ -65,7 +65,7 @@ function saveCity(req, res)
   var params = req.body;
   city.name = params.name;
 
-  City.save((err, cityStored) => {
+  city.save((err, cityStored) => {
     if (err){
       res.status(500).send({message: 'Error no se pudo guardar la ciudad'});
     }else {

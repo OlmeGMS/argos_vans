@@ -64,7 +64,7 @@ function saveCostCenter(req, res)
   var costCenter = new CostCenter();
   var params = req.body;
   costCenter.name = params.name;
-  costCenter.adress = params.adress;
+  costCenter.address = params.address;
   costCenter.ceco = params.ceco;
 
   costCenter.save((err, costCenterStored) =>{

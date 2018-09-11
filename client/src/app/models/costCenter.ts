@@ -1,7 +1,7 @@
 export class CostCenter {
     constructor(
       public name: string,
-      public adress: string,
+      public address: string,
       public ceco: string
     ){}
 }

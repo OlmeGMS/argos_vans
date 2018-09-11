@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
+import { User } from '../models/user';
 
 @Injectable()
 export class UserService{
@@ -34,6 +35,17 @@ export class UserService{
       let headers = new Headers({'Content-Type':'application/json'});
 
       return this._http.post(this.url+'register',params, {headers: headers})
+                       .map(res => res.json());
+    }
+
+    addUser(token, user: User){
+      let params = JSON.stringify(user);
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      });
+
+      return this._http.post(this.url+'add-user',params, {headers: headers})
                        .map(res => res.json());
     }
 
@@ -71,5 +83,27 @@ export class UserService{
       }
 
       return this.token;
+  }
+
+  getUserTablet(token){
+    let headers = new Headers({
+      'Content-Type':'application/json',
+      'Authorization': token
+    });
+    let options = new RequestOptions({ headers: headers });
+    return this._http.get(this.url + 'users/', options)
+                     .map(res => res.json());
+
+  }
+
+  deleteUser(token, id: string){
+    let headers = new Headers({
+      'Content-Type':'application/json',
+      'Authorization':token
+    });
+
+    let options = new RequestOptions({ headers: headers});
+    return this._http.delete(this.url+'/user'+id, options)
+                     .map(res => res.json());
   }
 }

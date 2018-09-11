@@ -12,10 +12,19 @@ import { TemplateHeaderComponent } from './template-header/template-header.compo
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './components/home.component';
 import { UserTableComponent } from './components/user-table.component';
+import { UserAddComponent } from './components/user-add.component';
 import { UserEditComponent } from './components/user-edit.component';
 import { RolListComponent } from './components/rol-list.component';
 import { RolAddComponent } from './components/rol-add.component';
 import { RolEditComponent } from './components/rol-edit.component';
+import { CityTableComponent } from './components/city-table.component';
+import { CityAddComponent } from './components/city-add.component';
+import { CityEditComponent } from './components/city-edit.component';
+import { LocationTableComponent } from './components/location-table.component';
+import { LocationAddComponent } from './components/location-add.component';
+import { LocationEditComponent } from './components/location-edit.component';
+import { CostCenterTableComponent } from './components/cost-center-table.component';
+import { CostCenterAddComponent } from './components/cost-center-add.component';
 
 
 @NgModule({
@@ -26,10 +35,19 @@ import { RolEditComponent } from './components/rol-edit.component';
     FooterComponent,
     HomeComponent,
     UserTableComponent,
+    UserAddComponent,
     UserEditComponent,
     RolListComponent,
     RolAddComponent,
-    RolEditComponent
+    RolEditComponent,
+    CityTableComponent,
+    CityAddComponent,
+    CityEditComponent,
+    LocationTableComponent,
+    LocationAddComponent,
+    LocationEditComponent,
+    CostCenterTableComponent,
+    CostCenterAddComponent
 
   ],
   imports: [

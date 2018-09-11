@@ -3,72 +3,69 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
-import { Rol } from '../models/rol';
+import { Location } from '../models/location';
 
 @Injectable()
-export class RolService {
+export class LocationService {
   public url: string;
 
-  constructor(private _http: Http) {
+  constructor(private _http: Http){
     this.url = GLOBAL.url;
   }
 
-  getRol(token, id: string){
+  getLocation(token, id: string){
     let headers = new Headers({
       'Content-Type':'application/json',
       'Authorization': token
     });
 
-    let options = new RequestOptions({ headers: headers });
-    return this._http.get(this.url+'rol/'+id, options)
+    let options = new RequestOptions({ headers: headers});
+    return this._http.get(this.url+'location/'+id, options)
                      .map(res => res.json());
   }
 
-  getRolList(token) {
+  getLocationList(token){
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+    let options = new RequestOptions({ headers: headers});
+    return this._http.get(this.url + 'locations-list/', options)
+                     .map(res => res.json());
+  }
+
+  addLocation(token, location: Location){
+    let params = JSON.stringify(location);
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': token
     });
 
-    let options = new RequestOptions({ headers: headers });
-    return this._http.get(this.url + 'roles-list/', options)
+    return this._http.post(this.url+'location', params, { headers: headers })
                      .map(res => res.json());
   }
 
-  addRol(token, rol: Rol) {
-    let params = JSON.stringify(rol);
-    let headers = new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': token
-    });
-
-    return this._http.post(this.url+'rol', params, { headers: headers })
-                     .map(res => res.json());
-
-  }
-
-  editRol(token, id:string, rol: Rol){
-    let params = JSON.stringify(rol);
+  editLocation(token, id:string, location:Location){
+    let params = JSON.stringify(location);
     let headers = new Headers({
       'Content-Type':'application/json',
       'Authorization': token
     });
 
-    return this._http.put(this.url+'rol/'+id, params, {headers: headers})
+    return this._http.put(this.url+'location/'+id, params, {headers: headers})
                      .map(res => res.json());
+
   }
 
-  deleteRol(token, id: string){
+  deleteLocation(token, id: string){
     let headers = new Headers({
       'Content-Type':'application/json',
       'Authorization':token
     });
 
-    let options = new RequestOptions({ headers: headers });
-    return this._http.delete(this.url+'rol/'+id, options)
-                     .map(res => res.json());
+    let options = new RequestOptions({ headers: headers});
+    return this._http.delete(this.url+'location/'+id, options)
+               .map(res => res.json());
   }
-
-
 
 }

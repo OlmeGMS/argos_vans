@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var CostCenterSchema = Schema({
   name: String,
-  adress: String,
+  address: String,
   ceco: String
 
 });

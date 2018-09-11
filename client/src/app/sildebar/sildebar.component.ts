@@ -21,7 +21,7 @@ export class SildebarComponent implements OnInit {
   constructor(
     private _userService: UserService
   ) {
-    this.user = new User('','','','','','','','','');
+    this.user = new User('','','','','','','','','', true);
   }
 
   ngOnInit() {

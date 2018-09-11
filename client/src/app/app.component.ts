@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
     private _router: Router,
     private _userService: UserService
   ) {
-    this.user = new User('','','','','','','','','');
+    this.user = new User('','','','','','','','','',true);
   }
 
   ngOnInit(){
@@ -63,7 +63,7 @@ export class AppComponent implements OnInit{
                       // Crear elemento en el localstorage para tener el token
                       localStorage.setItem('token', token);
                       this._router.navigate(['/']);
-                      this.user = new User('','','','','','','','','');
+                      this.user = new User('','','','','','','','','', true);
 
 
                     }

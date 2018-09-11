@@ -8,6 +8,7 @@ export class User{
     public password: string,
     public phone: string,
     public image: string,
-    public role: string
+    public rol: string,
+    public status: boolean,
   ){}
 }
