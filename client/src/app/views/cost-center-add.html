@@ -42,7 +42,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="address">Dirección<span class="text-danger">*</span></label>
             <div class="col-md-6">
-              <input type="text" id="address" #address="ngModel" name="address" class="form-control" [(ngModel)]="costCenter.address" placeholder="Digite el nombre de la ciudad" value="" required>
+              <input type="text" id="address" #address="ngModel" name="address" class="form-control" [(ngModel)]="costCenter.address" placeholder="Calle 1c Bis #18-34" value="" required>
               <span *ngIf="!address.valid && address.touched"><p style="color:#b61922;">El ceco es obligatorio.</p></span>
             </div>
           </div>
@@ -50,7 +50,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="ceco">Ceco<span class="text-danger">*</span></label>
             <div class="col-md-6">
-              <input type="text" id="ceco" #ceco="ngModel" name="ceco" class="form-control" [(ngModel)]="costCenter.ceco" placeholder="Digite el nombre de la ciudad" value="" required>
+              <input type="text" id="ceco" #ceco="ngModel" name="ceco" class="form-control" [(ngModel)]="costCenter.ceco" placeholder="Digite el ceco" value="" required>
               <span *ngIf="!ceco.valid && ceco.touched"><p style="color:#b61922;">El ceco es obligatorio.</p></span>
             </div>
           </div>

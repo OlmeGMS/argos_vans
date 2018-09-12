@@ -26,6 +26,10 @@ import { LocationEditComponent } from './components/location-edit.component';
 import { CostCenterTableComponent } from './components/cost-center-table.component';
 import { CostCenterAddComponent } from './components/cost-center-add.component';
 
+// import car
+import { CarAddComponent } from './components/car-add.component';
+import { CarTableComponent } from './components/car-table.component';
+
 
 
 const appRoutes: Routes = [
@@ -44,6 +48,8 @@ const appRoutes: Routes = [
   {path: 'editar-localidad/:id', component: LocationEditComponent},
   {path: 'centros', component: CostCenterTableComponent},
   {path: 'crear-centro', component: CostCenterAddComponent},
+  {path: 'vehiculos', component: CarTableComponent},
+  {path: 'crear-vehiculo', component: CarAddComponent},
   {path: '**', component: HomeComponent}
 ];
 

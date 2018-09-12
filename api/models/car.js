@@ -5,9 +5,9 @@ var Schema = mongoose.Schema;
 
 var CasSchema = Schema({
   placa: String,
-  status: Boolean,
   capacity: String,
-  adress: String
+  address: String,
+  status: Boolean
 });
 
 module.exports = mongoose.model('Car', CasSchema);

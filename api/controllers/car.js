@@ -62,16 +62,36 @@ function getListCars(req, res)
     });
 }
 
+function searchCar(req, res)
+{
+  var placa = req.params.placa;
+
+  var find = Car.find({placa: placa}).sort('car').where('placa').equals(placa);
+  find.populate({path: 'car'}).exec((err, cars) => {
+
+    if(err){
+      res.status(500).send({message: 'Error en la petición'});
+    }else {
+      if (!cars) {
+        res.status(404).send({message: 'No hay vehículos'});
+        console.log('no encontro');
+      }else{
+        res.status(200).send({cars});
+      }
+    }
+  });
+}
+
 function saveCar(req, res)
 {
   var car = new Car();
   var params = req.body;
-  car.placa = params.placa;
-  car.status = params.status;
+  car.placa = params.placa.toUpperCase();
   car.capacity = params.capacity;
-  car.adress = params.adress;
+  car.address = params.address;
+  car.status = params.status;
 
-  Car.save((err, carStored) => {
+  car.save((err, carStored) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -127,6 +147,7 @@ module.exports = {
   getCar,
   getCars,
   getListCars,
+  searchCar,
   saveCar,
   updateCar,
   deleteCar

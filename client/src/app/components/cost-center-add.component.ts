@@ -45,7 +45,7 @@ export class  CostCenterAddComponent implements OnInit {
 
     onSubmit(){
       console.log(this.costCenter);
-      /*
+
       this._costCenterService.addCostCenter(this.token, this.costCenter).subscribe(
           response => {
             if(!response.costCenter){
@@ -65,7 +65,7 @@ export class  CostCenterAddComponent implements OnInit {
             }
 
       );
-      */
+      
 
     }
 }

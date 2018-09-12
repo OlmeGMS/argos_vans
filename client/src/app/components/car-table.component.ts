@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params} from '@angular/router';
 
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
-import { CostCenterService } from '../services/costCenter.service';
-import { CostCenter } from '../models/costCenter';
+import { CarService } from '../services/car.service';
+import { Car } from '../models/car';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'centro-list',
-  templateUrl: '../views/centro-table.html',
-  providers: [UserService, CostCenterService]
+  selector: 'car-table',
+  templateUrl: '../views/car-table.html',
+  providers: [UserService, CarService]
 })
 
-export class CostCenterTableComponent implements OnInit {
+export class CarTableComponent implements OnInit {
 
     public titulo: string;
-    public costCenters: CostCenter[];
-    public center: CostCenter;
+    public cars: Car[];
     public identity;
     public token;
     public url: string;
@@ -27,28 +26,29 @@ export class CostCenterTableComponent implements OnInit {
       private _route: ActivatedRoute,
       private _router: Router,
       private _userService: UserService,
-      private _costCenterService: CostCenterService
+      private _carService: CarService
     ){
-      this.titulo = 'Centros de costos';
+      this.titulo = 'Vehículos';
       this.identity = this._userService.getIdentity();
       this.token = this._userService.getToken();
       this.url = GLOBAL.url;
     }
 
     ngOnInit(){
-      console.log('componente de tabla de cnetro de costos cargado');
-      this.getCostCenterList();
+        console.log('Cargado el componente de tabla de vehículos');
+        this.getCarList();
     }
 
-    getCostCenterList(){
-      this._costCenterService.getCostCenterList(this.token).subscribe(
+    getCarList(){
+      this._carService.getCarList(this.token).subscribe(
         response => {
-          console.log(response);
-          if(!response.costCenter){
+          if(!response.cars){
             this._router.navigate(['/']);
+
           }else{
-            this.costCenters = response.costCenter;
-            console.log(this.costCenters);
+            this.cars = response.cars;
+            console.log(this.cars);
+
           }
         },
         error => {
@@ -65,17 +65,17 @@ export class CostCenterTableComponent implements OnInit {
       this.confirmado = id;
     }
 
-    onCancelCostCenter() {
+    onCancelCar(){
       this.confirmado = null;
     }
 
-    onDeleteCostCenter(id){
-      this._costCenterService.deleteCostCenter(this.token, id).subscribe(
+    onDeleteCar(id){
+      this._carService.deleteCar(this.token, id).subscribe(
         response => {
-          if (!response.costCenter) {
-              alert('Centro de costo eliminado');
+          if(!response.car){
+            alert('Vehículo eliminado');
           }
-          this.getCostCenterList();
+          this.getCarList();
         },
         error => {
           var errorMessage = <any>error;
@@ -83,8 +83,8 @@ export class CostCenterTableComponent implements OnInit {
                   var body = JSON.parse(error._body);
                   console.log(error);
               }
-
         }
       );
     }
+
 }

@@ -68,6 +68,15 @@ var FormsValidation = function() {
                         required: true,
                         range: [1, 1000]
                     },
+                    placa:{
+                      required: true
+                    },
+                    name:{
+                      required: true
+                    },
+                    surname:{
+                      required: true
+                    },
                     val_terms: {
                         required: true
                     }
@@ -92,6 +101,9 @@ var FormsValidation = function() {
                     val_website: 'Please enter your website!',
                     val_digits: 'Please enter only digits!',
                     val_number: 'Please enter a number!',
+                    placa: 'Digite la placa',
+                    namen: 'Digite el nombre',
+                    surname: 'Digite el apellido',
                     val_range: 'Please enter a number between 1 and 1000!',
                     val_terms: 'You must agree to the service terms!'
                 }
@@ -108,6 +120,7 @@ var FormsValidation = function() {
             $('#masked_taxid').mask('99-9999999');
             $('#masked_ssn').mask('999-99-9999');
             $('#masked_pkey').mask('a*-999-a999');
+            $('#placa').mask('aaa999');
         }
     };
 }();

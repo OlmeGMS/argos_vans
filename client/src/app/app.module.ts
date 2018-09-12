@@ -25,6 +25,8 @@ import { LocationAddComponent } from './components/location-add.component';
 import { LocationEditComponent } from './components/location-edit.component';
 import { CostCenterTableComponent } from './components/cost-center-table.component';
 import { CostCenterAddComponent } from './components/cost-center-add.component';
+import { CarAddComponent } from './components/car-add.component';
+import { CarTableComponent } from './components/car-table.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { CostCenterAddComponent } from './components/cost-center-add.component';
     LocationAddComponent,
     LocationEditComponent,
     CostCenterTableComponent,
-    CostCenterAddComponent
+    CostCenterAddComponent,
+    CarAddComponent,
+    CarTableComponent
 
   ],
   imports: [
