@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var RateSchema = Schema({
-  origen: Number,
-  destino: Number,
+  origen: String,
+  destino: String,
   precio: Number,
 });
 

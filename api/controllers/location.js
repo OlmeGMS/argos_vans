@@ -63,6 +63,25 @@ function getListLocations(req, res)
   });
 }
 
+function searchLocation(req, res)
+{
+  var id_city = req.params.city;
+
+  var find = Localidad.find({id_city: id_city}).sort('location').where('id_city').equals(id_city);
+  find.populate({path: 'location'}).exec((err, locations) => {
+    if (err) {
+      res.status(500).send({message: 'Error en la petición'});
+    }else {
+      if (!locations) {
+        res.status(404).send({message: 'No hay localidades'});
+        console.log('no encontro');
+      }else {
+        res.status(200).send({locations});
+      }
+    }
+  });
+}
+
 function saveLocation(req, res)
 {
   var location = new Localidad();
@@ -122,6 +141,7 @@ module.exports = {
   getLocation,
   getLocations,
   getListLocations,
+  searchLocation,
   saveLocation,
   updateLocation,
   deleteLocation

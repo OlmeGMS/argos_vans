@@ -3,13 +3,13 @@
   <div class="content-header">
       <div class="header-section">
           <h1>
-              <i class="fa fa-building"></i>{{titulo}}<br><small>En esta sección pudes ver las ciudades registradas!</small>
+              <i class="fa fa-building"></i>{{titulo}}<br><small>En esta sección pudes ver las tarifa registradas!</small>
           </h1>
       </div>
   </div>
   <ul class="breadcrumb breadcrumb-top">
       <li>Home</li>
-      <li>Ciudades</li>
+      <li>tarifas</li>
       <li><a href="">{{titulo}}</a></li>
   </ul>
   <!-- END Blank Header -->
@@ -18,7 +18,7 @@
   <div class="block">
       <!-- Example Title -->
       <div class="block-title">
-          <h2>{{titulo}}</h2> &nbsp;&nbsp;&nbsp;&nbsp;<a [routerLink]="['/crear-ciudad']"  id="btn-search-user"><i class="fa fa-plus"></i>Agregar nueva ciudad</a>
+          <h2>{{titulo}}</h2> &nbsp;&nbsp;&nbsp;&nbsp;<a [routerLink]="['/crear-tarifa']"  id="btn-search-user"><i class="fa fa-plus"></i>Agregar nueva tarifa</a>
       </div>
       <!-- END Example Title -->
         <div class="table-responsive remove-margin-bottom">
@@ -26,14 +26,18 @@
               <thead>
                   <tr>
                       <th class="text-center">ID</th>
-                      <th class="text-center">Nombre</th>
+                      <th class="text-center">Origen</th>
+                      <th class="text-center">Destino</th>
+                      <th class="text-center">Precio</th>
                       <th class="text-center">Acción</th>
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let city of cities">
-                      <td class="text-center">{{city._id}}</td>
-                      <td class="text-center">{{city.name}}</td>
+                  <tr *ngFor="let rate of rates">
+                      <td class="text-center">{{rate._id}}</td>
+                      <td class="text-center">{{rate.origen}}</td>
+                      <td class="text-center">{{rate.destino}}</td>
+                      <td class="text-center">{{rate.precio}}</td>
                       <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
@@ -41,12 +45,12 @@
                       </td>
                       <td class="text-center" *ngIf="identity.rol == '5b93e53e54cf2f04af4ed4d9'">
                           <div class="btn-group">
-                              <a [routerLink]="['/editar-ciudad', city._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                              <a (click)="onDeleteConfirm(city._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                              <a [routerLink]="['/editar-rate', rate._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                              <a (click)="onDeleteConfirm(rate._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                           </div>
                           <div class="btn-group btn-group-xs seguro" id="btn-cancel-table" *ngIf="confirmado == city._id">
-                              <a (click)="onDeleteCity(city._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-danger"><i class="fa fa-times"></i>Eliminar</a>
-                              <a (click)="onCancelCity()" data-toggle="tooltip" title="Cancelar" class="btn btn-default"><i class="fa fa-cw">Cancelar</i></a>
+                              <a (click)="onDeleteRate(rate._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-danger"><i class="fa fa-times"></i>Eliminar</a>
+                              <a (click)="onCancelRate()" data-toggle="tooltip" title="Cancelar" class="btn btn-default"><i class="fa fa-cw">Cancelar</i></a>
                           </div>
                       </td>
                   </tr>

@@ -69,7 +69,7 @@ function saveRate(req, res)
   rate.destino = params.destino;
   rate.precio = params.precio;
 
-  Rate.save((err, rateStored) => {
+  rate.save((err, rateStored) => {
     if (err) {
       res.status(500).send({message: 'Error no se pudo guardar la tarifa'});
     }else {

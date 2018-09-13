@@ -28,6 +28,8 @@ import { CostCenterAddComponent } from './components/cost-center-add.component';
 import { CarAddComponent } from './components/car-add.component';
 import { CarTableComponent } from './components/car-table.component';
 import { CarEditComponent } from './components/car-edit.component';
+import { RateTableComponent } from './components/rate-table.component';
+import { RateAddComponent } from './components/rate-add.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { CarEditComponent } from './components/car-edit.component';
     CostCenterAddComponent,
     CarAddComponent,
     CarTableComponent,
-    CarEditComponent
+    CarEditComponent,
+    RateTableComponent,
+    RateAddComponent
 
   ],
   imports: [
