@@ -3,18 +3,22 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GLOBAL } from './services/global';
 import { UserService } from './services/user.service';
+import { RolService } from './services/rol.service';
+import { Rol } from './models/rol';
 import { User } from './models/user';
+
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [UserService]
+  providers: [UserService, RolService]
 })
 export class AppComponent implements OnInit{
   public title = 'Celuvans';
   public user: User;
+  public rol;
   public identity;
   public token;
   public errorMessage;
@@ -25,18 +29,25 @@ export class AppComponent implements OnInit{
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService,
+    private _rolService: RolService
   ) {
     this.user = new User('','','','','','','','','',true);
+
   }
 
   ngOnInit(){
       this.identity = this._userService.getIdentity();
       this.token = this._userService.getToken();
+      this.rol = this._userService.getRol();
+
 
       console.log(this.identity);
       console.log(this.token);
+      console.log(this.identity.rol._id);
+      console.log(this.identity.rol.name);
   }
+
 
   public onSubmit(){
       console.log(this.user);

@@ -10,6 +10,7 @@ export class UserService{
 
     public identity;
     public token;
+    public rol;
     public url: string;
 
     constructor(private _http: Http){
@@ -85,6 +86,19 @@ export class UserService{
       return this.token;
   }
 
+  getRol(){
+    let rol = localStorage.getItem('rol');
+
+    if(rol != "undefined"){
+      this.rol = rol;
+    }else{
+      this.rol = null;
+    }
+
+    return this.rol;
+}
+
+
   getUserTablet(token){
     let headers = new Headers({
       'Content-Type':'application/json',
@@ -103,7 +117,7 @@ export class UserService{
     });
 
     let options = new RequestOptions({ headers: headers});
-    return this._http.delete(this.url+'/user'+id, options)
+    return this._http.delete(this.url+'/user/'+id, options)
                      .map(res => res.json());
   }
 }

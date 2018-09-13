@@ -1,4 +1,4 @@
-<div class="" *ngIf="identity && identity.rol == '5b93e53e54cf2f04af4ed4d9'">
+<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador'">
   <!-- Blank Header -->
   <div class="content-header">
       <div class="header-section">
@@ -29,6 +29,7 @@
                       <th class="text-center">Placa</th>
                       <th class="text-center">Capacidad</th>
                       <th class="text-center">Dirección</th>
+                      <th class="text-center">Estado</th>
                       <th class="text-center">Acción</th>
                   </tr>
               </thead>
@@ -38,6 +39,8 @@
                       <td class="text-center">{{car.placa}}</td>
                       <td class="text-center">{{car.capacity}}</td>
                       <td class="text-center">{{car.address}}</td>
+                      <td class="text-center" *ngIf="car.status == true"><span class="label label-success">Disponible</span></td>
+                      <td class="text-center" *ngIf="car.status != true"><span class="label label-warning">Asignado</span></td>
                       <td class="text-center" *ngIf="identity.rol != '5b93e53e54cf2f04af4ed4d9'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
@@ -63,7 +66,7 @@
   </div>
   <!-- END Example Block -->
 </div>
-<div class="" *ngIf="!identity || identity.rol != '5b93e53e54cf2f04af4ed4d9'">
+<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador'">
   <h2>ERROR: Permisos</h2>
   <br>
   <p style=" color: #333;">No tienes acceso a esta parte de la aplicación.</p>

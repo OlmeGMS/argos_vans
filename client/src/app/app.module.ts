@@ -27,6 +27,7 @@ import { CostCenterTableComponent } from './components/cost-center-table.compone
 import { CostCenterAddComponent } from './components/cost-center-add.component';
 import { CarAddComponent } from './components/car-add.component';
 import { CarTableComponent } from './components/car-table.component';
+import { CarEditComponent } from './components/car-edit.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { CarTableComponent } from './components/car-table.component';
     CostCenterTableComponent,
     CostCenterAddComponent,
     CarAddComponent,
-    CarTableComponent
+    CarTableComponent,
+    CarEditComponent
 
   ],
   imports: [

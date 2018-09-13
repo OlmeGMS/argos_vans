@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var bcrypt = require('bcrypt-nodejs');
 var User = require('../models/user');
+var Rol = require('../models/rol');
 var jwt = require('../services/jwt');
 
 function saveUser(req, res)
@@ -51,7 +52,8 @@ function loginUser(req, res)
   var email = params.email;
   var password = params.password;
 
-  User.findOne({email: email.toLowerCase()}, (err, user) => {
+  User.findOne({email: email.toLowerCase()}).populate({path: 'rol'}).exec((err, user) => {
+
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -74,6 +76,7 @@ function loginUser(req, res)
           }
         });
       }
+
     }
   });
 }
@@ -177,7 +180,9 @@ function getImageFile(req, res) {
 
 function getListUser(req, res)
 {
-  User.find({}, function(err, users){
+  var find = User.find({}).sort('user');
+
+  find.populate({path: 'rol'}).exec((err, users) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {

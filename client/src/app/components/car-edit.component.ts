@@ -37,6 +37,58 @@ export class CarEditComponent implements OnInit {
     }
 
     ngOnInit(){
+        console.log('Componente de edicar vehículo cargado');
 
     }
+
+    getCar(){
+      this._route.params.forEach((params: Params) => {
+        let id = params['id'];
+        this._carService.getCar(this.token, id).subscribe(
+            response => {
+              if(!response.city){
+                this._router.navigate(['/']);
+              }else{
+                this.car = response.car;
+              }
+            },
+            error => {
+              var errorMessage = <any>error;
+               if(errorMessage != null){
+                 var body = JSON.parse(error._body);
+                 console.log(error);
+               }
+            }
+        );
+      });
+
+    }
+
+    onSubmit(){
+
+      this._route.params.forEach((params: Params) => {
+        let id = params['id'];
+
+        this._carService.editCar(this.token, id, this.car).subscribe(
+          response => {
+            if(!response){
+              this.alertMessage = "Error en el servidor";
+            }else{
+              this.alertMessage = '¡El vehículo fue actualizado!';
+              this.car = response.car;
+            }
+          },
+          error => {
+            var errorMessage = <any>error;
+            if(errorMessage != null){
+              var body = JSON.parse(error._body);
+              this.alertMessage = body.message;
+              console.log(error);
+            }
+          }
+        );
+      });
+      
+    }
+
 }

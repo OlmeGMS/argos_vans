@@ -29,6 +29,7 @@ import { CostCenterAddComponent } from './components/cost-center-add.component';
 // import car
 import { CarAddComponent } from './components/car-add.component';
 import { CarTableComponent } from './components/car-table.component';
+import { CarEditComponent } from './components/car-edit.component';
 
 
 
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
   {path: 'crear-centro', component: CostCenterAddComponent},
   {path: 'vehiculos', component: CarTableComponent},
   {path: 'crear-vehiculo', component: CarAddComponent},
+  {path: 'editar-vehiculo/:id', component: CarEditComponent},
   {path: '**', component: HomeComponent}
 ];
 

@@ -1,4 +1,4 @@
-<div class="" *ngIf="identity && identity.rol == '5b93e53e54cf2f04af4ed4d9'">
+<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador'">
   <!-- Blank Header -->
   <div class="content-header">
       <div class="header-section">
@@ -37,20 +37,13 @@
                       <td class="text-center">{{user._id}}</td>
                       <td class="text-center">{{user.name}}</td>
                       <td class="text-center">{{user.surname}}</td>
-                      <td class="text-center" *ngIf="user.rol == '5b93e53e54cf2f04af4ed4d9'">Super administrador</td>
-                      <td class="text-center" *ngIf="user.rol == '5b93e64354cf2f04af4ed4da'">Administrador</td>
-                      <td class="text-center" *ngIf="user.rol == '5b93fdadbd8dff0875f0bf2f'">Coordinador</td>
-                      <td class="text-center" *ngIf="user.rol == '5b96808e7bd7b51b083cf191'">Facturador</td>
-                      <td class="text-center" *ngIf="user.rol == '5b9680c67bd7b51b083cf192'">Conductor</td>
-                      <td class="text-center" *ngIf="user.rol == '5b9680d67bd7b51b083cf193'">Empleado</td>
-                      <td class="text-center" *ngIf="user.rol == '5b9680f77bd7b51b083cf194'">Cliente Admin</td>
-
-                      <td class="text-center" *ngIf="identity.rol != '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center">{{user.rol.name}}</td>
+                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
                         </div>
                       </td>
-                      <td class="text-center" *ngIf="identity.rol == '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
                           <div class="btn-group">
                               <a [routerLink]="['/editar-usuario', user._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                               <a (click)="onDeleteConfirm(user._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
@@ -70,7 +63,7 @@
   </div>
   <!-- END Example Block -->
 </div>
-<div class="" *ngIf="!identity || identity.rol != '5b93e53e54cf2f04af4ed4d9'">
+<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador'">
   <h2>ERROR: Permisos</h2>
   <br>
   <p style=" color: #333;">No tienes acceso a esta parte de la aplicación.</p>
