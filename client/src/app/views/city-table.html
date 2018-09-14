@@ -34,12 +34,12 @@
                   <tr *ngFor="let city of cities">
                       <td class="text-center">{{city._id}}</td>
                       <td class="text-center">{{city.name}}</td>
-                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
+                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
                         </div>
                       </td>
-                      <td class="text-center" *ngIf="identity.rol == '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
                           <div class="btn-group">
                               <a [routerLink]="['/editar-ciudad', city._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                               <a (click)="onDeleteConfirm(city._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>

@@ -34,6 +34,7 @@ import { CarEditComponent } from './components/car-edit.component';
 // import rate
 import { RateTableComponent } from './components/rate-table.component';
 import { RateAddComponent } from './components/rate-add.component';
+import { RateEditComponent } from './components/rate-edit.component';
 
 
 
@@ -58,6 +59,7 @@ const appRoutes: Routes = [
   {path: 'editar-vehiculo/:id', component: CarEditComponent},
   {path: 'tarifas', component: RateTableComponent},
   {path: 'crear-tarifa', component: RateAddComponent},
+  {path: 'editar-tarifa/:id', component: RateEditComponent},
   {path: '**', component: HomeComponent}
 ];
 

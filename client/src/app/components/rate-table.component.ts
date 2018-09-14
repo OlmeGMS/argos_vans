@@ -42,13 +42,12 @@ export class RateTableComponent implements OnInit {
     getRateList(){
       this._rateService.getRateList(this.token).subscribe(
         response => {
-          if(!response.cars){
+          if(!response.rates){
             this._router.navigate(['/']);
 
           }else{
             this.rates = response.rates;
             console.log(this.rates);
-
           }
         },
         error => {
@@ -72,8 +71,8 @@ export class RateTableComponent implements OnInit {
     onDeleteRate(id){
       this._rateService.deleteRate(this.token, id).subscribe(
         response => {
-          if(!response.car){
-            alert('Vehículo eliminado');
+          if(!response.rate){
+            alert('¡Tarifa eliminada!');
           }
           this.getRateList();
         },

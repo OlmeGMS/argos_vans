@@ -5,6 +5,7 @@ var fs = require('fs');
 var mongoosePaginate = require('mongoose-pagination');
 
 var Rate = require('../models/rate');
+var Localidad = require('../models/location');
 
 function getRate(req, res)
 {
@@ -47,7 +48,8 @@ function getRates(req, res)
 
 function getListRates(req, res)
 {
-  Rate.find({}, function(err, rates){
+    var find = Rate.find({}).sort('rate');
+    find.populate({path: 'origen'}).populate({path: 'destino'}).exec((err, rates) => {
     if(err){
       res.status(500).send({message: 'Error en la petición'});
     }else {

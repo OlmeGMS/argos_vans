@@ -35,20 +35,20 @@
               <tbody>
                   <tr *ngFor="let rate of rates">
                       <td class="text-center">{{rate._id}}</td>
-                      <td class="text-center">{{rate.origen}}</td>
-                      <td class="text-center">{{rate.destino}}</td>
+                      <td class="text-center">{{rate.origen.name}}</td>
+                      <td class="text-center">{{rate.destino.name}}</td>
                       <td class="text-center">{{rate.precio}}</td>
-                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
+                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
                         </div>
                       </td>
-                      <td class="text-center" *ngIf="identity.rol == '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
                           <div class="btn-group">
-                              <a [routerLink]="['/editar-rate', rate._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                              <a [routerLink]="['/editar-tarifa', rate._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                               <a (click)="onDeleteConfirm(rate._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                           </div>
-                          <div class="btn-group btn-group-xs seguro" id="btn-cancel-table" *ngIf="confirmado == city._id">
+                          <div class="btn-group btn-group-xs seguro" id="btn-cancel-table" *ngIf="confirmado == rate._id">
                               <a (click)="onDeleteRate(rate._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-danger"><i class="fa fa-times"></i>Eliminar</a>
                               <a (click)="onCancelRate()" data-toggle="tooltip" title="Cancelar" class="btn btn-default"><i class="fa fa-cw">Cancelar</i></a>
                           </div>

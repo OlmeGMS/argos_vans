@@ -41,12 +41,12 @@
                       <td class="text-center">{{car.address}}</td>
                       <td class="text-center" *ngIf="car.status == true"><span class="label label-success">Disponible</span></td>
                       <td class="text-center" *ngIf="car.status != true"><span class="label label-warning">Asignado</span></td>
-                      <td class="text-center" *ngIf="identity.rol != '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
                         </div>
                       </td>
-                      <td class="text-center" *ngIf="identity.rol == '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
                           <div class="btn-group">
                               <a [routerLink]="['/editar-vehiculo', car._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                               <a (click)="onDeleteConfirm(car._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>

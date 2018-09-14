@@ -22,7 +22,7 @@ export class RateService{
       'Authorization': token
     });
     let options = new RequestOptions({ headers: headers});
-    return this._http.get(this.url+'car/'+id, options)
+    return this._http.get(this.url+'rate/'+id, options)
                      .map(res => res.json());
 
   }
@@ -33,7 +33,7 @@ export class RateService{
       'Authorization': token
     });
     let options = new RequestOptions({ headers: headers});
-    return this._http.get(this.url+'cars-list/', options)
+    return this._http.get(this.url+'rates-list/', options)
                      .map(res => res.json());
   }
 
