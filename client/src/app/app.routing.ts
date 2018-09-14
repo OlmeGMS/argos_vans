@@ -36,6 +36,11 @@ import { RateTableComponent } from './components/rate-table.component';
 import { RateAddComponent } from './components/rate-add.component';
 import { RateEditComponent } from './components/rate-edit.component';
 
+// import employee
+import { EmployeeTableComponent } from './components/employee-table.component';
+import { EmployeeAddComponent } from './components/employee-add.component';
+
+
 
 
 const appRoutes: Routes = [
@@ -43,6 +48,8 @@ const appRoutes: Routes = [
   {path: 'mis-datos', component: UserEditComponent},
   {path: 'usuarios', component: UserTableComponent},
   {path: 'crear-usuario', component: UserAddComponent},
+  {path: 'empleados', component: EmployeeTableComponent},
+  {path: 'crear-empleado', component: EmployeeAddComponent},
   {path: 'roles', component: RolListComponent},
   {path: 'crear-rol', component: RolAddComponent},
   {path: 'editar-rol/:id', component: RolEditComponent},

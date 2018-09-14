@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
 import { User } from '../models/user';
+import { Location } from '../models/location';
 
 @Injectable()
 export class UserService{
@@ -59,6 +60,17 @@ export class UserService{
 
       return this._http.put(this.url+'update-user/'+user_to_update._id, params, {headers: headers})
                        .map(res => res.json());
+    }
+
+    searchLocation(token, city: string){
+      let headers = new Headers({
+        'Content-Type':'application/json',
+        'Authorization': token
+      });
+
+      let options = new RequestOptions({ headers: headers});
+      return this._http.get(this.url+'location-search/'+city, options)
+                        .map(res => res.json());
     }
 
     getIdentity(){

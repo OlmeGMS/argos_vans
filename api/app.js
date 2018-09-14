@@ -16,6 +16,7 @@ var car_routes = require('./routes/car');
 var rate_routes = require('./routes/rate');
 var route_routes = require('./routes/route');
 var template_routes = require('./routes/template');
+var employee_routes = require('./routes/employee');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -41,6 +42,7 @@ app.use('/api', car_routes);
 app.use('/api', rate_routes);
 app.use('/api', route_routes);
 app.use('/api', template_routes);
+app.use('/api', employee_routes);
 
 
 

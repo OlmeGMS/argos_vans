@@ -4,6 +4,7 @@ var fs = require('fs');
 var mongoosePaginate = require('mongoose-pagination');
 
 var Employee = require('../models/employee');
+var User = require('../models/user');
 var CostCenter = require('../models/costCenter');
 var Localidad = require('../models/location');
 
@@ -49,7 +50,27 @@ function getEmployees(req, res)
 
 function getListEmployees(req, res)
 {
-  Employee.find({}, function(err, employees){
+  var find = Employee.find({}).sort('employee');
+  find.populate({
+    path: 'id_user',
+    populate: {
+      path: 'user',
+      model: 'User'
+    },
+  }).populate({
+    path: 'id_cost_center',
+    populate: {
+      path: 'id_cost_center',
+      model: 'CostCenter'
+    },
+  }).populate({
+    path: 'id_localidad',
+    populate: {
+      path: 'id_localidad',
+      model: 'Location'
+    },
+  }).exec((err, employees) => {
+  //Employee.find({}, function(err, employees){
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -67,7 +88,7 @@ function saveEmployee(req, res)
   var employee = new Employee();
   var params = req.body;
   employee.code = params.code;
-  employee.adress = params.adress;
+  employee.address = params.address;
   employee.id_user = params.id_user;
   employee.id_cost_center = params.id_cost_center;
   employee.id_localidad = params.id_localidad;
@@ -76,7 +97,7 @@ function saveEmployee(req, res)
     if (err) {
       res.status(500).send({message: 'Error al guardar el empleado'});
     }else {
-      if (!themeStored) {
+      if (!employeeStored) {
         res.status(404).send({message: 'El empleado no ha sido guardado'});
       }else {
         res.status(200).send({employee: employeeStored});
@@ -128,5 +149,5 @@ module.exports = {
   getListEmployees,
   saveEmployee,
   updateEmployee,
-  deleteEmployee  
+  deleteEmployee
 }

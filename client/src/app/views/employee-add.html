@@ -1,4 +1,4 @@
-<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador'">
+<div class="" *ngIf="identity && identity.rol.name == 'Cliente Admin'|| identity.rol.name == 'Super Administrador'">
 <!-- Blank Header -->
 <div class="content-header">
     <div class="header-section">
@@ -73,17 +73,13 @@
             <span *ngIf="!phone.valid && phone.touched"><p style="color:#b61922;">El teléfono es obligatorio.</p></span>
           </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
           <label class="col-md-4 control-label" for="rol">Rol</label>
           <div class="col-md-6">
-            <select  class="form-control" id="rol" #rol="ngModel" name="rol" [(ngModel)]="user.rol" placeholder="Seleccione el rol" (ngModelChange)="getRolSelect($event)" required>
-              <option value="" selected disabled>Seleccione el rol</option>
-              <option *ngFor="let rol of roles; let i=index;" value="{{rol._id}}" (click)="getRolSelect(rol._id)">{{rol.name}}</option>
-            </select>
+            <input type="text" id="rol" #rol="ngModel" name="rol" class="form-control" [(ngModel)]="user.rol" placeholder="Digite el codigo" value="5b9680d67bd7b51b083cf193">
           </div>
-        </div>
+        </div>-->
 
-        <div class="" *ngIf="user.rol == '5b9680d67bd7b51b083cf193'">
           <div class="form-group">
             <label class="col-md-4 control-label" for="code">Codigo<span class="text-danger">*</span></label>
             <div class="col-md-6">
@@ -105,7 +101,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="city">Ciudad</label>
             <div class="col-md-6">
-              <select  class="form-control" id="city" #city="ngModel" name="city" [(ngModel)]="employee.city" placeholder="Seleccione la ciudad" (ngModelChange)="getCityLocations($event)" required>
+              <select  class="form-control" id="city" #city="ngModel" name="city" [(ngModel)]="user.city" placeholder="Seleccione la ciudad" (ngModelChange)="getCityLocations($event)" required>
                 <option value="" selected disabled>Seleccione el rol</option>
                 <option *ngFor="let city of cities" value="{{city._id}}" (click)="getCityLocations(city._id)">{{city.name}}</option>
               </select>
@@ -115,7 +111,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="location">Localidad destino</label>
             <div class="col-md-6">
-              <select  class="form-control" id="location" #destino="ngModel" name="destino" [(ngModel)]="employee.localidad" placeholder="Seleccione la localidad" required>
+              <select  class="form-control" id="location" #destino="ngModel" name="destino" [(ngModel)]="employee.id_localidad" placeholder="Seleccione la localidad" required>
                 <option value="" selected disabled>Seleccione la localidad</option>
                 <option *ngFor="let location of locations" value="{{location._id}}">{{location.name}}</option>
               </select>
@@ -130,8 +126,6 @@
             </div>
           </div>
 
-        </div>
-
         <div class="form-group ">
           <div class="col-md-8 col-md-offset-4">
             <button href="" type="submit" class="btn btn-sm btn-success" [disabled]="!formUser.form.valid"><i class="fa fa-arrow-right"></i> {{titulo}}</button>
@@ -144,7 +138,7 @@
 </div>
 <!-- END Example Block -->
 </div>
-<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador'">
+<div class="" *ngIf="!identity || identity.rol.name != 'Cliente Admin'|| identity.rol.name != 'Super Administrador'">
   <h2>ERROR: Permisos</h2>
   <br>
   <p style=" color: #333;">No tienes acceso a esta parte de la aplicación.</p>
