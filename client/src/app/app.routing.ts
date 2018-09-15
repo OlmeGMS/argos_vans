@@ -43,6 +43,10 @@ import { EmployeeAddComponent } from './components/employee-add.component';
 import { EmployeeEditComponent } from './components/employee-edit.component';
 import { EmployeeDatilComponent } from './components/employee-detail.component';
 
+// import arl
+import { ArlTableComponent } from './components/arl-table.component';
+import { ArlAddComponent } from './components/arl-add.component';
+import { ArlEditComponent } from './components/arl-edit.component';
 
 
 
@@ -73,6 +77,9 @@ const appRoutes: Routes = [
   {path: 'tarifas', component: RateTableComponent},
   {path: 'crear-tarifa', component: RateAddComponent},
   {path: 'editar-tarifa/:id', component: RateEditComponent},
+  {path: 'arls', component: ArlTableComponent},
+  {path: 'crear-arl', component: ArlAddComponent},
+  {path: 'editar-arl/:id', component: ArlEditComponent},
   {path: '**', component: HomeComponent}
 ];
 

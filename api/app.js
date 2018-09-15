@@ -17,6 +17,9 @@ var rate_routes = require('./routes/rate');
 var route_routes = require('./routes/route');
 var template_routes = require('./routes/template');
 var employee_routes = require('./routes/employee');
+var arl_routes = require('./routes/arl');
+var eps_routes = require('./routes/eps');
+var driver_routes = require('./routes/driver');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -43,6 +46,9 @@ app.use('/api', rate_routes);
 app.use('/api', route_routes);
 app.use('/api', template_routes);
 app.use('/api', employee_routes);
+app.use('/api', arl_routes);
+app.use('/api', eps_routes);
+app.use('/api', driver_routes);
 
 
 

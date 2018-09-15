@@ -36,6 +36,9 @@ import { EmployeeTableComponent } from './components/employee-table.component';
 import { EmployeeTableAdminComponent } from './components/employee-table-admin.component';
 import { EmployeeEditComponent } from './components/employee-edit.component';
 import { EmployeeDatilComponent } from './components/employee-detail.component';
+import { ArlTableComponent } from './components/arl-table.component';
+import { ArlAddComponent } from './components/arl-add.component';
+import { ArlEditComponent } from './components/arl-edit.component';
 
 
 @NgModule({
@@ -69,7 +72,10 @@ import { EmployeeDatilComponent } from './components/employee-detail.component';
     EmployeeTableComponent,
     EmployeeTableAdminComponent,
     EmployeeEditComponent,
-    EmployeeDatilComponent
+    EmployeeDatilComponent,
+    ArlTableComponent,
+    ArlAddComponent,
+    ArlEditComponent
 
   ],
   imports: [
