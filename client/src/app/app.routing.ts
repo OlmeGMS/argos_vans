@@ -37,8 +37,11 @@ import { RateAddComponent } from './components/rate-add.component';
 import { RateEditComponent } from './components/rate-edit.component';
 
 // import employee
+import { EmployeeTableAdminComponent } from './components/employee-table-admin.component';
 import { EmployeeTableComponent } from './components/employee-table.component';
 import { EmployeeAddComponent } from './components/employee-add.component';
+import { EmployeeEditComponent } from './components/employee-edit.component';
+import { EmployeeDatilComponent } from './components/employee-detail.component';
 
 
 
@@ -48,8 +51,11 @@ const appRoutes: Routes = [
   {path: 'mis-datos', component: UserEditComponent},
   {path: 'usuarios', component: UserTableComponent},
   {path: 'crear-usuario', component: UserAddComponent},
+  {path: 'empleados-admin', component: EmployeeTableAdminComponent},
   {path: 'empleados', component: EmployeeTableComponent},
   {path: 'crear-empleado', component: EmployeeAddComponent},
+  {path: 'editar-empleado/:id', component: EmployeeEditComponent},
+  {path: 'ver-empleado/:id', component: EmployeeDatilComponent},
   {path: 'roles', component: RolListComponent},
   {path: 'crear-rol', component: RolAddComponent},
   {path: 'editar-rol/:id', component: RolEditComponent},

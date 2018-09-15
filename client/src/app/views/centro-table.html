@@ -36,12 +36,12 @@
                       <td class="text-center">{{centro._id}}</td>
                       <td class="text-center">{{centro.name}}</td>
                       <td class="text-center">{{centro.address}}</td>
-                      <td class="text-center" *ngIf="identity.rol != '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center" *ngIf="identity.rol != 'Super Administrador'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
                         </div>
                       </td>
-                      <td class="text-center" *ngIf="identity.rol == '5b93e53e54cf2f04af4ed4d9'">
+                      <td class="text-center" *ngIf="identity.rol == 'Super Administrador'">
                           <div class="btn-group">
                               <a [routerLink]="['/editar-centro', centro._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                               <a (click)="onDeleteConfirm(centro._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>

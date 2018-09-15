@@ -4,6 +4,7 @@ export class Employee {
       public address: string,
       public id_user: string,
       public id_cost_center: string,
-      public id_localidad: string
+      public id_localidad: string,
+      public status: boolean
     ){}
 }

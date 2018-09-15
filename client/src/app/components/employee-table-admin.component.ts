@@ -13,7 +13,7 @@ import { AppComponent } from '../app.component';
   providers: [UserService, EmployeeService]
 })
 
-export class EmployeeTableComponent implements OnInit{
+export class EmployeeTableAdminComponent implements OnInit{
 
   public titulo: string;
   public employees: Employee[];
@@ -37,11 +37,11 @@ export class EmployeeTableComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.getEmployeeList();
+    this.getEmployeeListAdmin();
   }
 
-  getEmployeeList(){
-    this._employeeService.getEmployeeList(this.token).subscribe(
+  getEmployeeListAdmin(){
+    this._employeeService.getEmployeeListAdmin(this.token).subscribe(
       response => {
         if(!response.employees){
           this._router.navigate(['/']);
@@ -78,7 +78,7 @@ export class EmployeeTableComponent implements OnInit{
         if (!response.rol){
           alert('Empleado eliminado');
         }
-        this.getEmployeeList();
+        this.getEmployeeListAdmin();
       },
       error => {
         var errorMessage = <any>error;
@@ -107,7 +107,7 @@ export class EmployeeTableComponent implements OnInit{
                 if (!response.rol){
                   alert('Empleado eliminado');
                 }
-                this.getEmployeeList();
+                this.getEmployeeListAdmin();
               },
               error => {
                 var errorMessage = <any>error;

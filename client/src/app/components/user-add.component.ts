@@ -50,7 +50,7 @@ export class  UserAddComponent implements OnInit {
       this.identity = this._userService.getIdentity();
       this.token = this._userService.getToken();
       this.user = new User('', '', '', '', '', '','', 'null', '', true);
-      this.employee = new Employee('', '', '', '', '');
+      this.employee = new Employee('', '', '', '', '', true);
       this.getRolList();
       this.getCostCenterList();
       this.getCityList();

@@ -73,7 +73,7 @@ export class AppComponent implements OnInit{
                     }else{
                       // Crear elemento en el localstorage para tener el token
                       localStorage.setItem('token', token);
-                      this._router.navigate(['/']);
+                      this._router.navigate(['index.html']);
                       this.user = new User('','','','','','','','','', true);
 
 

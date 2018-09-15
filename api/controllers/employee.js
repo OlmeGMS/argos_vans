@@ -12,7 +12,25 @@ function getEmployee(req, res)
 {
   var employeeId = req.params.id;
 
-  Employee.findById(employeeId, (err, employee) => {
+  Employee.findById(employeeId).populate({
+    path: 'id_user',
+    populate: {
+      path: 'user',
+      model: 'User'
+    },
+  }).populate({
+    path: 'id_cost_center',
+    populate: {
+      path: 'id_cost_center',
+      model: 'CostCenter'
+    },
+  }).populate({
+    path: 'id_localidad',
+    populate: {
+      path: 'id_localidad',
+      model: 'Location'
+    },
+  }).exec((err, employee) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -48,9 +66,45 @@ function getEmployees(req, res)
   });
 }
 
+function getListEmployeesAdmin(req, res)
+{
+
+  var find = Employee.find({}).sort('employee');
+  find.populate({
+    path: 'id_user',
+    populate: {
+      path: 'user',
+      model: 'User'
+    },
+  }).populate({
+    path: 'id_cost_center',
+    populate: {
+      path: 'id_cost_center',
+      model: 'CostCenter'
+    },
+  }).populate({
+    path: 'id_localidad',
+    populate: {
+      path: 'id_localidad',
+      model: 'Location'
+    },
+  }).exec((err, employees) => {
+  //Employee.find({}, function(err, employees){
+    if (err) {
+      res.status(500).send({message: 'Error en la petición'});
+    }else {
+      if (!employees) {
+        res.status(404).send({message: 'No hay empleados !!'});
+      }else {
+        res.status(200).send({employees: employees});
+      }
+    }
+  });
+}
+
 function getListEmployees(req, res)
 {
-  var find = Employee.find({}).sort('employee');
+  var find = Employee.find({}).sort('employee').where('status').equals(true);
   find.populate({
     path: 'id_user',
     populate: {
@@ -92,6 +146,7 @@ function saveEmployee(req, res)
   employee.id_user = params.id_user;
   employee.id_cost_center = params.id_cost_center;
   employee.id_localidad = params.id_localidad;
+  employee.status = params.status;
 
   employee.save((err, employeeStored) => {
     if (err) {
@@ -111,7 +166,25 @@ function updateEmployee(req, res)
   var employeeId = req.params.id;
   var update = req.body;
 
-  Employee.findByIdAndRemove(employeeId, update, (err, employeeUpdate) => {
+  Employee.findByIdAndUpdate(employeeId, update, (err, employeeUpdate) => {
+    if (err) {
+      res.status(500).send({message: 'Error en la petición'});
+    }else {
+      if (!employeeUpdate) {
+        res.status(404).send({message: 'El empleado no ha sido actualizdo'});
+      }else {
+        res.status(200).send({employee: employeeUpdate});
+      }
+    }
+  });
+}
+
+function updateEmployeeStatus(req, res)
+{
+  var employeeId = req.params.id;
+  var update = req.body;
+
+  Employee.findByIdAndUpdate(employeeId, update, (err, employeeUpdate) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -146,8 +219,10 @@ function deleteEmployee(req, res)
 module.exports = {
   getEmployee,
   getEmployees,
+  getListEmployeesAdmin,
   getListEmployees,
   saveEmployee,
   updateEmployee,
-  deleteEmployee
+  deleteEmployee,
+  updateEmployeeStatus
 }

@@ -29,6 +29,17 @@ export class EmployeeService{
                      .map(res => res.json());
   }
 
+  getEmployeeListAdmin(token) {
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+
+    let options = new RequestOptions({ headers: headers });
+    return this._http.get(this.url + 'employee-list-admin/', options)
+                     .map(res => res.json());
+  }
+
   getEmployeeList(token) {
     let headers = new Headers({
       'Content-Type': 'application/json',
@@ -72,6 +83,18 @@ export class EmployeeService{
     let options = new RequestOptions({ headers: headers });
     return this._http.delete(this.url+'employee/'+id, options)
                      .map(res => res.json());
+  }
+
+  onFalseEmployee(token, id:string, employee: Employee){
+    let params = JSON.stringify(employee);
+    let headers = new Headers({
+      'Content-Type':'application/json',
+      'Authorization': token
+    });
+
+    return this._http.put(this.url+'employee-status/'+id, params, {headers: headers})
+                     .map(res => res.json());
+
   }
 
 }

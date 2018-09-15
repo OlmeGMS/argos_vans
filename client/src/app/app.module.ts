@@ -33,6 +33,9 @@ import { RateAddComponent } from './components/rate-add.component';
 import { RateEditComponent } from './components/rate-edit.component';
 import { EmployeeAddComponent } from './components/employee-add.component';
 import { EmployeeTableComponent } from './components/employee-table.component';
+import { EmployeeTableAdminComponent } from './components/employee-table-admin.component';
+import { EmployeeEditComponent } from './components/employee-edit.component';
+import { EmployeeDatilComponent } from './components/employee-detail.component';
 
 
 @NgModule({
@@ -63,7 +66,10 @@ import { EmployeeTableComponent } from './components/employee-table.component';
     RateAddComponent,
     RateEditComponent,
     EmployeeAddComponent,
-    EmployeeTableComponent
+    EmployeeTableComponent,
+    EmployeeTableAdminComponent,
+    EmployeeEditComponent,
+    EmployeeDatilComponent
 
   ],
   imports: [
