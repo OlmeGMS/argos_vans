@@ -108,6 +108,21 @@
 
           </ul>
           <!-- END Sidebar Navigation ClientAdmin-->
+          <!-- Sidebar Navigation ClientAdmin -->
+          <ul class="sidebar-nav" *ngIf="identity && identity.rol.name == 'Coordinador'">
+
+
+            <a href="#" class="sidebar-nav-menu"><span class="sidebar-nav-mini-hide">MENU DE NAVEGACIÓN</span></a>
+
+
+            <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Empleados</span></a>
+            <ul>
+              <li><a [routerLink]="['/conductores']"><i class="fa fa-circle-o"></i> Lista Conductores</a></li>
+              <li><a [routerLink]="['/crear-conductor']"><i class="fa fa-circle-o"></i> Crear Conductores</a></li>
+            </ul>
+
+         </ul>
+         <!-- END Sidebar Navigation ClientAdmin-->
 
            <!-- Sidebar Notifications -->
 

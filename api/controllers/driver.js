@@ -79,7 +79,7 @@ function getListDriversAdmin(req, res)
 
 function getListDrivers(req, res)
 {
-  var find = Employee.find({}).sort('driver').where('status').equals(true);
+  var find = Driver.find({}).sort('driver').where('status').equals(true);
   find.populate({
     path: 'user',
     populate: {

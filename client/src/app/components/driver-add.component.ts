@@ -101,7 +101,7 @@ export class DriverAddComponent implements OnInit {
   getEpsList(){
     this._epsService.getEpsList(this.token).subscribe(
       response => {
-        if(!response.cities){
+        if(!response.eps){
           this._router.navigate(['/']);
         }else{
           this.epss = response.eps;

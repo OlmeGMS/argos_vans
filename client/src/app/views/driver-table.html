@@ -1,4 +1,4 @@
-<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador' || identity.rol.name == 'Cliente Admin'">
+<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador' || identity.rol.name == 'Coordinador'">
   <!-- Blank Header -->
   <div class="content-header">
       <div class="header-section">
@@ -48,12 +48,12 @@
                       <td class="text-center">{{driver.eps.name}}</td>
                       <td class="text-center">{{driver.arl.name}}</td>
                       <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'"><span class="label label-info">{{driver.status}}</span></td>
-                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador' && identity.rol.name != 'Cliente Admin'">
+                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador' && identity.rol.name != 'Coordinador'">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-lock"></i></a>
                         </div>
                       </td>
-                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador' && identity.rol.name != 'Cliente Admin'">
+                      <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador' && identity.rol.name != 'Coordinador'">
                           <div class="btn-group">
                               <a [routerLink]="['/editar-conductor', driver._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                               <a (click)="onDeleteConfirm(driver._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
@@ -63,7 +63,7 @@
                               <a (click)="onCancelDriver()" data-toggle="tooltip" title="Cancelar" class="btn btn-default"><i class="fa fa-cw">Cancelar</i></a>
                           </div>
                       </td>
-                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador' && identity.rol.name == 'Cliente Admin'">
+                      <td class="text-center" *ngIf="identity.rol.name != 'Super Administrador' && identity.rol.name == 'Coordinador'">
                           <div class="btn-group">
                               <a [routerLink]="['/ver-conductor', driver._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
                               <a (click)="onFalseConfirm(driver._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
@@ -83,7 +83,7 @@
   </div>
   <!-- END Example Block -->
 </div>
-<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador' && identity.rol.name != 'Cliente Admin'">
+<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador' && identity.rol.name != 'Coordinador'">
   <h2>ERROR: Permisos</h2>
   <br>
   <p style=" color: #333;">No tienes acceso a esta parte de la aplicación.</p>
