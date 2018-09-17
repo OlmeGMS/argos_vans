@@ -8,26 +8,35 @@ import { CostCenterService } from '../services/costCenter.service';
 import { CityService } from '../services/city.service';
 import { LocationService } from '../services/location.service';
 import { EmployeeService } from '../services/employee.service';
+import { DriverService } from '../services/driver.service';
+import { ArlService } from '../services/arl.service';
+import { EpsService } from '../services/eps.service';
 import { User } from '../models/user';
 import { Rol } from '../models/rol';
 import { CostCenter } from '../models/costCenter';
 import { City } from '../models/city';
 import { Location } from '../models/location';
 import { Employee } from '../models/employee';
+import { Driver } from '../models/driver';
+import { Arl } from '../models/arl';
+import { Eps } from '../models/eps';
 import { AppComponent } from '../app.component';
 
 
 @Component({
   selector: 'user-add',
   templateUrl: '../views/user-add.html',
-  providers: [UserService, RolService, CostCenterService, LocationService, CityService, EmployeeService]
+  providers: [UserService, RolService, CostCenterService, LocationService, CityService, EmployeeService, DriverService, ArlService, EpsService]
 })
 
 export class  UserAddComponent implements OnInit {
     public titulo: string;
     public user: User;
+    public driver: Driver;
     public employee: Employee;
     public cities: City[];
+    public arls: Arl[];
+    public epss: Eps[];
     public locations: Location[];
     public costCenters: CostCenter[];
     public center: CostCenter;
@@ -44,16 +53,22 @@ export class  UserAddComponent implements OnInit {
       private _rolService: RolService,
       private _costCenterService: CostCenterService,
       private _cityService: CityService,
-      private _employeeService: EmployeeService
+      private _employeeService: EmployeeService,
+      private _driverService: DriverService,
+      private _arlService: ArlService,
+      private _epsService: EpsService
     ){
       this.titulo = 'Crear usuario';
       this.identity = this._userService.getIdentity();
       this.token = this._userService.getToken();
       this.user = new User('', '', '', '', '', '','', 'null', '', true);
       this.employee = new Employee('', '', '', '', '', true);
+      this.driver = new Driver('', '', '', true);
       this.getRolList();
       this.getCostCenterList();
       this.getCityList();
+      this.getArlList();
+      this.getEpsList();
     }
 
     ngOnInit(){
@@ -147,6 +162,51 @@ export class  UserAddComponent implements OnInit {
 
     }
 
+    getArlList(){
+      this._arlService.getArlList(this.token).subscribe(
+        response => {
+          console.log(response);
+          if(!response.arl){
+            this._router.navigate(['/']);
+          }else{
+            this.arls = response.arl;
+            console.log(this.arls);
+          }
+        },
+        error => {
+          var errorMessage = <any>error;
+             if (errorMessage != null) {
+               var body = JSON.parse(error._body);
+               //this.alertMessage = body.message;
+               console.log(error);
+             }
+        }
+      );
+    }
+
+    getEpsList(){
+      this._epsService.getEpsList(this.token).subscribe(
+        response => {
+          console.log(response);
+          if(!response.eps){
+            this._router.navigate(['/']);
+          }else{
+            this.epss = response.eps;
+            console.log(this.epss);
+          }
+        },
+        error => {
+          var errorMessage = <any>error;
+             if (errorMessage != null) {
+               var body = JSON.parse(error._body);
+               //this.alertMessage = body.message;
+               console.log(error);
+             }
+        }
+      );
+
+  }
+
 
 
     getRolSelect(rol){
@@ -183,6 +243,27 @@ export class  UserAddComponent implements OnInit {
                     }else{
                       this.alertMessage = '¡El usuario empleado fue creado correctamente!';
                       this.employee = response.employee;
+                    }
+                  },
+                  error => {
+                    var errorMessage = <any>error;
+                     if(errorMessage != null){
+                       var body = JSON.parse(error._body);
+                       this.alertMessage = body.message;
+                       console.log(error);
+                     }
+                  }
+                );
+              }else if(this.user.rol == '5b9680c67bd7b51b083cf192'){
+                this.driver.user = this.user._id;
+                console.log(this.driver);
+                this._driverService.addDriver(this.token, this.driver).subscribe(
+                  response => {
+                    if(!response.driver){
+                      this.alertMessage = 'Error en el servidor';
+                    }else{
+                      this.alertMessage = '¡El usuario conductor fue creado correctamente!';
+                      this.driver = response.driver;
                     }
                   },
                   error => {

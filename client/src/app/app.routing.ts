@@ -48,7 +48,17 @@ import { ArlTableComponent } from './components/arl-table.component';
 import { ArlAddComponent } from './components/arl-add.component';
 import { ArlEditComponent } from './components/arl-edit.component';
 
+// import eps
+import { EpsTableComponent } from './components/eps-table.component';
+import { EpsAddComponent } from './components/eps-add.component';
+import { EpsEditComponent } from './components/eps-edit.component';
 
+// import driver
+import { DriverTableAdminComponent } from './components/driver-table-admin.component';
+import { DriverTableComponent } from './components/driver-table.component';
+import { DriverAddComponent } from './components/driver-add.component';
+import { DriverEditComponent } from './components/driver-edit.component';
+import { DriverDetailComponent } from './components/driver-detail.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -80,6 +90,14 @@ const appRoutes: Routes = [
   {path: 'arls', component: ArlTableComponent},
   {path: 'crear-arl', component: ArlAddComponent},
   {path: 'editar-arl/:id', component: ArlEditComponent},
+  {path: 'eps', component: EpsTableComponent},
+  {path: 'crear-eps', component: EpsAddComponent},
+  {path: 'editar-eps/:id', component: EpsEditComponent},
+  {path: 'conductores-admin', component: DriverTableAdminComponent},
+  {path: 'conductores', component: DriverTableComponent},
+  {path: 'crear-conductor', component: DriverAddComponent},
+  {path: 'editar-conductor/:id', component: DriverEditComponent},
+  {path: 'ver-conductor/:id', component: DriverDetailComponent},
   {path: '**', component: HomeComponent}
 ];
 

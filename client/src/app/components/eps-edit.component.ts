@@ -3,20 +3,20 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
-import { ArlService } from '../services/arl.service';
-import { Arl } from '../models/arl';
+import { EpsService } from '../services/eps.service';
+import { Eps } from '../models/eps';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'arl-edit',
-  templateUrl: '../views/arl-add.html',
-  providers: [UserService, ArlService]
+  selector: 'eps-edit',
+  templateUrl: '../views/eps-add.html',
+  providers: [UserService, EpsService]
 })
 
-export class ArlEditComponent implements OnInit {
+export class EpsEditComponent implements OnInit {
 
   public titulo: string;
-  public arl: Arl;
+  public eps: Eps;
   public identity;
   public token;
   public url:string;
@@ -27,30 +27,30 @@ export class ArlEditComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
-    private _arlService: ArlService
+    private _epsService: EpsService
   ){
-    this.titulo = "Editar ciudad";
+    this.titulo = "Editar Eps";
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
-    this.arl = new Arl('');
-    this.getArl();
+    this.eps = new Eps('');
+
   }
 
   ngOnInit(){
-    console.log('Cargado componenete de editar arl');
-    this.getArl();
+    console.log('Cargado componenete de editar eps');
+    this.getEps();
   }
 
-  getArl(){
+  getEps(){
     this._route.params.forEach((params: Params) => {
       let id = params['id'];
-      this._arlService.getArl(this.token, id).subscribe(
+      this._epsService.getEps(this.token, id).subscribe(
           response => {
-            if(!response.city){
+            if(!response.eps){
               this._router.navigate(['/']);
             }else{
-              this.arl = response.arl;
+              this.eps = response.eps;
             }
           },
           error => {
@@ -69,13 +69,13 @@ export class ArlEditComponent implements OnInit {
     this._route.params.forEach((params: Params) => {
       let id = params['id'];
 
-      this._arlService.editArl(this.token, id, this.arl).subscribe(
+      this._epsService.editEps(this.token, id, this.eps).subscribe(
         response => {
           if(!response){
             this.alertMessage = "Error en el servidor";
           }else{
-            this.alertMessage = '¡La arl fue actualizada!';
-            this.arl = response.arl;
+            this.alertMessage = '¡La eps fue actualizada!';
+            this.eps = response.eps;
           }
         },
         error => {

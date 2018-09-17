@@ -10,7 +10,7 @@ function getDriver(req, res)
 {
   var driverId = req.params.id;
 
-  Driver.findById(employeeId).populate({
+  Driver.findById(driverId).populate({
     path: 'user',
     populate: {
       path: 'user',
@@ -23,10 +23,10 @@ function getDriver(req, res)
       model: 'Eps'
     },
   }).populate({
-    path: 'id_localidad',
+    path: 'arl',
     populate: {
-      path: 'id_localidad',
-      model: 'Location'
+      path: 'arl',
+      model: 'Arl'
     },
   }).exec((err, driver) => {
     if (err) {

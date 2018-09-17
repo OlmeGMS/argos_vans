@@ -3,20 +3,20 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
-import { ArlService } from '../services/arl.service';
-import { Arl } from '../models/arl';
+import { EpsService } from '../services/eps.service';
+import { Eps } from '../models/eps';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'arl-add',
-  templateUrl: '../views/arl-add.html',
-  providers: [UserService, ArlService]
+  selector: 'eps-add',
+  templateUrl: '../views/eps-add.html',
+  providers: [UserService, EpsService]
 })
 
-export class ArlAddComponent implements OnInit{
+export class EpsAddComponent implements OnInit{
 
   public titulo: string;
-  public arl: Arl;
+  public eps: Eps;
   public identity;
   public token;
   public url: string;
@@ -26,27 +26,27 @@ export class ArlAddComponent implements OnInit{
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
-    private _arlService: ArlService
+    private _epsService: EpsService
   ){
-    this.titulo = 'Crear arl';
+    this.titulo = 'Crear eps';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.arl = new Arl('');
+    this.eps = new Eps('');
   }
 
   ngOnInit(){
-    console.log('cargado el componente crear arl');
+    console.log('cargado el componente crear eps');
   }
 
   onSubmit(){
-    console.log(this.arl);
-    this._arlService.addArl(this.token, this.arl).subscribe(
+    console.log(this.eps);
+    this._epsService.addEps(this.token, this.eps).subscribe(
       response => {
-        if (!response.arl) {
+        if (!response.eps) {
             this.alertMessage = '¡Error en el servidor!';
         }else{
-            this.alertMessage = '¡La arl fue creada correctamente!';
-            this.arl = response.arl;
+            this.alertMessage = '¡La eps fue creada correctamente!';
+            this.eps = response.eps;
         }
       },
       error => {

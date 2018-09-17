@@ -5,7 +5,7 @@ var mongoosePaginate = require('mongoose-pagination');
 
 var Eps = require('../models/eps');
 
-function getEps(rer, res)
+function getEps(req, res)
 {
   var epsId = req.params.id;
 

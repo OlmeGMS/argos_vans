@@ -39,6 +39,15 @@ import { EmployeeDatilComponent } from './components/employee-detail.component';
 import { ArlTableComponent } from './components/arl-table.component';
 import { ArlAddComponent } from './components/arl-add.component';
 import { ArlEditComponent } from './components/arl-edit.component';
+import { EpsTableComponent } from './components/eps-table.component';
+import { EpsAddComponent } from './components/eps-add.component';
+import { EpsEditComponent } from './components/eps-edit.component';
+import { DriverTableAdminComponent } from './components/driver-table-admin.component';
+import { DriverTableComponent } from './components/driver-table.component';
+import { DriverAddComponent } from './components/driver-add.component';
+import { DriverEditComponent } from './components/driver-edit.component';
+import { DriverDetailComponent } from './components/driver-detail.component';
+
 
 
 @NgModule({
@@ -75,8 +84,15 @@ import { ArlEditComponent } from './components/arl-edit.component';
     EmployeeDatilComponent,
     ArlTableComponent,
     ArlAddComponent,
-    ArlEditComponent
-
+    ArlEditComponent,
+    EpsTableComponent,
+    EpsAddComponent,
+    EpsEditComponent,
+    DriverTableAdminComponent,
+    DriverTableComponent,
+    DriverAddComponent,
+    DriverEditComponent,
+    DriverDetailComponent
   ],
   imports: [
     BrowserModule,

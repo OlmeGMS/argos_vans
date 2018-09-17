@@ -5,7 +5,7 @@ var mongoosePaginate = require('mongoose-pagination');
 
 var Arl = require('../models/arl');
 
-function getArl(rer, res)
+function getArl(req, res)
 {
   var arlId = req.params.id;
 

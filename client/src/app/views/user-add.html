@@ -132,6 +132,26 @@
           </div>
 
         </div>
+        <div class="" *ngIf="user.rol == '5b9680c67bd7b51b083cf192'">
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="">Arl</label>
+            <div class="col-md-6">
+              <select  class="form-control" id="arl" #arl="ngModel" name="arl" [(ngModel)]="driver.arl" placeholder="Seleccione el Arl" required>
+                <option value="" selected disabled>Seleccione la arl</option>
+                <option *ngFor="let arl of arls" value="{{arl._id}}">{{arl.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="">Eps</label>
+            <div class="col-md-6">
+              <select  class="form-control" id="eps" #eps="ngModel" name="eps" [(ngModel)]="driver.eps" placeholder="Seleccione la eps" required>
+                <option value="" selected disabled>Seleccione la eps</option>
+                <option *ngFor="let eps of epss" value="{{eps._id}}">{{eps.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <div class="form-group ">
           <div class="col-md-8 col-md-offset-4">

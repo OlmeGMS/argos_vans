@@ -4,29 +4,27 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
 import { RolService } from '../services/rol.service';
-import { EmployeeService } from '../services/employee.service';
-import { CostCenterService } from '../services/costCenter.service';
-import { CityService } from '../services/city.service';
-import { LocationService } from '../services/location.service';
+import { DriverService } from '../services/driver.service';
+import { ArlService } from '../services/arl.service';
+import { EpsService } from '../services/eps.service';
 import { User } from '../models/user';
 import { Rol } from '../models/rol';
-import { CostCenter } from '../models/costCenter';
-import { City } from '../models/city';
-import { Location } from '../models/location';
-import { Employee } from '../models/employee';
+import { Eps } from '../models/eps';
+import { Arl } from '../models/arl';
+import { Driver } from '../models/driver';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'employee-detail',
-  templateUrl: '../views/employee-detail.html',
-  providers: [UserService, RolService, CostCenterService, LocationService, CityService, EmployeeService]
+  selector: 'driver-detail',
+  templateUrl: '../views/driver-detail.html',
+  providers: [UserService, RolService, ArlService, EpsService, DriverService]
 })
 
-export class EmployeeDatilComponent implements OnInit {
+export class DriverDetailComponent implements OnInit {
 
   public titulo: string;
   public user: User;
-  public employee: Employee;
+  public driver: Driver;
 
   public identity;
   public token;
@@ -38,30 +36,30 @@ export class EmployeeDatilComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
 
-    private _employeeService: EmployeeService
+    private _driverService: DriverService
   ){
-    this.titulo = 'Ver datos del empleado';
+    this.titulo = 'Ver datos del conductor';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.user = new User('', '', '', '', '', '','', 'null', '', true);
-    this.employee = new Employee('', '', '', '', '', true);
+    this.driver = new Driver('', '', '', true);
 
-    this.getEmployee();
+    this.getDriver();
   }
   ngOnInit(){
     console.log('cargado el componente de crear usuario empleado');
   }
 
-  getEmployee(){
+  getDriver(){
     this._route.params.forEach((params: Params) => {
       let id = params['id'];
-      this._employeeService.getEmployee(this.token, id).subscribe(
+      this._driverService.getDriver(this.token, id).subscribe(
           response => {
-            if(!response.employee){
+            if(!response.driver){
               this._router.navigate(['/']);
             }else{
-              this.employee = response.employee;
-              console.log(this.employee);
+              this.driver = response.driver;
+              console.log(this.driver);
             }
           },
           error => {
@@ -79,7 +77,7 @@ export class EmployeeDatilComponent implements OnInit {
 
   onSubmit(){
 
-      this._router.navigate(['/empleados']);
+      this._router.navigate(['/conductores']);
 
   }
 
