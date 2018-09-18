@@ -62,6 +62,8 @@ import { DriverDetailComponent } from './components/driver-detail.component';
 
 // import driverCar
 import { DriverCarTableComponent } from './components/driverCar-table.component';
+import { DriverCarAddComponent } from './components/dirverCar-add.component';
+import { DriverCarEditComponent } from './components/driverCar-edit.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -102,6 +104,8 @@ const appRoutes: Routes = [
   {path: 'editar-conductor/:id', component: DriverEditComponent},
   {path: 'ver-conductor/:id', component: DriverDetailComponent},
   {path: 'prestadores', component: DriverCarTableComponent},
+  {path: 'crear-prestador', component: DriverCarAddComponent},
+  {path: 'editar-prestador/:id', component: DriverCarEditComponent},
   {path: '**', component: HomeComponent}
 ];
 

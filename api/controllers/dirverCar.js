@@ -5,6 +5,7 @@ var mongoosePaginate = require('mongoose-pagination');
 
 var User = require('../models/user');
 var Car = require('../models/car');
+var Driver = require('../models/driver');
 var DriverCar = require('../models/driver_car');
 
 function getDriverCar(req, res)
@@ -61,12 +62,16 @@ function getDriverCars(req, res)
 
 function getListDriverCarsAdmin(req, res)
 {
-  var find = Driver.find({}).sort('dirverCar');
+  var find = DriverCar.find({}).sort('dirverCar');
   find.populate({
     path: 'driver',
     populate: {
       path: 'driver',
       model: 'Driver'
+    },
+    populate: {
+      path: 'user',
+      model: 'User'
     },
   }).populate({
     path: 'car',
@@ -74,11 +79,11 @@ function getListDriverCarsAdmin(req, res)
       path: 'car',
       model: 'Car'
     },
-  }).exec((err, driverCar) => {
+  }).exec((err, driverCars) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
-      if (!driverCar) {
+      if (!driverCars) {
         res.status(404).send({message: 'No hay realciones driver_cars creados !!'});
       }else {
         res.status(200).send({driverCars: driverCars});
@@ -89,12 +94,16 @@ function getListDriverCarsAdmin(req, res)
 
 function getListDriverCars(req, res)
 {
-  var find = Driver.find({}).sort('driverCar').where('status').equals(true);
+  var find = DriverCar.find({}).sort('driverCar').where('status').equals(true);
   find.populate({
     path: 'driver',
     populate: {
       path: 'driver',
       model: 'Driver'
+    },
+    populate: {
+      path: 'user',
+      model: 'User'
     },
   }).populate({
     path: 'car',

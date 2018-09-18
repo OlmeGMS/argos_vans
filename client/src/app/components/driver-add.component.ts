@@ -12,7 +12,7 @@ import { Rol } from '../models/rol';
 import { Arl } from '../models/arl';
 import { Eps } from '../models/eps';
 import { Driver } from '../models/driver';
-import { AppComponent } from '../app.component'
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'driver-add',

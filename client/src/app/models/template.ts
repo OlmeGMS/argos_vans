@@ -1,7 +1,7 @@
 export class Template {
     constructor(
-      public id_employee: string,
-      public id_route: string,
+      public title: string,
+      public employee: string,
       public date_start: string,
       public date_end: string,
       public confirmation_upload: string,
@@ -10,6 +10,6 @@ export class Template {
       public location_start: string,
       public adress_end: string,
       public location_end: string,
-      public id_cost_center: string
+      public cost_center: string
     ){}
 }

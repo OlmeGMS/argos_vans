@@ -17,6 +17,7 @@ export class DriverCarTableComponent implements OnInit{
 
   public titulo: string;
   public driverCars: DriverCar[];
+  public driverCar: DriverCar;
   public identity;
   public token;
   public url: string;
@@ -69,7 +70,7 @@ export class DriverCarTableComponent implements OnInit{
     this.confirmado = null;
   }
 
-  onDeleteArl(id){
+  onDeleteDriverCar(id){
     this._driverCarService.deleteDriverCar(this.token, id).subscribe(
       response => {
         if (!response.rol){
@@ -86,5 +87,45 @@ export class DriverCarTableComponent implements OnInit{
             }
       }
     );
+  }
+
+  onFalseDriverCar(id){
+
+    this._driverCarService.getDriverCar(this.token, id).subscribe(
+        response => {
+          if(!response.driverCar){
+            this._router.navigate(['/']);
+          }else{
+            this.driverCar = response.driverCar;
+            this.driverCar.status = false;
+            this._driverCarService.onFalseDriverCar(this.token, id, this.driverCar).subscribe(
+              response => {
+                if (!response.rol){
+                  alert('Empleado eliminado');
+                }
+                this.getDriverCarList();
+              },
+              error => {
+                var errorMessage = <any>error;
+                    if (errorMessage != null) {
+                        var body = JSON.parse(error._body);
+                        //this.alertMessage = body.message;
+                        console.log(error);
+                    }
+              }
+            );
+          }
+        },
+        error => {
+          var errorMessage = <any>error;
+           if(errorMessage != null){
+             var body = JSON.parse(error._body);
+             console.log(error);
+           }
+        }
+    );
+
+
+
   }
 }

@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TemplateSchema = Schema({
-  id_employee: { type: Schema.ObjectId, ref: 'Employee'},
-  id_route: { type: Schema.ObjectId, ref: 'Route'},
+  title: String,
+  employee: { type: Schema.ObjectId, ref: 'Employee'},
   date_start: Date,
   date_end: Date,
   confirmation_upload: String,
@@ -14,9 +14,7 @@ var TemplateSchema = Schema({
   location_start: String,
   adress_end: String,
   location_end: String,
-  id_cost_center: { type: Schema.ObjectId, ref: 'CostCenter'}
-
-
+  cost_center: { type: Schema.ObjectId, ref: 'CostCenter'}
 
 });
 

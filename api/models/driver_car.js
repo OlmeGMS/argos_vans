@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var DriverCarSchema = Schema({
-  driver: { type: Schema.ObjectId, ref: 'User'},
+  driver: { type: Schema.ObjectId, ref: 'Driver'},
   car: { type: Schema.ObjectId, ref: 'Car'},
   status: Boolean
 });

@@ -34,11 +34,11 @@ export class CarEditComponent implements OnInit {
       this.token = this._userService.getToken();
       this.url = GLOBAL.url;
       this.car = new Car('','','', true);
+      this.getCar();
     }
 
     ngOnInit(){
         console.log('Componente de edicar vehículo cargado');
-
     }
 
     getCar(){
@@ -46,7 +46,7 @@ export class CarEditComponent implements OnInit {
         let id = params['id'];
         this._carService.getCar(this.token, id).subscribe(
             response => {
-              if(!response.city){
+              if(!response.car){
                 this._router.navigate(['/']);
               }else{
                 this.car = response.car;
@@ -88,7 +88,7 @@ export class CarEditComponent implements OnInit {
           }
         );
       });
-      
+
     }
 
 }

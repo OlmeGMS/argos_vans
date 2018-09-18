@@ -21,13 +21,6 @@ function getTemplate(req, res)
     },
   }).
   populate({
-    path: 'route',
-    populate: {
-      path: 'route',
-      model: 'Route'
-    },
-  })
-  populate({
     path: 'costCenter',
     populate: {
       path: 'costCenter',
@@ -66,8 +59,8 @@ function saveTemplate(req, res)
 {
   var template = new Template();
   var params = req.body;
-  template.id_employee = params.id_employee;
-  template.id_route = params.id_route;
+  template.title = params.title;
+  template.employee = params.employee;
   template.date_start = params.date_start;
   template.confirmation_upload = null;
   template.confirmation_download = null;
@@ -75,7 +68,7 @@ function saveTemplate(req, res)
   template.location_start = params.location_start;
   template.adress_end = params.adress_end;
   template.location_end = params.location_end;
-  template.id_cost_center = params.id_cost_center;
+  template.cost_center = params.cost_center;
 
   template.save((err, templateStored) => {
     if (err) {
