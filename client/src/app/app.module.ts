@@ -47,6 +47,7 @@ import { DriverTableComponent } from './components/driver-table.component';
 import { DriverAddComponent } from './components/driver-add.component';
 import { DriverEditComponent } from './components/driver-edit.component';
 import { DriverDetailComponent } from './components/driver-detail.component';
+import { DriverCarTableComponent } from './components/driverCar-table.component';
 
 
 
@@ -92,7 +93,8 @@ import { DriverDetailComponent } from './components/driver-detail.component';
     DriverTableComponent,
     DriverAddComponent,
     DriverEditComponent,
-    DriverDetailComponent
+    DriverDetailComponent,
+    DriverCarTableComponent
   ],
   imports: [
     BrowserModule,

@@ -60,6 +60,9 @@ import { DriverAddComponent } from './components/driver-add.component';
 import { DriverEditComponent } from './components/driver-edit.component';
 import { DriverDetailComponent } from './components/driver-detail.component';
 
+// import driverCar
+import { DriverCarTableComponent } from './components/driverCar-table.component';
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'mis-datos', component: UserEditComponent},
@@ -98,6 +101,7 @@ const appRoutes: Routes = [
   {path: 'crear-conductor', component: DriverAddComponent},
   {path: 'editar-conductor/:id', component: DriverEditComponent},
   {path: 'ver-conductor/:id', component: DriverDetailComponent},
+  {path: 'prestadores', component: DriverCarTableComponent},
   {path: '**', component: HomeComponent}
 ];
 

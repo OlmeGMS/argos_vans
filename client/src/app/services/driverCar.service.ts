@@ -26,6 +26,17 @@ export class DriverCarService{
                          .map(res => res.json());
     }
 
+    getDriverListAdmin(token) {
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      });
+
+      let options = new RequestOptions({ headers: headers });
+      return this._http.get(this.url + 'driver-car-list-admin/', options)
+                       .map(res => res.json());
+    }
+
     getDriverCarList(token){
       let headers = new Headers({
         'Content-Type': 'application/json',
@@ -66,6 +77,18 @@ export class DriverCarService{
       let options = new RequestOptions({ headers: headers});
       return this._http.delete(this.url+'driver-car/'+id, options)
                        .map(res => res.json());
+    }
+
+    onFalseDriver(token, id:string, driverCar: DriverCar){
+      let params = JSON.stringify(driverCar);
+      let headers = new Headers({
+        'Content-Type':'application/json',
+        'Authorization': token
+      });
+
+      return this._http.put(this.url+'driver-car-status/'+id, params, {headers: headers})
+                       .map(res => res.json());
+
     }
 
 

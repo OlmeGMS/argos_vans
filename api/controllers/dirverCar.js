@@ -10,7 +10,19 @@ var DriverCar = require('../models/driver_car');
 function getDriverCar(req, res)
 {
   var driverCarId = req.params.id;
-  DriverCar.findById(driverCarId, (err, driverCar) => {
+  DriverCar.findById(driverCarId).populate({
+    path: 'driver',
+    populate: {
+      path: 'driver',
+      model: 'Driver'
+    },
+  }).populate({
+    path: 'car',
+    populate: {
+      path: 'car',
+      model: 'Car'
+    },
+  }).exec((err, driverCar) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -47,9 +59,22 @@ function getDriverCars(req, res)
   });
 }
 
-function getListDriverCars(req, res)
+function getListDriverCarsAdmin(req, res)
 {
-  DriverCar.find({}, function(err, driverCar){
+  var find = Driver.find({}).sort('dirverCar');
+  find.populate({
+    path: 'driver',
+    populate: {
+      path: 'driver',
+      model: 'Driver'
+    },
+  }).populate({
+    path: 'car',
+    populate: {
+      path: 'car',
+      model: 'Car'
+    },
+  }).exec((err, driverCar) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -62,6 +87,35 @@ function getListDriverCars(req, res)
   });
 }
 
+function getListDriverCars(req, res)
+{
+  var find = Driver.find({}).sort('driverCar').where('status').equals(true);
+  find.populate({
+    path: 'driver',
+    populate: {
+      path: 'driver',
+      model: 'Driver'
+    },
+  }).populate({
+    path: 'car',
+    populate: {
+      path: 'car',
+      model: 'Car'
+    },
+  }).exec((err, driverCars) => {
+    if (err) {
+      res.status(500).send({message: 'Error en la petición'});
+    }else {
+      if (!driverCars) {
+        res.status(404).send({message: 'No hay realciones driver_cars creados !!'});
+      }else {
+        res.status(200).send({driverCars: driverCars});
+      }
+    }
+  });
+
+}
+
 function saveDriverCar(req, res)
 {
   var driverCar = new DriverCar();
@@ -69,6 +123,7 @@ function saveDriverCar(req, res)
 
   driverCar.driver = params.driver;
   driverCar.car = params.car;
+  driverCar.status = params.status;
 
   driverCar.save((err, driverCarStored) => {
     if (err) {
@@ -101,6 +156,24 @@ function updateDriverCar(req, res)
   });
 }
 
+function updateDriverCarStatus(req, res)
+{
+  var driverCarId = req.params.id;
+  var update = req.body;
+
+  DriverCar.findByIdAndUpdate(driverCarId, update, (err, driverCarUpdate) => {
+    if (err) {
+      res.status(500).send({message: 'Error en la petición'});
+    }else {
+      if (!driverCarUpdate) {
+        res.status(404).send({message: 'El prestador no ha sido actualizdo'});
+      }else {
+        res.status(200).send({driverCar: driverCarUpdate});
+      }
+    }
+  });
+}
+
 function deleteDriverCar(req, res)
 {
   var driverCarId = req.params.id;
@@ -120,9 +193,11 @@ function deleteDriverCar(req, res)
 
 module.exports = {
   getDriverCar,
+  getListDriverCarsAdmin,
   getDriverCars,
   getListDriverCars,
   saveDriverCar,
   updateDriverCar,
+  updateDriverCarStatus,
   deleteDriverCar
 }

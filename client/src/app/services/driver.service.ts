@@ -92,7 +92,7 @@ export class DriverService{
       'Authorization': token
     });
 
-    return this._http.put(this.url+'employee-status/'+id, params, {headers: headers})
+    return this._http.put(this.url+'driver-status/'+id, params, {headers: headers})
                      .map(res => res.json());
 
   }

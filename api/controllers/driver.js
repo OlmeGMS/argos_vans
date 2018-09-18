@@ -44,7 +44,7 @@ function getDriver(req, res)
 function getListDriversAdmin(req, res)
 {
 
-  var find = Driver.find({}).sort('employee');
+  var find = Driver.find({}).sort('dirver');
   find.populate({
     path: 'user',
     populate: {
@@ -64,7 +64,6 @@ function getListDriversAdmin(req, res)
       model: 'Arl'
     },
   }).exec((err, drivers) => {
-  //Employee.find({}, function(err, employees){
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -99,7 +98,6 @@ function getListDrivers(req, res)
       model: 'Arl'
     },
   }).exec((err, drivers) => {
-  //Employee.find({}, function(err, employees){
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
@@ -158,14 +156,14 @@ function updateDriverStatus(req, res)
   var driverId = req.params.id;
   var update = req.body;
 
-  Employee.findByIdAndUpdate(driverId, update, (err, driverUpdate) => {
+  Driver.findByIdAndUpdate(driverId, update, (err, driverUpdate) => {
     if (err) {
       res.status(500).send({message: 'Error en la petición'});
     }else {
       if (!driverUpdate) {
         res.status(404).send({message: 'El conductor no ha sido actualizdo'});
       }else {
-        res.status(200).send({employee: driverUpdate});
+        res.status(200).send({driver: driverUpdate});
       }
     }
   });
@@ -175,7 +173,7 @@ function deleteDriver(req, res)
 {
   var driverId = req.params.id;
 
-  Driver.findByIdAndRemove(employeeId, (err, driverRemove) => {
+  Driver.findByIdAndRemove(driverId, (err, driverRemove) => {
     if (err) {
       res.status(500).send({message: 'Error al eliminar el conductor'});
     }else {
