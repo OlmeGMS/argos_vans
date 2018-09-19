@@ -31,6 +31,7 @@
               {{alertMessage}}
             </div>
         </div>
+
         <div class="form-group">
           <label class="col-md-4 control-label" for="title">Titulo<span class="text-danger">*</span></label>
           <div class="col-md-6">
@@ -58,16 +59,1188 @@
                 <option value="unico">Unico Orgien</option>
                 <option value="varios">Varios Origenes</option>
             </select>
-            <span *ngIf="!type_address_start.valid && type_address_start.touched"><p style="color:#b61922;">La ciudad es obligatoria.</p></span>
+            <span *ngIf="!type_address_start.valid && type_address_start.touched"><p style="color:#b61922;">El tipo es obligatorio.</p></span>
           </div>
         </div>
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="address_start">Titulo<span class="text-danger">*</span></label>
-          <div class="col-md-6">
-            <input type="text" id="address_starte" #address_start="ngModel" name="address_start" class="form-control" [(ngModel)]="template.address_start" placeholder="Digite el titulo" value="" required><a (click)="searchLocation(template.address_start)">V</a>
-            <span *ngIf="!address_start.valid && address_start.touched"><p style="color:#b61922;">El nombre es obligatorio.</p></span>
+        <br>
+        <div class="" *ngIf="template.type_address_start == 'unico'">
+          <div class="input-groupform-group">
+            <label class="col-md-4 control-label" for="address_start">Dirección<span class="text-danger">*</span></label>
+            <div class="col-md-6 input-group">
+              <input type="text" id="address_starte" #address_start="ngModel" name="address_start" class="form-control" [(ngModel)]="template.address_start" placeholder="Digite el titulo" value="" required><span class="input-group-addon" (click)="searchLocation(template.address_start)"><i class="fa fa-binoculars"></i></span>
+              <span *ngIf="!address_start.valid && address_start.touched"><p style="color:#b61922;">El nombre es obligatorio.</p></span>
+            </div>
           </div>
         </div>
+        <div class="" *ngIf="template.type_address_start == 'varios'">
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="num_travel">Tipo dirección destino<span class="text-danger">*</span></label>
+            <div class="col-md-6">
+              <select class="form-control" #num_travel="ngModel" name="num_travel" id="num_travel" [(ngModel)]="template.num_travel" required>
+                  <option value="" disabled>Selecione la cantida de pasajeros</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+              </select>
+              <span *ngIf="!type_address_start.valid && type_address_start.touched"><p style="color:#b61922;">El tipo es obligatorio.</p></span>
+            </div>
+          </div>
+          <div class="" *ngIf="template.num_travel == 5">
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center">Nº</th>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Dirección</th>
+                    <th>CC</th>
+                    <th>Hora In</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="passenger1">
+                    <button (click)="searchUser(template.input_cedula)"><td id="id_plaza">1</td></button>
+                    <td id="row_cedula"><input type='text' id="input_cedula" #input_cedula="ngModel" name="input_cedula" sizes='20' [(ngModel)]="template.input_cedula"></td>
+                    <td id="row_name"><input type='text' sizes='20'></td>
+                    <td id="row_surname"><input type='text' sizes='20'></td>
+                    <td id="row_phone"><input type='text' sizes='20'></td>
+                    <td id="row_address"><input type='text' sizes='20'></td>
+                    <td id="row_cc"><input type='text' sizes='20'></td>
+                    <td id="row_fora"><input type='text' sizes='20'></td>
+                    <td id="row_fecha"><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="passenger2">
+                    <td id="passenger2">2</td>
+                    <td id="row_cedula"><input type='text' sizes='20'></td>
+                    <td id="row_name"><input type='text' sizes='20'></td>
+                    <td id="row_surname"><input type='text' sizes='20'></td>
+                    <td id="row_phone"><input type='text' sizes='20'></td>
+                    <td id="row_address"><input type='text' sizes='20'></td>
+                    <td id="row_cc"><input type='text' sizes='20'></td>
+                    <td id="row_fora"><input type='text' sizes='20'></td>
+                    <td id="row_fecha"><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="passenger3">
+                    <td id="passenger3">3</td>
+                    <td id="row_cedula"><input type='text' sizes='20'></td>
+                    <td id="row_name"><input type='text' sizes='20'></td>
+                    <td id="row_surname"><input type='text' sizes='20'></td>
+                    <td id="row_phone"><input type='text' sizes='20'></td>
+                    <td id="row_address"><input type='text' sizes='20'></td>
+                    <td id="row_cc"><input type='text' sizes='20'></td>
+                    <td id="row_fora"><input type='text' sizes='20'></td>
+                    <td id="row_fecha"><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="passenger4">
+                    <td id="passenger4">4</td>
+                    <td id="row_cedula"><input type='text' sizes='20'></td>
+                    <td id="row_name"><input type='text' sizes='20'></td>
+                    <td id="row_surname"><input type='text' sizes='20'></td>
+                    <td id="row_phone"><input type='text' sizes='20'></td>
+                    <td id="row_address"><input type='text' sizes='20'></td>
+                    <td id="row_cc"><input type='text' sizes='20'></td>
+                    <td id="row_fora"><input type='text' sizes='20'></td>
+                    <td id="row_fecha"><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="passenger5">
+                    <td id="passenger5">5</td>
+                    <td id="row_cedula"><input type='text' sizes='20'></td>
+                    <td id="row_name"><input type='text' sizes='20'></td>
+                    <td id="row_surname"><input type='text' sizes='20'></td>
+                    <td id="row_phone"><input type='text' sizes='20'></td>
+                    <td id="row_address"><input type='text' sizes='20'></td>
+                    <td id="row_cc"><input type='text' sizes='20'></td>
+                    <td id="row_fora"><input type='text' sizes='20'></td>
+                    <td id="row_fecha"><input type='text' sizes='20'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="" *ngIf="template.num_travel == 10">
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center">Nº</th>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Dirección</th>
+                    <th>H.H.</th>
+                    <th>Confirmación</th>
+                    <th>CC</th>
+                    <th>Planta</th>
+                    <th>Hora In</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="">
+                    <td>1</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>2</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>3</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>4</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>5</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>6</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>7</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>8</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>9</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>10</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="" *ngIf="template.num_travel == 15">
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center">Nº</th>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Dirección</th>
+                    <th>H.H.</th>
+                    <th>Confirmación</th>
+                    <th>CC</th>
+                    <th>Planta</th>
+                    <th>Hora In</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="">
+                    <td>1</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>2</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>3</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>4</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>5</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>6</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>7</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>8</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>9</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>10</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>11</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>12</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>13</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>14</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>15</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="" *ngIf="template.num_travel == 20">
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center">Nº</th>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Dirección</th>
+                    <th>H.H.</th>
+                    <th>Confirmación</th>
+                    <th>CC</th>
+                    <th>Planta</th>
+                    <th>Hora In</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="">
+                    <td>1</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>2</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>3</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>4</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>5</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>6</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>7</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>8</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>9</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>10</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>11</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>12</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>13</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>14</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>15</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>16</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>17</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>18</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>19</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>20</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="" *ngIf="template.num_travel == 25">
+            <div class="table-responsive">
+              <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                  <tr>
+                    <th class="text-center">Nº</th>
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Celular</th>
+                    <th>Dirección</th>
+                    <th>H.H.</th>
+                    <th>Confirmación</th>
+                    <th>CC</th>
+                    <th>Planta</th>
+                    <th>Hora In</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="">
+                    <td>1</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>2</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>3</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>4</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>5</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>6</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>7</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>8</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>9</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>10</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>11</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>12</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>13</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>14</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>15</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>16</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>17</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>18</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>19</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>20</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>21</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>22</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>23</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>24</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                  <tr id="">
+                    <td>25</td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                    <td><input type='text' sizes='20'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <div class="form-group ">
           <div class="col-md-8 col-md-offset-4">
             <button href="" type="submit" class="btn btn-sm btn-success" [disabled]="!formTemplate.form.valid"><i class="fa fa-arrow-right"></i> {{titulo}}</button>

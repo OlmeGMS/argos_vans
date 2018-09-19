@@ -26,8 +26,9 @@ export class TemplateAddComponent implements OnInit{
   public ciudad;
   public direccion;
   public servi;
+  public nceldas;
   public identificador;
-  public info:any = [];
+  public info:any = {};
   public url: string;
   public alertMessage;
 
@@ -71,18 +72,35 @@ export class TemplateAddComponent implements OnInit{
     );
   }
 
+  searchUser(dni){
+    console.log(dni);
+  }
+
   searchLocation(address){
     console.log(address);
     this.ciudad = "Bogota";
     this.direccion = address;
     this.identificador = "1";
 
-    this.info = [{"ciudad":this.ciudad, "direccion":this.direccion, "identificador":this.identificador}];
+    //this.info = [{"ciudad":this.ciudad, "direccion":this.direccion, "identificador":this.identificador}];
+    this.info = {
+                  "row":[
+                  {"ciudad":this.ciudad,"direccion":this.direccion,"identificador":"1"}
+                ]};
+
+
 
     console.log(this.info);
     this._servinformacionService.getServiLocalidad(this.info).subscribe(
       response => {
         console.log(response);
+        if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
+            this.alertMessage = '¡No se pudo ubicar la dirección!';
+        }else{
+          this.servi = response.data[0];
+          console.log(this.servi);
+          this.template.location_start = this.servi.localidad;
+        }
       },
       error => {
         var errorMessage = <any>error;
@@ -93,6 +111,11 @@ export class TemplateAddComponent implements OnInit{
       }
     );
 
+
+  }
+
+  celdas(){
+    this.nceldas = 4;
 
   }
 

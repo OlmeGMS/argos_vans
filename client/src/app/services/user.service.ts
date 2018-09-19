@@ -122,6 +122,16 @@ export class UserService{
 
   }
 
+  searchUser(token, dni){
+    let headers = new Headers({
+      'Content-Type':'application/json',
+      'Authorization': token
+    });
+    let options = new RequestOptions({ headers: headers});
+    return this._http.get(this.url+'search-use/'+dni, options)
+                     .map(res => res.json());
+  }
+
   deleteUser(token, id: string){
     let headers = new Headers({
       'Content-Type':'application/json',

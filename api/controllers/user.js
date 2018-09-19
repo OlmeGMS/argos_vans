@@ -195,6 +195,24 @@ function getListUser(req, res)
   });
 }
 
+function searchUser(req, res)
+{
+  var dni = req.params.id;
+  var find = User.find({dni: dni}).sort('user').where('dni').equals(dni);
+  find.populate({path: 'dni'}).exec((err, user) => {
+    if(err){
+      res.status(500).send({message: 'Error en la petición'});
+    }else{
+      if (!user) {
+        res.status(404).send({message: 'No hay usuario'});
+        console.log('no encontro');
+      }else {
+        res.status(200).send({user});
+      }
+    }
+  });
+}
+
 
 
 module.exports = {
@@ -204,5 +222,6 @@ module.exports = {
   deleteUser,
   uploadImage,
   getImageFile,
-  getListUser
+  getListUser,
+  searchUser
 };
