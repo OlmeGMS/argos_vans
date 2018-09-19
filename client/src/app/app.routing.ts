@@ -65,6 +65,10 @@ import { DriverCarTableComponent } from './components/driverCar-table.component'
 import { DriverCarAddComponent } from './components/dirverCar-add.component';
 import { DriverCarEditComponent } from './components/driverCar-edit.component';
 
+//import template
+import { TemplateTableComponent } from './components/template-table.component';
+import { TemplateAddComponent } from './components/template-add.component';
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'mis-datos', component: UserEditComponent},
@@ -106,6 +110,8 @@ const appRoutes: Routes = [
   {path: 'prestadores', component: DriverCarTableComponent},
   {path: 'crear-prestador', component: DriverCarAddComponent},
   {path: 'editar-prestador/:id', component: DriverCarEditComponent},
+  {path: 'planillas', component: TemplateTableComponent},
+  {path: 'crear-planilla', component: TemplateAddComponent},
   {path: '**', component: HomeComponent}
 ];
 

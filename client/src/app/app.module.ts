@@ -50,6 +50,8 @@ import { DriverDetailComponent } from './components/driver-detail.component';
 import { DriverCarTableComponent } from './components/driverCar-table.component';
 import { DriverCarAddComponent } from './components/dirverCar-add.component';
 import { DriverCarEditComponent } from './components/driverCar-edit.component';
+import { TemplateTableComponent } from './components/template-table.component';
+import { TemplateAddComponent } from './components/template-add.component';
 
 
 
@@ -98,7 +100,9 @@ import { DriverCarEditComponent } from './components/driverCar-edit.component';
     DriverDetailComponent,
     DriverCarTableComponent,
     DriverCarAddComponent,
-    DriverCarEditComponent
+    DriverCarEditComponent,
+    TemplateTableComponent,
+    TemplateAddComponent
   ],
   imports: [
     BrowserModule,
