@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { LocalDataSource } from 'ng2-smart-table';
 
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
@@ -27,10 +28,48 @@ export class TemplateAddComponent implements OnInit{
   public direccion;
   public servi;
   public nceldas;
+  public viajerosdata;
+  public viajeros;
   public identificador;
   public info:any = {};
   public url: string;
   public alertMessage;
+
+  settings = {
+  columns: {
+    dni:{
+      title: 'Cedula'
+    },
+    name: {
+      title: 'Nombre'
+    },
+    surnaname: {
+      title: 'Apellido'
+    },
+    phone: {
+      title: 'Teléfono'
+    },
+    address:{
+      title: 'Dirección'
+    },
+    costCenter:{
+      title: 'CC'
+    },
+    hour:{
+      title: 'Hora'
+    },
+    date:{
+      title: 'Fecha'
+    }
+
+  }
+};
+
+data = [
+
+];
+source: LocalDataSource;
+
 
   constructor(
     private _route: ActivatedRoute,
@@ -45,10 +84,17 @@ export class TemplateAddComponent implements OnInit{
     this.token = this._userService.getToken();
     this.template = new Template('', '', '', '', '', '', '', '', '', '', '');
     this.getCostCenterList();
+
   }
 
   ngOnInit(){
     console.log('cargado el componente crear planilla');
+  }
+
+  final(){
+    this.viajerosdata = new LocalDataSource(this.data);
+    this.viajeros = this.viajerosdata.data;
+    console.log(this.viajeros);
   }
 
   getCostCenterList(){

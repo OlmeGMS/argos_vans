@@ -4,8 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { routing, appRoutingProviders } from './app.routing';
 
+//Plugins
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { DatatablesProductsComponent } from './datatables-products/datatables-products.component';
 
-
+// Webapp
 import { AppComponent } from './app.component';
 import { SildebarComponent } from './sildebar/sildebar.component';
 import { TemplateHeaderComponent } from './template-header/template-header.component';
@@ -52,7 +55,7 @@ import { DriverCarAddComponent } from './components/dirverCar-add.component';
 import { DriverCarEditComponent } from './components/driverCar-edit.component';
 import { TemplateTableComponent } from './components/template-table.component';
 import { TemplateAddComponent } from './components/template-add.component';
-import { DatatablesProductsComponent } from './datatables-products/datatables-products.component';
+
 
 
 
@@ -110,6 +113,7 @@ import { DatatablesProductsComponent } from './datatables-products/datatables-pr
     BrowserModule,
     FormsModule,
     HttpModule,
+    Ng2SmartTableModule,
     routing
   ],
   providers: [appRoutingProviders],
