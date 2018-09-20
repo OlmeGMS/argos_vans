@@ -14,12 +14,12 @@ import { City } from '../models/city';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'template-add',
-  templateUrl: '../views/template-add.html',
-  providers: [UserService, TemplateService, CostCenterService, ServiInformacionService, CityService]
+  selector: 'template-detail',
+  templateUrl: '../views/template-detail.html',
+    providers: [UserService, TemplateService, CostCenterService, ServiInformacionService, CityService]
 })
 
-export class TemplateAddComponent implements OnInit{
+export class TemplateDetailComponent implements OnInit{
 
   public titulo: string;
   public template: Template;
@@ -90,11 +90,33 @@ source: LocalDataSource;
     this.getCostCenterList();
     this.getCityList();
     this.getCityListEnd();
-
+    this.getTemplate();
   }
 
   ngOnInit(){
     console.log('cargado el componente crear planilla');
+  }
+
+  getTemplate(){
+    this._route.params.forEach((params: Params) => {
+      let id = params['id'];
+      this._templateService.getTemplate(this.token, id).subscribe(
+          response => {
+            if(!response.template){
+              this._router.navigate(['/']);
+            }else{
+              this.template = response.template;
+            }
+          },
+          error => {
+            var errorMessage = <any>error;
+             if(errorMessage != null){
+               var body = JSON.parse(error._body);
+               console.log(error);
+             }
+          }
+      );
+    });
   }
 
   final(){
@@ -261,93 +283,6 @@ source: LocalDataSource;
 
 
   onSubmit(){
-    this.viajerosdata = new LocalDataSource(this.data);
-    this.viajeros = this.viajerosdata.data;
-    console.log(this.viajeros);
-    console.log(this.viajeros[0].address);
-    this.template.employee = this.viajeros;
-    if(this.template.location_start == ""){
-      console.log('Vacio start');
-      console.log(this.ciudadMira);
-      this.direccionMira = this.viajeros[0].address;
-      this.template.adress_start = this.viajeros[0].address;
-      this.info = {
-                    "row":[
-                    {"ciudad":this.ciudadMira,"direccion":this.direccionMira,"identificador":"1"}
-                  ]};
-                  this._servinformacionService.getServiLocalidad(this.info).subscribe(
-                    response => {
-                      console.log(response);
-                      if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
-                          this.alertMessage = '¡No se pudo ubicar la dirección origen!';
-                      }else{
-                        this.servi = response.data[0];
-                        console.log(this.servi);
-                        this.template.location_start = this.servi.localidad;
-                      }
-                    },
-                    error => {
-                      var errorMessage = <any>error;
-                         if (errorMessage != null) {
-                           var body = JSON.parse(error._body);
-                           console.log(error);
-                         }
-                    }
-                  );
-
-    }else if (this.template.location_end == "") {
-      console.log('Vacio end');
-      this.direccionMira = this.viajeros[0].address;
-      this.template.address_end = this.viajeros[0].address;
-      this.info = {
-                    "row":[
-                    {"ciudad":this.ciudadMiraEnd,"direccion":this.direccion,"identificador":"1"}
-                  ]};
-                  this._servinformacionService.getServiLocalidad(this.info).subscribe(
-                    response => {
-                      console.log(response);
-                      if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
-                          this.alertMessage = '¡No se pudo ubicar la dirección destino!';
-                      }else{
-                        this.servi = response.data[0];
-                        console.log(this.servi);
-                        this.template.location_end = this.servi.localidad;
-                      }
-                    },
-                    error => {
-                      var errorMessage = <any>error;
-                         if (errorMessage != null) {
-                           var body = JSON.parse(error._body);
-                           console.log(error);
-                         }
-                    }
-                  );
-
-
-
-    }
-
-
-    console.log(this.template);
-
-    this._templateService.addTemplate(this.token, this.template).subscribe(
-      response => {
-        if (!response.template) {
-            this.alertMessage = '¡Error en el servidor!';
-        }else{
-            this.alertMessage = '¡La planilla fue creada correctamente!';
-            this.template = response.template;
-        }
-      },
-      error => {
-          var errorMessage = <any>error;
-           if(errorMessage != null){
-             var body = JSON.parse(error._body);
-             this.alertMessage = body.message;
-             console.log(error);
-           }
-      }
-    );
-
+      this._router.navigate(['/planillas']);
   }
 }

@@ -68,6 +68,8 @@ import { DriverCarEditComponent } from './components/driverCar-edit.component';
 //import template
 import { TemplateTableComponent } from './components/template-table.component';
 import { TemplateAddComponent } from './components/template-add.component';
+import { TemplateEditComponent } from './components/template-edit.component';
+import { TemplateDetailComponent } from './components/template-detail.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -112,6 +114,8 @@ const appRoutes: Routes = [
   {path: 'editar-prestador/:id', component: DriverCarEditComponent},
   {path: 'planillas', component: TemplateTableComponent},
   {path: 'crear-planilla', component: TemplateAddComponent},
+  {path: 'editar-planilla/:id', component: TemplateEditComponent},
+  {path: 'ver-planilla/:id', component: TemplateDetailComponent},
   {path: '**', component: HomeComponent}
 ];
 

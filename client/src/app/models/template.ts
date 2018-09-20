@@ -8,7 +8,7 @@ export class Template {
       public confirmation_download: string,
       public adress_start: string,
       public location_start: string,
-      public adress_end: string,
+      public address_end: string,
       public location_end: string,
       public cost_center: string
     ){}

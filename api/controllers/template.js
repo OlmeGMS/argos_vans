@@ -14,13 +14,6 @@ function getTemplate(req, res)
   var templateId = req.params.id;
 
   Template.findById(templateId).populate({
-    path: 'employee',
-    populate:{
-      path: 'employee',
-      model: 'Employee'
-    },
-  }).
-  populate({
     path: 'costCenter',
     populate: {
       path: 'costCenter',
@@ -62,20 +55,22 @@ function saveTemplate(req, res)
   template.title = params.title;
   template.employee = params.employee;
   template.date_start = params.date_start;
-  template.confirmation_upload = null;
-  template.confirmation_download = null;
-  template.adress_start = params.adress_start;
+  template.date_end = params.date_end;
+  template.confirmation_upload = params.confirmation_download;
+  template.confirmation_download = params.confirmation_upload;
+  template.address_start = params.address_start;
   template.location_start = params.location_start;
-  template.adress_end = params.adress_end;
+  template.address_end = params.address_end;
   template.location_end = params.location_end;
   template.cost_center = params.cost_center;
 
   template.save((err, templateStored) => {
     if (err) {
-      res.status(500).send({message: 'Error en la petición'});
+      //res.status(500).send({message: 'Error en la petición'});
+      res.status(500).send({err});
     }else {
       if (!templateStored) {
-        res.status(404).send({message: 'No se puudo guardar la planilla'});
+        res.status(404).send({message: 'No se pudo guardar la planilla'});
       }else {
         res.status(200).send({template: templateStored});
       }

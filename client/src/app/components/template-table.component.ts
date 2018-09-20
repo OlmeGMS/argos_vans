@@ -44,7 +44,7 @@ export class TemplateTableComponent implements OnInit{
     this._templateService.getTemplateList(this.token).subscribe(
       response => {
         console.log(response);
-        if(!response.eps){
+        if(!response.templates){
           this._router.navigate(['/']);
         }else{
           this.templates = response.templates;

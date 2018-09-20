@@ -14,12 +14,12 @@ import { City } from '../models/city';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'template-add',
+  selector: 'template-edit',
   templateUrl: '../views/template-add.html',
-  providers: [UserService, TemplateService, CostCenterService, ServiInformacionService, CityService]
+    providers: [UserService, TemplateService, CostCenterService, ServiInformacionService, CityService]
 })
 
-export class TemplateAddComponent implements OnInit{
+export class TemplateEditComponent implements OnInit{
 
   public titulo: string;
   public template: Template;
@@ -90,11 +90,33 @@ source: LocalDataSource;
     this.getCostCenterList();
     this.getCityList();
     this.getCityListEnd();
-
+    this.getTemplate();
   }
 
   ngOnInit(){
     console.log('cargado el componente crear planilla');
+  }
+
+  getTemplate(){
+    this._route.params.forEach((params: Params) => {
+      let id = params['id'];
+      this._templateService.getTemplate(this.token, id).subscribe(
+          response => {
+            if(!response.template){
+              this._router.navigate(['/']);
+            }else{
+              this.template = response.template;
+            }
+          },
+          error => {
+            var errorMessage = <any>error;
+             if(errorMessage != null){
+               var body = JSON.parse(error._body);
+               console.log(error);
+             }
+          }
+      );
+    });
   }
 
   final(){
@@ -329,8 +351,9 @@ source: LocalDataSource;
 
 
     console.log(this.template);
-
-    this._templateService.addTemplate(this.token, this.template).subscribe(
+    this._route.params.forEach((params: Params) => {
+      let id = params['id'];
+    this._templateService.editTemplate(this.token, id, this.template).subscribe(
       response => {
         if (!response.template) {
             this.alertMessage = '¡Error en el servidor!';
@@ -348,6 +371,6 @@ source: LocalDataSource;
            }
       }
     );
-
+    });
   }
 }

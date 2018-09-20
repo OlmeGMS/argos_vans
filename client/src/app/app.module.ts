@@ -55,6 +55,8 @@ import { DriverCarAddComponent } from './components/dirverCar-add.component';
 import { DriverCarEditComponent } from './components/driverCar-edit.component';
 import { TemplateTableComponent } from './components/template-table.component';
 import { TemplateAddComponent } from './components/template-add.component';
+import { TemplateEditComponent } from './components/template-edit.component';
+import { TemplateDetailComponent } from './components/template-detail.component';
 
 
 
@@ -107,7 +109,9 @@ import { TemplateAddComponent } from './components/template-add.component';
     DriverCarEditComponent,
     TemplateTableComponent,
     TemplateAddComponent,
-    DatatablesProductsComponent
+    DatatablesProductsComponent,
+    TemplateEditComponent,
+    TemplateDetailComponent 
   ],
   imports: [
     BrowserModule,
