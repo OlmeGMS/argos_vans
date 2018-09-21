@@ -36,14 +36,14 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="title">Titulo<span class="text-danger">*</span></label>
           <div class="col-md-6">
-            <input type="text" id="title" #title="ngModel" name="title" class="form-control" [(ngModel)]="template.title" placeholder="Digite el titulo" value="" required>
+            <input type="text" id="title" #title="ngModel" name="title" class="form-control" [(ngModel)]="template.title" placeholder="Digite el titulo" value="" readonly>
             <span *ngIf="!title.valid && title.touched"><p style="color:#b61922;">El nombre es obligatorio.</p></span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-4 control-label" for="date_start">Fecha Inicio</label>
           <div class="input-group col-md-6">
-            <input type="date" id="date_start" #date_start="ngModel" name="date_start" class="form-control" [(ngModel)]="template.date_start" data-date-format="yyyy-mm-dd" placeholder="aaaa/mm/dd">
+            <input type="date" id="date_start" #date_start="ngModel" name="date_start" class="form-control" [(ngModel)]="template.date_start" data-date-format="yyyy-mm-dd" placeholder="aaaa/mm/dd" readonly>
             <span *ngIf="!date_start.valid && date_start.touched"><p style="color:#b61922;">La fecha es obligatoria.</p></span>
           </div>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="date_end">Fecha Final</label>
           <div class="input-group col-md-6">
-            <input type="date" id="date_end" #date_end="ngModel" name="date_end" class="form-control" [(ngModel)]="template.date_end" data-date-format="yyyy-mm-dd" placeholder="aaaa/mm/dd">
+            <input type="date" id="date_end" #date_end="ngModel" name="date_end" class="form-control" [(ngModel)]="template.date_end" data-date-format="yyyy-mm-dd" placeholder="aaaa/mm/dd" readonly>
             <span *ngIf="!date_end.valid && date_end.touched"><p style="color:#b61922;">La fecha es obligatoria.</p></span>
           </div>
         </div>
@@ -59,18 +59,20 @@
           <table id="table-usuarios-app" class="table table-vcenter table-condensed table-bordered">
               <thead>
                   <tr>
-                      <th class="text-center">ID</th>
-                      <th class="text-center">Localidad Incio</th>
-                      <th class="text-center">Localidad Destino</th>
-                      <th class="text-center">Fecha</th>
+                      <th class="text-center">Cédula</th>
+                      <th class="text-center">Nombre</th>
+                      <th class="text-center">Apellido</th>
+                      <th class="text-center">Teléfono</th>
+                      <th class="text-center">Dirección</th>
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let template of templates; index as i">
-                      <td class="text-center">{{template._id}}</td>
-                      <td class="text-center">{{template.location_start}}</td>
-                      <td class="text-center">{{template.location_end}}</td>
-                      <td class="text-center">{{template.date_start}}</td>
+                  <tr *ngFor="let template of template.employee; index as i">
+                      <td class="text-center">{{template.dni}}</td>
+                      <td class="text-center">{{template.name}}</td>
+                      <td class="text-center">{{template.surname}}</td>
+                      <td class="text-center">{{template.phone}}</td>
+                      <td class="text-center">{{template.address}}</td>
                   </tr>
                 </tbody>
             </table>

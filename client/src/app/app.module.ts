@@ -57,6 +57,8 @@ import { TemplateTableComponent } from './components/template-table.component';
 import { TemplateAddComponent } from './components/template-add.component';
 import { TemplateEditComponent } from './components/template-edit.component';
 import { TemplateDetailComponent } from './components/template-detail.component';
+import { RouteTableComponent } from './components/route-table.component';
+import { RouteAddComponent } from './components/route-add.component';
 
 
 
@@ -111,7 +113,9 @@ import { TemplateDetailComponent } from './components/template-detail.component'
     TemplateAddComponent,
     DatatablesProductsComponent,
     TemplateEditComponent,
-    TemplateDetailComponent 
+    TemplateDetailComponent,
+    RouteTableComponent,
+    RouteAddComponent
   ],
   imports: [
     BrowserModule,

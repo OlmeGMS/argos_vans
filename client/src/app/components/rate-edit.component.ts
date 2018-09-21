@@ -44,6 +44,7 @@ export class RateEditComponent implements OnInit {
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
     this.rate = new Rate('','','');
+    this.getRate();
   }
 
   ngOnInit(){

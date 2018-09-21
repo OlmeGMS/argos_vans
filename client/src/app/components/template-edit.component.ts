@@ -15,7 +15,7 @@ import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'template-edit',
-  templateUrl: '../views/template-add.html',
+  templateUrl: '../views/template-edit.html',
     providers: [UserService, TemplateService, CostCenterService, ServiInformacionService, CityService]
 })
 
@@ -37,6 +37,8 @@ export class TemplateEditComponent implements OnInit{
   public ciudadMira;
   public ciudadMiraEnd;
   public direccionMira;
+  public rellenador;
+  public flecha;
   public info:any = {};
   public url: string;
   public alertMessage;
@@ -71,6 +73,7 @@ export class TemplateEditComponent implements OnInit{
 data = [
 
 ];
+
 source: LocalDataSource;
 
 
@@ -83,7 +86,7 @@ source: LocalDataSource;
     private _servinformacionService: ServiInformacionService,
     private _cityService: CityService
   ){
-    this.titulo = 'Crear planilla de recorrido';
+    this.titulo = 'Editar planilla de recorrido';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.template = new Template('', '', '', '', 'null', 'null', '', '', '', '', '');
@@ -91,10 +94,33 @@ source: LocalDataSource;
     this.getCityList();
     this.getCityListEnd();
     this.getTemplate();
+    this.rellenador = this.template;
+
+    console.log(this.rellenador);
+    this.source = new LocalDataSource(this.rellenador);
+    console.log(this.source);
+
+
   }
+
+
 
   ngOnInit(){
     console.log('cargado el componente crear planilla');
+  }
+
+  prueba(){
+    this.rellenador = {
+      dni:'4444',
+      name: 'Nombre',
+      surname: 'Apellido',
+      phone: '444',
+      address:'Dirección',
+      costCenter: 'CC',
+      hour:'Hora'
+
+    }
+    return this.rellenador;
   }
 
   getTemplate(){
@@ -118,6 +144,8 @@ source: LocalDataSource;
       );
     });
   }
+
+
 
   final(){
     this.viajerosdata = new LocalDataSource(this.data);
@@ -306,6 +334,24 @@ source: LocalDataSource;
                         this.servi = response.data[0];
                         console.log(this.servi);
                         this.template.location_start = this.servi.localidad;
+                        this._templateService.addTemplate(this.token, this.template).subscribe(
+                          response => {
+                            if (!response.template) {
+                                this.alertMessage = '¡Error en el servidor!';
+                            }else{
+                                this.alertMessage = '¡La planilla fue creada correctamente!';
+                                this.template = response.template;
+                            }
+                          },
+                          error => {
+                              var errorMessage = <any>error;
+                               if(errorMessage != null){
+                                 var body = JSON.parse(error._body);
+                                 this.alertMessage = body.message;
+                                 console.log(error);
+                               }
+                          }
+                        );
                       }
                     },
                     error => {
@@ -323,7 +369,7 @@ source: LocalDataSource;
       this.template.address_end = this.viajeros[0].address;
       this.info = {
                     "row":[
-                    {"ciudad":this.ciudadMiraEnd,"direccion":this.direccion,"identificador":"1"}
+                    {"ciudad":this.ciudadMiraEnd,"direccion":this.direccionMira,"identificador":"1"}
                   ]};
                   this._servinformacionService.getServiLocalidad(this.info).subscribe(
                     response => {
@@ -334,6 +380,24 @@ source: LocalDataSource;
                         this.servi = response.data[0];
                         console.log(this.servi);
                         this.template.location_end = this.servi.localidad;
+                        this._templateService.addTemplate(this.token, this.template).subscribe(
+                          response => {
+                            if (!response.template) {
+                                this.alertMessage = '¡Error en el servidor!';
+                            }else{
+                                this.alertMessage = '¡La planilla fue creada correctamente!';
+                                this.template = response.template;
+                            }
+                          },
+                          error => {
+                              var errorMessage = <any>error;
+                               if(errorMessage != null){
+                                 var body = JSON.parse(error._body);
+                                 this.alertMessage = body.message;
+                                 console.log(error);
+                               }
+                          }
+                        );
                       }
                     },
                     error => {
@@ -351,26 +415,6 @@ source: LocalDataSource;
 
 
     console.log(this.template);
-    this._route.params.forEach((params: Params) => {
-      let id = params['id'];
-    this._templateService.editTemplate(this.token, id, this.template).subscribe(
-      response => {
-        if (!response.template) {
-            this.alertMessage = '¡Error en el servidor!';
-        }else{
-            this.alertMessage = '¡La planilla fue creada correctamente!';
-            this.template = response.template;
-        }
-      },
-      error => {
-          var errorMessage = <any>error;
-           if(errorMessage != null){
-             var body = JSON.parse(error._body);
-             this.alertMessage = body.message;
-             console.log(error);
-           }
-      }
-    );
-    });
+
   }
 }

@@ -71,6 +71,10 @@ import { TemplateAddComponent } from './components/template-add.component';
 import { TemplateEditComponent } from './components/template-edit.component';
 import { TemplateDetailComponent } from './components/template-detail.component';
 
+// import route
+import { RouteTableComponent } from './components/route-table.component';
+import { RouteAddComponent } from './components/route-add.component';
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'mis-datos', component: UserEditComponent},
@@ -116,6 +120,8 @@ const appRoutes: Routes = [
   {path: 'crear-planilla', component: TemplateAddComponent},
   {path: 'editar-planilla/:id', component: TemplateEditComponent},
   {path: 'ver-planilla/:id', component: TemplateDetailComponent},
+  {path: 'rutas', component: RouteTableComponent},
+  {path: 'crear-ruta', component: RouteAddComponent},
   {path: '**', component: HomeComponent}
 ];
 

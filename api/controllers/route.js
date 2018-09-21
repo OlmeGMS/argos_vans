@@ -13,17 +13,10 @@ function getRoute(req, res)
   var routeId = req.params.id;
 
   Route.findById(routeId).populate({
-    path: 'user',
+    path: 'driverCar',
     populate: {
-        path: 'user',
-        model: 'User'
-    },
-  }).
-  populate({
-    path: 'car',
-    populate: {
-      path: 'car',
-      model: 'Car'
+        path: 'driverCar',
+        model: 'DriverCar'
     },
   }).populate({
     path: 'rate',
@@ -83,9 +76,12 @@ function saveRoute(req, res)
   var route = new Route();
 
   var params = req.body;
-  route.id_user = params.id_user;
-  route.id_car = params.id_car;
-  route.id_template = params.id_template;
+  route.name = params.name;
+  route.driverCar = params.driverCar;
+  route.rate = params.rate;
+  route.template = params.template;
+  route.locationAdd = params.locationAdd;
+  route.price = params.price;
   route.date = params.date;
 
   route.save((err, routeStored) => {

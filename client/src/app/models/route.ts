@@ -1,8 +1,11 @@
 export class Route {
     constructor(
-      public id_user: string,
-      public id_car: string,
-      public id_template: string,
+      public name: string,
+      public driverCar: string,
+      public rate: string,
+      public template: string,
+      public locationAdd: boolean,
+      public price: string,
       public date: string
     ){}
 }

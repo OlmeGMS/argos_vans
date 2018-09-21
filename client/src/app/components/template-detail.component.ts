@@ -106,6 +106,7 @@ source: LocalDataSource;
               this._router.navigate(['/']);
             }else{
               this.template = response.template;
+              console.log(this.template);
             }
           },
           error => {
