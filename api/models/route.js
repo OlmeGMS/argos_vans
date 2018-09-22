@@ -8,7 +8,7 @@ var RouteSchema = Schema({
     driverCar: { type: Schema.ObjectId, ref: 'DriverCar'},
     rate: { type: Schema.ObjectId, ref: 'Rate'},
     template: { type: Schema.ObjectId, ref: 'Template'},
-    locationAdd: Boolean,
+    locationAdd: String,
     price: String,
     date: Date
 });

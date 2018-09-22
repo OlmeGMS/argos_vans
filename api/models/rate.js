@@ -9,4 +9,4 @@ var RateSchema = Schema({
   precio: Number,
 });
 
-module.exports = mongoose.model('RateSchema', RateSchema);
+module.exports = mongoose.model('Rate', RateSchema);

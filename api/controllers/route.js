@@ -4,8 +4,8 @@ var fs = require('fs');
 var mongoosePaginate = require('mongoose-pagination');
 
 var Route = require('../models/route');
-var Car = require('../models/car');
 var Rate = require('../models/rate');
+var User = require('../models/user');
 var Template = require('../models/template');
 
 function getRoute(req, res)
@@ -18,18 +18,74 @@ function getRoute(req, res)
         path: 'driverCar',
         model: 'DriverCar'
     },
+    populate: {
+        path: 'car',
+        model: 'Car'
+    },
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'user',
+        model: 'User'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'eps',
+        model: 'Eps'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'arl',
+        model: 'Arl'
+      }
+    },
+
   }).populate({
     path: 'rate',
     populate: {
       path: 'rate',
       model: 'Rate'
     },
+    path: 'rate',
+    populate:{
+      path: 'origen',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'destino',
+      model: 'Location'
+    }
   }).populate({
     path: 'template',
     populate: {
       path: 'template',
       model: 'Template'
-    }
+    },
   }).exec((err, route) => {
     if (err) {
       res.status(500).send({
@@ -51,7 +107,83 @@ function getRoute(req, res)
 
 function getListRoutes(req, res)
 {
-  Routes.find({}, function(err, exams) {
+  var find = Route.find({}).sort('Route');
+
+  find.populate({
+    path: 'driverCar',
+    populate: {
+        path: 'driverCar',
+        model: 'DriverCar'
+    },
+    populate: {
+        path: 'car',
+        model: 'Car'
+    },
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'user',
+        model: 'User'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'eps',
+        model: 'Eps'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'arl',
+        model: 'Arl'
+      }
+    },
+
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'origen',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'destino',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'template',
+    populate: {
+      path: 'template',
+      model: 'Template'
+    },
+  }).exec((err, routes) => {
     if (err) {
       res.status(500).send({
         message: 'Error en la petición'
@@ -68,6 +200,8 @@ function getListRoutes(req, res)
       }
     }
   });
+
+
 
 }
 

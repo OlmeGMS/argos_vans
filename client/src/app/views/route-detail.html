@@ -1,0 +1,94 @@
+<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador'">
+<!-- Blank Header -->
+<div class="content-header">
+    <div class="header-section">
+        <h1>
+            <i class="fa fa-road"></i>{{titulo}}<br><small>En esta sección pudes agregar nuevas rutas al sistema!</small>
+        </h1>
+    </div>
+</div>
+<ul class="breadcrumb breadcrumb-top">
+    <li>Home</li>
+    <li>Gestionar ruta</li>
+    <li><a href="">{{titulo}}</a></li>
+</ul>
+<!-- END Blank Header -->
+
+<!-- Example Block -->
+<div class="block">
+    <!-- Example Title -->
+    <div class="block-title">
+        <h2>{{titulo}}</h2>
+    </div>
+    <!-- END Example Title -->
+
+    <!-- Example Content -->
+    <form id="form-validation" #formRoute="ngForm" method="post" class="form-horizontal form-bordered" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <legend><i class="fa fa-angle-right"></i> Datos de la ruta</legend>
+        <div *ngIf="alertMessage">
+            <div class="alert alert-info">
+              {{alertMessage}}
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="name">Titulo<span class="text-danger">*</span></label>
+          <div class="col-md-6">
+            <input type="text" id="name" name="name" class="form-control"  placeholder="Digite el nombre de la localidad" value="{{route.name}}" required readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="driverCar">Prestador<span class="text-danger">*</span></label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" name="" value="{{route.driverCar.driver.user.name}} {{route.driverCar.driver.user.surname}} | {{route.driverCar.car.placa}} | {{route.driverCar.car.capacity}}" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="rate">Tarifa<span class="text-danger">*</span></label>
+          <div class="col-md-6">
+              <input type="text" class="form-control" name="" value="${{route.rate.precio}} | {{route.rate.origen.name}} - {{route.rate.destino.name}}" readonly>
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="route.locationAdd == 'true'">
+          <label class="col-md-4 control-label" for="locationAdd">Localidad adicional<span class="text-danger">*</span></label>
+          <div class="col-md-6">
+              <input type="text" class="form-control" name="" value="Si" readonly>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="route.locationAdd == 'false'">
+          <label class="col-md-4 control-label" for="locationAdd">Localidad adicional<span class="text-danger">*</span></label>
+          <div class="col-md-6">
+              <input type="text" class="form-control" name="" value="No" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="date">Fecha</label>
+          <div class="input-group col-md-6">
+            <input type="date" id="date" #date="ngModel" name="date" class="form-control" [(ngModel)]="route.date" data-date-format="yyyy-mm-dd" placeholder="aaaa/mm/dd" readonly>
+            <span *ngIf="!date.valid && date.touched"><p style="color:#b61922;">La fecha es obligatoria.</p></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="template">Planilla<span class="text-danger">*</span></label>
+          <div class="col-md-6">
+              <!-- Table template Employees-->
+              <!-- End Table template Employees-->
+          </div>
+        </div>
+        <div class="form-group ">
+          <div class="col-md-8 col-md-offset-4">
+            <button href="" type="submit" class="btn btn-sm btn-info" [disabled]="!formRoute.form.valid"><i class="fa fa-arrow-right"></i> Regresar</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+    <!-- END Example Content -->
+</div>
+<!-- END Example Block -->
+</div>
+<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador'">
+  <h2>ERROR: Permisos</h2>
+  <br>
+  <p style=" color: #333;">No tienes acceso a esta parte de la aplicación.</p>
+</div>

@@ -59,6 +59,8 @@ import { TemplateEditComponent } from './components/template-edit.component';
 import { TemplateDetailComponent } from './components/template-detail.component';
 import { RouteTableComponent } from './components/route-table.component';
 import { RouteAddComponent } from './components/route-add.component';
+import { RouteEditComponent } from './components/route-edit.component';
+import { RouteDetailComponent } from './components/route-detail.component';
 
 
 
@@ -115,7 +117,9 @@ import { RouteAddComponent } from './components/route-add.component';
     TemplateEditComponent,
     TemplateDetailComponent,
     RouteTableComponent,
-    RouteAddComponent
+    RouteAddComponent,
+    RouteEditComponent,
+    RouteDetailComponent
   ],
   imports: [
     BrowserModule,

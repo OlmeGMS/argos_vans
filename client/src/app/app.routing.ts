@@ -74,6 +74,8 @@ import { TemplateDetailComponent } from './components/template-detail.component'
 // import route
 import { RouteTableComponent } from './components/route-table.component';
 import { RouteAddComponent } from './components/route-add.component';
+import { RouteEditComponent } from './components/route-edit.component';
+import { RouteDetailComponent } from './components/route-detail.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -122,6 +124,8 @@ const appRoutes: Routes = [
   {path: 'ver-planilla/:id', component: TemplateDetailComponent},
   {path: 'rutas', component: RouteTableComponent},
   {path: 'crear-ruta', component: RouteAddComponent},
+  {path: 'editar-ruta/:id', component: RouteEditComponent},
+  {path: 'ver-ruta/:id', component: RouteDetailComponent},
   {path: '**', component: HomeComponent}
 ];
 
