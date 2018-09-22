@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { GLOBAL } from '../services/global';
@@ -12,6 +12,8 @@ import { Rate } from '../models/rate';
 import { DriverCar } from '../models/driver_car';
 import { Route } from '../models/route';
 import { AppComponent } from '../app.component';
+
+declare const $;
 
 @Component({
   selector: 'route-detail',
@@ -55,6 +57,18 @@ export class RouteDetailComponent implements OnInit {
 
     ngOnInit(){
       console.log('Cargado el componente de crear ruta');
+      $(function () {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+      });
+
+
+
+
 
     }
 
