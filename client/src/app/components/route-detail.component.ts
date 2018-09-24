@@ -1,5 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ExcelService } from '../services/export.excel.service';
+
+import * as jsPDF from 'jspdf';
 
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
@@ -23,6 +26,9 @@ declare const $;
 
 export class RouteDetailComponent implements OnInit {
 
+
+    @ViewChild('content') content: ElementRef;
+
     public titulo: string;
     public templates: Template[];
     public rates: Rate[];
@@ -43,7 +49,8 @@ export class RouteDetailComponent implements OnInit {
       private _templateService: TemplateService,
       private _rateService: RateService,
       private _driverCarService: DriverCarService,
-      private _routeService: RouteService
+      private _routeService: RouteService,
+      private excelService: ExcelService
     ){
       this.titulo = 'Ver Ruta';
       this.identity = this._userService.getIdentity();
@@ -59,12 +66,12 @@ export class RouteDetailComponent implements OnInit {
       console.log('Cargado el componente de crear ruta');
       $(function () {
         $('#example').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
+          dom: 'Bfrtip',
+          buttons: [
+              'copy', 'csv', 'excel', 'pdf'
+          ]
       });
+    });
 
 
 
@@ -167,4 +174,30 @@ export class RouteDetailComponent implements OnInit {
           this._router.navigate(['/rutas']);
 
     }
+
+
+    public downloadEXCEL(){
+        console.log('Excel');
+        this.excelService.generateExcel();
+    }
+
+    public downloadPDF(){
+      let doc = new jsPDF();
+
+      let specialElementHandlers = {
+        '#editor': function(element, renderer){
+          return true;
+        }
+      };
+
+      let content = this.content.nativeElement;
+
+      doc.fromHTML(content.innerHTML, 15, 15, {
+        'width': 190,
+        'elementHandlers': specialElementHandlers
+      });
+
+      doc.save('ruta.pdf');
+    }
+
 }

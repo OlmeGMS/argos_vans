@@ -7,6 +7,8 @@ import { EpsService } from '../services/eps.service';
 import { Eps } from '../models/eps';
 import { AppComponent } from '../app.component';
 
+declare const $;
+
 @Component({
   selector: 'eps-table',
   templateUrl: '../views/eps-table.html',
