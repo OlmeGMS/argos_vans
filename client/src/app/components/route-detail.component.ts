@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ExcelService } from '../services/export.excel.service';
 
 import * as jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
 
 import { GLOBAL } from '../services/global';
 import { UserService } from '../services/user.service';
@@ -17,6 +18,7 @@ import { Route } from '../models/route';
 import { AppComponent } from '../app.component';
 
 declare const $;
+type AOA = any[][];
 
 @Component({
   selector: 'route-detail',
@@ -40,7 +42,12 @@ export class RouteDetailComponent implements OnInit {
     public token;
     public url: string;
     public alertMessage;
+    public flecha;
 
+    //excel
+    public data: AOA = [];
+	  public wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
+	  public fileName: string = 'Ruta.xlsx';
 
     constructor(
       private _route: ActivatedRoute,
@@ -180,6 +187,50 @@ export class RouteDetailComponent implements OnInit {
         console.log('Excel');
         this.excelService.generateExcel();
     }
+
+    onFileChange(evt: any) {
+      console.log('excel js');
+		/* wire up file reader */
+		const target: DataTransfer = <DataTransfer>(evt.target);
+		if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+		const reader: FileReader = new FileReader();
+		reader.onload = (e: any) => {
+			/* read workbook */
+			const bstr: string = e.target.result;
+			const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+
+			/* grab first sheet */
+			const wsname: string = wb.SheetNames[0];
+			const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+			/* save data */
+			this.data = <AOA>(XLSX.utils.sheet_to_json(ws, {header: 1}));
+		};
+		reader.readAsBinaryString(target.files[0]);
+	}
+
+	export(template){
+
+    var rg = template;
+
+    console.log('ol');
+    console.log(rg);
+    //this.data.push(['Nombre', 'Apellido', 'Cédula', 'Teléfono', 'Dirección']);
+    for (let i = 0; i < rg.length; i++) {
+      console.log(this.flecha[i]);
+      this.data.push(['Nombre', 'Apellido', 'Cédula', 'Teléfono', 'Dirección'],[this.flecha[i]]);
+    }
+
+		/* generate worksheet */
+		const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+
+		/* generate workbook and add the worksheet */
+		const wb: XLSX.WorkBook = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(wb, ws, 'Ruta');
+
+		/* save to file */
+		XLSX.writeFile(wb, this.fileName);
+	}
 
     public downloadPDF(){
       let doc = new jsPDF();
