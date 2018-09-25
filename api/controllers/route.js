@@ -281,6 +281,7 @@ module.exports = {
   getListRoutes,
   saveRoute,
   updateRoute,
-  deleteRoute
+  deleteRoute,
+  exportExcel
 
 }
