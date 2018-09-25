@@ -266,6 +266,15 @@ function deleteRoute(req, res)
   });
 }
 
+function exportExcel(req, res)
+{
+  var fs = require('fs');
+  var csv = require('fast-csv');
+  var ws = fs.createWriteStream('ruta.cvs');
+
+  cvs.write([],{headers:true}).pipe(ws);
+}
+
 
 module.exports = {
   getRoute,

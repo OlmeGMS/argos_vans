@@ -218,7 +218,7 @@ export class RouteDetailComponent implements OnInit {
     //this.data.push(['Nombre', 'Apellido', 'Cédula', 'Teléfono', 'Dirección']);
     for (let i = 0; i < rg.length; i++) {
       console.log(this.flecha[i]);
-      this.data.push(['Nombre', 'Apellido', 'Cédula', 'Teléfono', 'Dirección'],[this.flecha[i]]);
+      this.data.push(['Nombre', 'Apellido', 'Cédula', 'Teléfono', 'Dirección'],[this.flecha[i].name]);
     }
 
 		/* generate worksheet */
@@ -247,8 +247,25 @@ export class RouteDetailComponent implements OnInit {
         'width': 190,
         'elementHandlers': specialElementHandlers
       });
-
+      
       doc.save('ruta.pdf');
+    }
+
+    buttonExcel(){
+
+      var wb = XLSX.utils.table_to_book(document.getElementById('example'));
+      var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+
+      function s2ab(s){
+          var buf = new ArrayBuffer(s.length);
+          var view = new Uint8Array(buf);
+          for(var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+          return buf;
+      }
+
+      $('#button-a').click(function(){
+        //saveAs(new Blob([s2ab(wbout)],{type:"application/octest-stream"}), 'ruta.xlsx');
+      });
     }
 
 }
