@@ -23,7 +23,7 @@
     <!-- END Example Title -->
 
     <!-- Example Content -->
-    <form id="form-validation" #formRoute="ngForm" method="post" class="form-horizontal form-bordered" (ngSubmit)="onSubmit()">
+    <form id="form-validation" method="post" class="form-horizontal form-bordered" (ngSubmit)="onSubmit()">
       <fieldset id="content" #content>
         <legend><i class="fa fa-angle-right"></i> Datos de la ruta</legend>
         <div *ngIf="alertMessage">
@@ -34,44 +34,38 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="name">Titulo<span class="text-danger">*</span></label>
           <div class="col-md-6">
-            <input type="text" id="name" name="name" class="form-control"  placeholder="Digite el nombre de la localidad" value="{{route.name}}" required readonly>
-
+            <p class="form-control">{{route.name}}</p>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-4 control-label" for="driverCar">Prestador<span class="text-danger">*</span></label>
           <div class="col-md-6">
-            <input type="text" class="form-control" name="" value="{{route.driverCar.driver.user.name}} {{route.driverCar.driver.user.surname}} | {{route.driverCar.car.placa}} | {{route.driverCar.car.capacity}}" readonly>
-
+            <p class="form-control">{{route.driverCar.driver.user.name}} {{route.driverCar.driver.user.surname}} | {{route.driverCar.car.placa}} | {{route.driverCar.car.capacity}}</p>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-4 control-label" for="rate">Tarifa<span class="text-danger">*</span></label>
           <div class="col-md-6">
-            <input type="text" class="form-control" name="" value="${{route.rate.precio}} | {{route.rate.origen.name}} - {{route.rate.destino.name}}" readonly>
-
+            <p class="form-control">${{route.rate.precio}} | {{route.rate.origen.name}} - {{route.rate.destino.name}}</p>
           </div>
         </div>
 
         <div class="form-group" *ngIf="route.locationAdd == 'true'">
           <label class="col-md-4 control-label" for="locationAdd">Localidad adicional<span class="text-danger">*</span></label>
           <div class="col-md-6">
-            <input type="text" class="form-control" name="" value="Si" readonly>
-
+            <p class="form-control">Si</p>
           </div>
         </div>
         <div class="form-group" *ngIf="route.locationAdd == 'false'">
           <label class="col-md-4 control-label" for="locationAdd">Localidad adicional<span class="text-danger">*</span></label>
           <div class="col-md-6">
-            <input type="text" class="form-control" name="" value="No" readonly>
-
+            <p class="form-control">No</p>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-4 control-label" for="date">Fecha</label>
           <div class="input-group col-md-6">
-            <input type="date" id="date" #date="ngModel" name="date" class="form-control" [(ngModel)]="route.date" data-date-format="yyyy-mm-dd" placeholder="aaaa/mm/dd" readonly>
-            <span *ngIf="!date.valid && date.touched"><p style="color:#b61922;">La fecha es obligatoria.</p></span>
+            <p class="form-control">{{route.date}}</p>
           </div>
         </div>
         <div class="form-group">
@@ -111,8 +105,8 @@
               </tfoot>
             </table>
             <div class="dt-buttons">
-              <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example" type="button" (click)="export(route.template.employee)"><span>CSV</span></button>
-              <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example" type="button" id="button-a" (click)="buttonExcel()"><span>Excel</span></button>
+              <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example" type="button" (click)="export(route.template.employee, route.name)"><span>CSV</span></button>
+              <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example" type="button" id="button-a" (click)="exportExcel(route.template.employee)"><span>Excel</span></button>
               <button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example" type="button" (click)="downloadPDF()"><span>PDF</span></button>
               <!--<button class="dt-button buttons-print" tabindex="0" aria-controls="example" type="button"><span>Print</span></button> -->
             </div>
@@ -122,7 +116,7 @@
         </div>
         <div class="form-group ">
           <div class="col-md-8 col-md-offset-4">
-            <button href="" type="submit" class="btn btn-sm btn-info" [disabled]="!formRoute.form.valid"><i class="fa fa-arrow-right"></i> Regresar</button>
+            <button href="" type="submit" class="btn btn-sm btn-info"><i class="fa fa-arrow-right"></i> Regresar</button>
           </div>
         </div>
       </fieldset>
