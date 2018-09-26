@@ -86,7 +86,7 @@ source: LocalDataSource;
     this.titulo = 'Crear planilla de recorrido';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.template = new Template('', '', '', '', 'null', 'null', '', '', '', '', '');
+    this.template = new Template('', '', '', '', '', '', '', '', '','');
     this.getCostCenterList();
     this.getCityList();
     this.getCityListEnd();

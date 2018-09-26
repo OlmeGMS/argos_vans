@@ -61,8 +61,10 @@ import { RouteTableComponent } from './components/route-table.component';
 import { RouteAddComponent } from './components/route-add.component';
 import { RouteEditComponent } from './components/route-edit.component';
 import { RouteDetailComponent } from './components/route-detail.component';
-
-
+import { RouteManageComponent } from './components/route-manage.component';
+import { RouteTableActiveComponent } from './components/route-active.component';
+import { RouteTableInactiveComponent } from './components/route-inactive.component';
+import { RouteBillComponent } from './components/route-bill.component';
 
 
 @NgModule({
@@ -119,7 +121,11 @@ import { RouteDetailComponent } from './components/route-detail.component';
     RouteTableComponent,
     RouteAddComponent,
     RouteEditComponent,
-    RouteDetailComponent
+    RouteDetailComponent,
+    RouteManageComponent,
+    RouteTableActiveComponent,
+    RouteTableInactiveComponent,
+    RouteBillComponent
   ],
   imports: [
     BrowserModule,

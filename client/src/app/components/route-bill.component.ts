@@ -14,18 +14,19 @@ import { Route } from '../models/route';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'route-add',
-  templateUrl: '../views/route-add.html',
+  selector: 'route-bill',
+  templateUrl: '../views/route-bill.html',
   providers: [UserService, TemplateService, RateService, DriverCarService, RouteService]
 })
 
-export class RouteAddComponent implements OnInit {
+export class RouteBillComponent implements OnInit {
 
     public titulo: string;
     public templates: Template[];
     public rates: Rate[];
     public driverCars: DriverCar[];
     public route: Route;
+    public routes: Route[];
     public precio;
     public precioTotal;
     public identity;
@@ -43,7 +44,7 @@ export class RouteAddComponent implements OnInit {
       private _driverCarService: DriverCarService,
       private _routeService: RouteService
     ){
-      this.titulo = 'Crear Ruta';
+      this.titulo = 'Buscar';
       this.identity = this._userService.getIdentity();
       this.token = this._userService.getToken();
       this.route = new Route('', '', '', '', 'false', '', '', 'null','null',true);
@@ -125,95 +126,24 @@ export class RouteAddComponent implements OnInit {
 
 
     onSubmit(){
-      console.log(this.route.locationAdd);
-      var flag = true;
-      console.log(flag);
-      if(this.route.locationAdd == 'true'){
-        console.log('bruja');
-        this._rateService.getRate(this.token, this.route.rate).subscribe(
-            response => {
-              if(!response.rate){
-                this._router.navigate(['/']);
-              }else{
-                this.precio = response.rate;
-                this.precioTotal = this.precio.precio;
-                this.precioTotal = this.precioTotal + 12490;
-                this.route.price = this.precioTotal;
-                console.log('bloblo');
-                this._routeService.addRoute(this.token, this.route).subscribe(
-                  response => {
-                    if(!response.route){
-                      this.alertMessage = 'Error en el servidor';
-                    }else{
-                      this.alertMessage = 'La ruta fue creada correctamente';
-                      this.route = response.route;
-                    }
-                  },
-                  error => {
-                    var errorMessage = <any>error;
-                     if(errorMessage != null){
-                       var body = JSON.parse(error._body);
-                       this.alertMessage = body.message;
-                       console.log(error);
-                     }
-                  }
-                );
-              }
-            },
-            error => {
-              var errorMessage = <any>error;
-               if(errorMessage != null){
-                 var body = JSON.parse(error._body);
-                 console.log(error);
-               }
+        console.log(this.route);
+        this._routeService.billRouteWeek(this.token, this.route).subscribe(
+          response => {
+            if (!response.routes) {
+                this.alertMessage = '¡Error en el servidor!';
+            }else{
+                this.routes = response.routes;
+                console.log(this.routes);
             }
+          },
+          error =>{
+            var errorMessage = <any>error;
+             if(errorMessage != null){
+               var body = JSON.parse(error._body);
+               this.alertMessage = body.message;
+               console.log(error);
+             }
+          }
         );
-
-      }else{
-        console.log('brujo');
-
-        this._rateService.getRate(this.token, this.route.rate).subscribe(
-            response => {
-              if(!response.rate){
-                this._router.navigate(['/']);
-              }else{
-                this.precio = response.rate;
-                this.route.price = this.precio.precio;
-                this._routeService.addRoute(this.token, this.route).subscribe(
-                  response => {
-                    if(!response.route){
-                      this.alertMessage = 'Error en el servidor';
-                    }else{
-                      this.alertMessage = 'La ruta fue creada correctamente';
-                      this.route = response.route;
-                    }
-                  },
-                  error => {
-                    var errorMessage = <any>error;
-                     if(errorMessage != null){
-                       var body = JSON.parse(error._body);
-                       this.alertMessage = body.message;
-                       console.log(error);
-                     }
-                  }
-                );
-              }
-            },
-            error => {
-              var errorMessage = <any>error;
-               if(errorMessage != null){
-                 var body = JSON.parse(error._body);
-                 console.log(error);
-               }
-            }
-        );
-
-
-      }
-
-
-
-
-
     }
 }

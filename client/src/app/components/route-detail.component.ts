@@ -62,11 +62,12 @@ export class RouteDetailComponent implements OnInit {
     this.titulo = 'Ver Ruta';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.route = new Route('', '', '', '', 'false', '', '');
+    this.route = new Route('', '', '', '', 'false', '', '', 'null','null',true);
+    this.getRoute();
     this.getRateList();
     this.getDriverCarList();
     this.getTempalteList();
-    this.getRoute();
+
   }
 
   ngOnInit() {

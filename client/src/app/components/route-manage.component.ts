@@ -14,12 +14,12 @@ import { Route } from '../models/route';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'route-edit',
-  templateUrl: '../views/route-edit.html',
+  selector: 'route-manage',
+  templateUrl: '../views/route-manage.html',
   providers: [UserService, TemplateService, RateService, DriverCarService, RouteService]
 })
 
-export class RouteEditComponent implements OnInit {
+export class RouteManageComponent implements OnInit {
 
     public titulo: string;
     public templates: Template[];
@@ -43,10 +43,10 @@ export class RouteEditComponent implements OnInit {
       private _driverCarService: DriverCarService,
       private _routeService: RouteService
     ){
-      this.titulo = 'Editar Ruta';
+      this.titulo = 'Gestionar Ruta';
       this.identity = this._userService.getIdentity();
       this.token = this._userService.getToken();
-      this.route = new Route('', '', '', '', 'false', '', '', 'null','null',true);
+      this.route = new Route('', '', '', '', 'false', '', '', '','null',false);
       this.getRateList();
       this.getDriverCarList();
       this.getTempalteList();
@@ -54,7 +54,7 @@ export class RouteEditComponent implements OnInit {
     }
 
     ngOnInit(){
-      console.log('Cargado el componente de crear ruta');
+      console.log('Cargado el componente de gestionar ruta');
 
     }
 
@@ -150,99 +150,28 @@ export class RouteEditComponent implements OnInit {
 
 
     onSubmit(){
-      console.log(this.route.locationAdd);
       this._route.params.forEach((params: Params) => {
         let id = params['id'];
-          var flag = true;
-          console.log(flag);
-          if(this.route.locationAdd == 'true'){
-            console.log('bruja');
-            this._rateService.getRate(this.token, this.route.rate).subscribe(
-                response => {
-                  if(!response.rate){
-                    this._router.navigate(['/']);
-                  }else{
-                    this.precio = response.rate;
-                    this.precioTotal = this.precio.precio;
-                    this.precioTotal = this.precioTotal + 12490;
-                    this.route.price = this.precioTotal;
-                    console.log('bloblo');
-                    this._routeService.editRoute(this.token, id, this.route).subscribe(
-                      response => {
-                        if(!response.route){
-                          this.alertMessage = 'Error en el servidor';
-                        }else{
-                          this.alertMessage = 'La ruta fue actualizada correctamente';
-                          this.route = response.route;
-                        }
-                      },
-                      error => {
-                        var errorMessage = <any>error;
-                         if(errorMessage != null){
-                           var body = JSON.parse(error._body);
-                           this.alertMessage = 'Verifica los campos';
-                           console.log(error);
-                         }
-                      }
-                    );
-                  }
-                },
-                error => {
-                  var errorMessage = <any>error;
-                   if(errorMessage != null){
-                     var body = JSON.parse(error._body);
-                     console.log(error);
-                   }
-                }
-            );
-
-          }else{
-            console.log('brujo');
-
-            this._rateService.getRate(this.token, this.route.rate).subscribe(
-                response => {
-                  if(!response.rate){
-                    this._router.navigate(['/']);
-                  }else{
-                    this.precio = response.rate;
-                    this.route.price = this.precio.precio;
-                    this._routeService.editRoute(this.token, id, this.route).subscribe(
-                      response => {
-                        if(!response.route){
-                          this.alertMessage = 'Error en el servidor';
-                        }else{
-                          this.alertMessage = 'La ruta fue Actualizada correctamente';
-                          this.route = response.route;
-                        }
-                      },
-                      error => {
-                        var errorMessage = <any>error;
-                         if(errorMessage != null){
-                           var body = JSON.parse(error._body);
-                           this.alertMessage = body.message;
-                           this.alertMessage = 'Verifica los campos';
-                           console.log(error);
-                         }
-                      }
-                    );
-                  }
-                },
-                error => {
-                  var errorMessage = <any>error;
-                   if(errorMessage != null){
-                     var body = JSON.parse(error._body);
-                     this.alertMessage = 'Verifica los campos';
-                     console.log(error);
-                   }
-                }
-            );
-
-
+        this.route.status = false;
+        this._routeService.editRoute(this.token, id, this.route).subscribe(
+          response => {
+            if(!response){
+              this.alertMessage = "Error en el servidor";
+            }else{
+              this.alertMessage = '¡La ruta fue gestionada actualizada!';
+              this.route = response.route;
+            }
+          },
+          error => {
+            var errorMessage = <any>error;
+            if(errorMessage != null){
+              var body = JSON.parse(error._body);
+              this.alertMessage = body.message;
+              console.log(error);
+            }
           }
-
-
-          });
-
+        );
+      });
 
     }
 }

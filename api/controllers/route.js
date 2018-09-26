@@ -72,6 +72,18 @@ function getRoute(req, res)
   }).populate({
     path: 'rate',
     populate: {
+      path: 'origen',
+      model: 'Location',
+      path: 'origen',
+      populate:{
+        path: 'id_city',
+        model: 'City'
+      }
+    },
+
+  }).populate({
+    path: 'rate',
+    populate: {
       path: 'rate',
       model: 'Rate'
     },
@@ -81,10 +93,28 @@ function getRoute(req, res)
       model: 'Location'
     }
   }).populate({
+    path: 'rate',
+    populate: {
+      path: 'destino',
+      model: 'Location',
+      path: 'destino',
+      populate:{
+        path: 'id_city',
+        model: 'City'
+      }
+    },
+
+  }).populate({
     path: 'template',
     populate: {
       path: 'template',
       model: 'Template'
+    },
+  }).populate({
+    path: 'template',
+    populate: {
+      path: 'cost_center',
+      model: 'CostCenter'
     },
   }).exec((err, route) => {
     if (err) {
@@ -205,6 +235,206 @@ function getListRoutes(req, res)
 
 }
 
+function getListRoutesTrue(req, res)
+{
+  var find = Route.find({}).sort('Route').where('status').equals(true);
+
+  find.populate({
+    path: 'driverCar',
+    populate: {
+        path: 'driverCar',
+        model: 'DriverCar'
+    },
+    populate: {
+        path: 'car',
+        model: 'Car'
+    },
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'user',
+        model: 'User'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'eps',
+        model: 'Eps'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'arl',
+        model: 'Arl'
+      }
+    },
+
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'origen',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'destino',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'template',
+    populate: {
+      path: 'template',
+      model: 'Template'
+    },
+  }).exec((err, routes) => {
+    if (err) {
+      res.status(500).send({
+        message: 'Error en la petición'
+      });
+    } else {
+      if (!routes) {
+        res.status(404).send({
+          message: 'No hay rutas !!'
+        });
+      } else {
+        res.status(200).send({
+          routes: routes
+        });
+      }
+    }
+  });
+
+
+
+}
+
+function getListRoutesFalse(req, res)
+{
+  var find = Route.find({}).sort('Route').where('status').equals(false);
+
+  find.populate({
+    path: 'driverCar',
+    populate: {
+        path: 'driverCar',
+        model: 'DriverCar'
+    },
+    populate: {
+        path: 'car',
+        model: 'Car'
+    },
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'user',
+        model: 'User'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'eps',
+        model: 'Eps'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'arl',
+        model: 'Arl'
+      }
+    },
+
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'origen',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'destino',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'template',
+    populate: {
+      path: 'template',
+      model: 'Template'
+    },
+  }).exec((err, routes) => {
+    if (err) {
+      res.status(500).send({
+        message: 'Error en la petición'
+      });
+    } else {
+      if (!routes) {
+        res.status(404).send({
+          message: 'No hay rutas !!'
+        });
+      } else {
+        res.status(200).send({
+          routes: routes
+        });
+      }
+    }
+  });
+
+
+
+}
+
 function saveRoute(req, res)
 {
   var route = new Route();
@@ -217,6 +447,9 @@ function saveRoute(req, res)
   route.locationAdd = params.locationAdd;
   route.price = params.price;
   route.date = params.date;
+  route.confirmation_upload = params.confirmation_upload;
+  route.km = params.confirmation_upload;
+  route.status = params.status;
 
   route.save((err, routeStored) => {
     if (err) {
@@ -275,6 +508,107 @@ function exportExcel(req, res)
   cvs.write([],{headers:true}).pipe(ws);
 }
 
+function billWeekRoute(req, res)
+{
+  var params = req.body;
+  var date_start = params.date_start;
+  var date_end = params.date_end;
+
+  var find = Route.find({"date": {"$gte": new Date(date_start), "$lt": new Date(date_end)}}).sort('Route').where('status').equals(false);
+
+  find.populate({
+    path: 'driverCar',
+    populate: {
+        path: 'driverCar',
+        model: 'DriverCar'
+    },
+    populate: {
+        path: 'car',
+        model: 'Car'
+    },
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'user',
+        model: 'User'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'eps',
+        model: 'Eps'
+      }
+    },
+
+  }).populate({
+    path: 'driverCar',
+    populate: {
+      path: 'driver',
+      model: 'Driver',
+      path: 'driver',
+      populate:{
+        path: 'arl',
+        model: 'Arl'
+      }
+    },
+
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'origen',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'rate',
+    populate: {
+      path: 'rate',
+      model: 'Rate'
+    },
+    path: 'rate',
+    populate:{
+      path: 'destino',
+      model: 'Location'
+    }
+  }).populate({
+    path: 'template',
+    populate: {
+      path: 'template',
+      model: 'Template'
+    },
+  }).exec((err, routes) => {
+    if (err) {
+      res.status(500).send({
+        message: 'Error en la petición'
+      });
+    } else {
+      if (!routes) {
+        res.status(404).send({
+          message: 'No hay rutas !!'
+        });
+      } else {
+        res.status(200).send({
+          routes: routes
+        });
+      }
+    }
+  });
+}
+
 
 module.exports = {
   getRoute,
@@ -282,6 +616,8 @@ module.exports = {
   saveRoute,
   updateRoute,
   deleteRoute,
-  exportExcel
-
+  exportExcel,
+  getListRoutesTrue,
+  getListRoutesFalse,
+  billWeekRoute
 }

@@ -23,7 +23,7 @@
     <!-- END Example Title -->
 
     <!-- Example Content -->
-    <form id="form-validation" method="post" class="form-horizontal form-bordered" (ngSubmit)="onSubmit()">
+    <form id="form-validation" class="form-horizontal form-bordered" (ngSubmit)="onSubmit()">
       <fieldset id="content" #content>
         <legend><i class="fa fa-angle-right"></i> Datos de la ruta</legend>
         <div *ngIf="alertMessage">
@@ -32,32 +32,32 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-4 control-label" for="name">Titulo<span class="text-danger">*</span></label>
+          <label class="col-md-4 control-label" for="name">Titulo</label>
           <div class="col-md-6">
             <p class="form-control">{{route.name}}</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-4 control-label" for="driverCar">Prestador<span class="text-danger">*</span></label>
+          <label class="col-md-4 control-label" for="driverCar">Prestador</label>
           <div class="col-md-6">
             <p class="form-control">{{route.driverCar.driver.user.name}} {{route.driverCar.driver.user.surname}} | {{route.driverCar.car.placa}} | {{route.driverCar.car.capacity}}</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-4 control-label" for="rate">Tarifa<span class="text-danger">*</span></label>
+          <label class="col-md-4 control-label" for="rate">Tarifa</label>
           <div class="col-md-6">
             <p class="form-control">${{route.rate.precio}} | {{route.rate.origen.name}} - {{route.rate.destino.name}}</p>
           </div>
         </div>
 
         <div class="form-group" *ngIf="route.locationAdd == 'true'">
-          <label class="col-md-4 control-label" for="locationAdd">Localidad adicional<span class="text-danger">*</span></label>
+          <label class="col-md-4 control-label" for="locationAdd">Localidad adicional</label>
           <div class="col-md-6">
             <p class="form-control">Si</p>
           </div>
         </div>
         <div class="form-group" *ngIf="route.locationAdd == 'false'">
-          <label class="col-md-4 control-label" for="locationAdd">Localidad adicional<span class="text-danger">*</span></label>
+          <label class="col-md-4 control-label" for="locationAdd">Localidad adicional</label>
           <div class="col-md-6">
             <p class="form-control">No</p>
           </div>
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-4 control-label" for="template">Planilla<span class="text-danger">*</span></label>
+          <label class="col-md-4 control-label" for="template">Planilla</label>
           <div class="col-md-12" >
 
 
@@ -106,7 +106,7 @@
             </table>
             <div class="dt-buttons">
               <button class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example" type="button" (click)="export(route.template.employee, route.name)"><span>CSV</span></button>
-              <button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example" type="button" id="button-a" (click)="exportExcel(route.template.employee)"><span>Excel</span></button>
+              <!--<button class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example" type="button" id="button-a" (click)="exportExcel(route.template.employee)"><span>Excel</span></button>-->
               <button class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example" type="button" (click)="downloadPDF()"><span>PDF</span></button>
               <!--<button class="dt-button buttons-print" tabindex="0" aria-controls="example" type="button"><span>Print</span></button> -->
             </div>

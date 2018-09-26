@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-4 control-label" for="cost_center">Tipo dirección destino<span class="text-danger">*</span></label>
+          <label class="col-md-4 control-label" for="cost_center">Centro de costo<span class="text-danger">*</span></label>
           <div class="col-md-6">
             <select class="form-control" #cost_center="ngModel" name="cost_center" id="type_address_start" [(ngModel)]="template.cost_center" required>
                 <option *ngFor="let cc of costCenters" value="{{cc._id}}">{{cc.name}}</option>
@@ -65,6 +65,15 @@
             <span *ngIf="!cost_center.valid && cost_center.touched"><p style="color:#b61922;">El centro de costos es obligatorio.</p></span>
           </div>
         </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="ceco">Ceco<span class="text-danger">*</span></label>
+          <div class="col-md-6">
+            <input type="text" id="ceco" #ceco="ngModel" name="ceco" class="form-control" [(ngModel)]="template.ceco" placeholder="Digite el ceco" value="" required>
+            <span *ngIf="!ceco.valid && ceco.touched"><p style="color:#b61922;">El ceco es obligatorio.</p></span>
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="col-md-4 control-label" for="city">Ciudad origen<span class="text-danger">*</span></label>
           <div class="col-md-6">

@@ -56,12 +56,11 @@ function saveTemplate(req, res)
   template.employee = params.employee;
   template.date_start = params.date_start;
   template.date_end = params.date_end;
-  template.confirmation_upload = params.confirmation_download;
-  template.confirmation_download = params.confirmation_upload;
   template.address_start = params.address_start;
   template.location_start = params.location_start;
   template.address_end = params.address_end;
   template.location_end = params.location_end;
+  template.ceco = params.ceco;
   template.cost_center = params.cost_center;
 
   template.save((err, templateStored) => {

@@ -35,6 +35,26 @@ export class RouteService {
                      .map(res => res.json());
   }
 
+  getRouteListActive(token){
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+    let options = new RequestOptions({ headers: headers});
+    return this._http.get(this.url + 'route-list-active/', options)
+                     .map(res => res.json());
+  }
+
+  getRouteListinActive(token){
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+    let options = new RequestOptions({ headers: headers});
+    return this._http.get(this.url + 'route-list-inactive/', options)
+                     .map(res => res.json());
+  }
+
   addRoute(token, route: Route){
     let params = JSON.stringify(route);
     let headers = new Headers({
@@ -67,6 +87,17 @@ export class RouteService {
     let options = new RequestOptions({ headers: headers});
     return this._http.delete(this.url+'route/'+id, options)
                .map(res => res.json());
+  }
+
+  billRouteWeek(token, route: Route){
+    let params = JSON.stringify(route);
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+
+    return this._http.post(this.url+'route-bill', params, { headers: headers })
+                     .map(res => res.json());
   }
 
 }

@@ -50,13 +50,6 @@
                       <td class="text-center" *ngIf="identity.rol.name == 'Super Administrador'">
                           <div class="btn-group">
                               <a [routerLink]="['/ver-ruta', route._id]" data-toggle="tooltip" title="Ver" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
-                              <a [routerLink]="['/gestionar-ruta', route._id]" data-toggle="tooltip" title="Gestionar" class="btn btn-xs btn-info"><i class="fa fa-list"></i></a>
-                              <a [routerLink]="['/editar-ruta', route._id]" data-toggle="tooltip" title="Editar" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                              <a (click)="onDeleteConfirm(route._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
-                          </div>
-                          <div class="btn-group btn-group-xs seguro" id="btn-cancel-table" *ngIf="confirmado == route._id">
-                              <a (click)="onDeleteRoute(route._id)" data-toggle="tooltip" title="Eliminar" class="btn btn-danger"><i class="fa fa-times"></i>Eliminar</a>
-                              <a (click)="onCancelRoute()" data-toggle="tooltip" title="Cancelar" class="btn btn-default"><i class="fa fa-cw">Cancelar</i></a>
                           </div>
                       </td>
                   </tr>
