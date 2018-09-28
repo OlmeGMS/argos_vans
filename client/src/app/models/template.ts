@@ -9,6 +9,7 @@ export class Template {
       public address_end: string,
       public location_end: string,
       public ceco: string,
-      public cost_center: string
+      public cost_center: string,
+      public canLocalidades: string
     ){}
 }

@@ -37,9 +37,12 @@ export class TemplateAddComponent implements OnInit{
   public ciudadMira;
   public ciudadMiraEnd;
   public direccionMira;
+  public radar;
   public info:any = {};
+  public buscador:any = {};
   public url: string;
   public alertMessage;
+  public cantLocalidad: number = 0;
 
   settings = {
   columns: {
@@ -86,7 +89,7 @@ source: LocalDataSource;
     this.titulo = 'Crear planilla de recorrido';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.template = new Template('', '', '', '', '', '', '', '', '','');
+    this.template = new Template('', '', '', '', '', '', '', '', '','', '');
     this.getCostCenterList();
     this.getCityList();
     this.getCityListEnd();
@@ -244,6 +247,7 @@ source: LocalDataSource;
         }else{
           this.servi = response.data[0];
           console.log(this.servi);
+          this.alertMessage = '¡Dirección ubicada!';
           this.template.location_end = this.servi.localidad;
         }
       },
@@ -261,11 +265,300 @@ source: LocalDataSource;
 
 
   onSubmit(){
+    var cant = 0;
+    var contador = 0;
+    var flag = 'No';
     this.viajerosdata = new LocalDataSource(this.data);
     this.viajeros = this.viajerosdata.data;
     console.log(this.viajeros);
     console.log(this.viajeros[0].address);
     this.template.employee = this.viajeros;
+    console.log(this.viajeros.length);
+
+    this.alertMessage = '¡Procesando ...!';
+
+    //prueba
+    /*
+    this.direccionMira = this.viajeros[0].address;
+    this.info = {
+                  "row":[
+                  {"ciudad":this.ciudadMira,"direccion":this.direccionMira,"identificador":"1"}
+                ]};
+    this._servinformacionService.getServiLocalidad(this.info).subscribe(
+      response => {
+        console.log(response);
+        if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
+            this.alertMessage = '¡No se pudo ubicar la dirección origen!';
+        }else{
+          this.servi = response.data[0];
+          console.log(this.servi);
+          this.template.location_start = this.servi.localidad;
+          console.log(this.template.location_start);
+          for (var row in this.viajeros){
+            this.buscador = {
+                          "row":[
+                          {"ciudad":this.ciudadMira,"direccion":this.viajeros[row].address,"identificador":"1"}
+                        ]};
+                        this._servinformacionService.getServiLocalidad(this.buscador).subscribe(
+                          response => {
+                            if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
+                                this.alertMessage = '¡No se pudo ubicar la dirección origen!';
+                            }else{
+                              this.servi = response.data[0];
+                              console.log(this.servi);
+                              console.log(this.servi.localidad);
+                              if(this.template.location_start != this.servi.localidad){
+                                cant++;
+                                console.log('diferente');
+                                console.log(cant);
+                              }else{
+                                console.log('igual');
+                              }
+                            }
+                          },
+                          error =>{
+                            var errorMessage = <any>error;
+                            if (errorMessage != null) {
+                              var body = JSON.parse(error._body);
+                              console.log(error);
+                            }
+                          }
+                        );
+                      console.log(cant);
+          }
+
+          console.log('termino bucle');
+          console.log(cant);
+
+        }
+      },
+      error => {
+        var errorMessage = <any>error;
+        if (errorMessage != null) {
+          var body = JSON.parse(error._body);
+          console.log(error);
+        }
+      }
+    );
+*/
+    //fusion
+
+
+    if(this.template.location_start == ""){
+      console.log('Vacio start');
+      console.log(this.ciudadMira);
+      this.direccionMira = this.viajeros[0].address;
+      this.template.adress_start = this.viajeros[0].address;
+      this.info = {
+                    "row":[
+                    {"ciudad":this.ciudadMira,"direccion":this.direccionMira,"identificador":"1"}
+                  ]};
+                  this._servinformacionService.getServiLocalidad(this.info).subscribe(
+                    response => {
+                      console.log(response);
+                      if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
+                          this.alertMessage = '¡No se pudo ubicar la dirección origen!';
+                      }else{
+                        this.servi = response.data[0];
+                        console.log(this.servi);
+                        this.template.location_start = this.servi.localidad;
+                        for (var row in this.viajeros){
+
+                          this.buscador = {
+                                        "row":[
+                                        {"ciudad":this.ciudadMira,"direccion":this.viajeros[row].address,"identificador":"1"}
+                                      ]};
+                                      this._servinformacionService.getServiLocalidad(this.buscador).subscribe(
+                                        response => {
+                                          contador++;
+                                          if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
+                                              this.alertMessage = '¡No se pudo ubicar la dirección origen!';
+                                          }else{
+                                            this.servi = response.data[0];
+                                            console.log(this.servi);
+                                            console.log(this.servi.localidad);
+                                            if(this.template.location_start != this.servi.localidad){
+                                              cant = cant + 1;
+                                              this.cantLocalidad = this.cantLocalidad + 1;
+                                              console.log('diferente');
+                                              console.log(cant);
+
+                                            }else{
+                                              console.log('igual');
+                                            }
+                                          }
+                                        },
+                                        error =>{
+                                          var errorMessage = <any>error;
+                                          if (errorMessage != null) {
+                                            var body = JSON.parse(error._body);
+                                            console.log(error);
+                                          }
+                                        }
+                                      );
+                                    console.log(cant);
+
+                                    flag = "Si";
+                        }
+
+                        setTimeout(() => {
+
+                          console.log('olmecas');
+                          console.log(cant);
+                          this.cantLocalidad = cant;
+                          this.template.canLocalidades = this.cantLocalidad.toString();
+                          console.log(this.template);
+
+                          this._templateService.addTemplate(this.token, this.template).subscribe(
+                            response => {
+                              if (!response.template) {
+                                  this.alertMessage = '¡Error en el servidor!';
+                              }else{
+                                  this.alertMessage = '¡La planilla fue creada correctamente!';
+                                  this.template = response.template;
+                                  console.log(this.template);
+                              }
+                            },
+                            error => {
+                                var errorMessage = <any>error;
+                                 if(errorMessage != null){
+                                   var body = JSON.parse(error._body);
+                                   this.alertMessage = body.message;
+                                   console.log(error);
+                                 }
+                            }
+                          );
+
+                        }, 2000);
+
+
+
+
+
+
+
+
+                      }
+                    },
+                    error => {
+                      var errorMessage = <any>error;
+                         if (errorMessage != null) {
+                           var body = JSON.parse(error._body);
+                           console.log(error);
+                         }
+                    }
+                  );
+
+    }else if (this.template.location_end == "") {
+      console.log('Vacio end');
+      this.direccionMira = this.viajeros[0].address;
+      this.template.address_end = this.viajeros[0].address;
+      this.info = {
+                    "row":[
+                    {"ciudad":this.ciudadMiraEnd,"direccion":this.direccionMira,"identificador":"1"}
+                  ]};
+                  this._servinformacionService.getServiLocalidad(this.info).subscribe(
+                    response => {
+                      console.log(response);
+                      if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
+                          this.alertMessage = '¡No se pudo ubicar la dirección destino!';
+                      }else{
+                        this.servi = response.data[0];
+                        console.log(this.servi);
+                        this.template.location_end = this.servi.localidad;
+                        for (var row in this.viajeros){
+
+                          this.buscador = {
+                                        "row":[
+                                        {"ciudad":this.ciudadMira,"direccion":this.viajeros[row].address,"identificador":"1"}
+                                      ]};
+                                      this._servinformacionService.getServiLocalidad(this.buscador).subscribe(
+                                        response => {
+                                          contador++;
+                                          console.log('contador');
+                                          console.log(contador);
+                                          if (response.success != true || Object.entries(response.data).length === 0 || response.data[0].barrio === "") {
+                                              this.alertMessage = '¡No se pudo ubicar la dirección origen!';
+                                          }else{
+                                            this.servi = response.data[0];
+                                            console.log(this.servi);
+                                            console.log(this.servi.localidad);
+                                            console.log('comparacion');
+                                            console.log(this.template.location_end,'/',this.servi.localidad)
+                                            if(this.template.location_end != this.servi.localidad){
+                                              cant = cant + 1;
+                                              this.cantLocalidad = this.cantLocalidad + 1;
+                                              console.log('diferente');
+                                              console.log(cant);
+                                            }else{
+                                              console.log('igual');
+                                            }
+                                          }
+                                        },
+                                        error =>{
+                                          var errorMessage = <any>error;
+                                          if (errorMessage != null) {
+                                            var body = JSON.parse(error._body);
+                                            console.log(error);
+                                          }
+                                        }
+                                      );
+                                    console.log(cant);
+
+                                    flag = "Si";
+                        }
+
+                          setTimeout(() => {
+
+                            console.log('Marinpingüe');
+                            console.log(cant);
+                            this.cantLocalidad = cant;
+                            this.template.canLocalidades = this.cantLocalidad.toString();
+                            console.log(this.template);
+                            this._templateService.addTemplate(this.token, this.template).subscribe(
+                              response => {
+                                if (!response.template) {
+                                    this.alertMessage = '¡Error en el servidor!';
+                                }else{
+                                    this.alertMessage = '¡La planilla fue creada correctamente!';
+                                    this.template = response.template;
+                                }
+                              },
+                              error => {
+                                  var errorMessage = <any>error;
+                                   if(errorMessage != null){
+                                     var body = JSON.parse(error._body);
+                                     this.alertMessage = body.message;
+                                     console.log(error);
+                                   }
+                              }
+                            );
+
+                          }, 2000);
+
+                          /*
+
+                          */
+                        }
+
+
+                    },
+                    error => {
+                      var errorMessage = <any>error;
+                         if (errorMessage != null) {
+                           var body = JSON.parse(error._body);
+                           console.log(error);
+                         }
+                    }
+                  );
+
+
+
+    }
+
+
+
+    /*
     if(this.template.location_start == ""){
       console.log('Vacio start');
       console.log(this.ciudadMira);
@@ -364,7 +657,9 @@ source: LocalDataSource;
     }
 
 
-    console.log(this.template);
+*/
+
+    //console.log(this.template);
 
   }
 }

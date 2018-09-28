@@ -65,6 +65,9 @@ import { RouteManageComponent } from './components/route-manage.component';
 import { RouteTableActiveComponent } from './components/route-active.component';
 import { RouteTableInactiveComponent } from './components/route-inactive.component';
 import { RouteBillComponent } from './components/route-bill.component';
+import { LocationAddTableComponent } from './components/locationadd-table.component';
+import { LocationAddAddComponent } from './components/locationadd-add.component';
+import { LocationAddEditComponent } from './components/locationadd-edit.component';
 
 
 @NgModule({
@@ -125,7 +128,10 @@ import { RouteBillComponent } from './components/route-bill.component';
     RouteManageComponent,
     RouteTableActiveComponent,
     RouteTableInactiveComponent,
-    RouteBillComponent
+    RouteBillComponent,
+    LocationAddTableComponent,
+    LocationAddAddComponent,
+    LocationAddEditComponent
   ],
   imports: [
     BrowserModule,

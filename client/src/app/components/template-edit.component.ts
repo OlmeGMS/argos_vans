@@ -89,7 +89,7 @@ source: LocalDataSource;
     this.titulo = 'Editar planilla de recorrido';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.template = new Template('', '', '', '', '', '', '', '',  '','');
+    this.template = new Template('', '', '', '', '', '', '', '',  '','', '');
     this.getCostCenterList();
     this.getCityList();
     this.getCityListEnd();

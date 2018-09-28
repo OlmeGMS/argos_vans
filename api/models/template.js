@@ -13,7 +13,8 @@ var TemplateSchema = Schema({
   address_end: String,
   location_end: String,
   ceco: String,
-  cost_center: { type: Schema.ObjectId, ref: 'CostCenter'}
+  cost_center: { type: Schema.ObjectId, ref: 'CostCenter'},
+  canLocalidades: String
 
 });
 

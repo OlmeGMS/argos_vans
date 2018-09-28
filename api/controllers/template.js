@@ -62,6 +62,7 @@ function saveTemplate(req, res)
   template.location_end = params.location_end;
   template.ceco = params.ceco;
   template.cost_center = params.cost_center;
+  template.canLocalidades = params.canLocalidades;
 
   template.save((err, templateStored) => {
     if (err) {

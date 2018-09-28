@@ -576,6 +576,18 @@ function billWeekRoute(req, res)
   }).populate({
     path: 'rate',
     populate: {
+      path: 'origen',
+      model: 'Location',
+      path: 'origen',
+      populate:{
+        path: 'id_city',
+        model: 'City'
+      }
+    },
+
+  }).populate({
+    path: 'rate',
+    populate: {
       path: 'rate',
       model: 'Rate'
     },
@@ -585,10 +597,28 @@ function billWeekRoute(req, res)
       model: 'Location'
     }
   }).populate({
+    path: 'rate',
+    populate: {
+      path: 'destino',
+      model: 'Location',
+      path: 'destino',
+      populate:{
+        path: 'id_city',
+        model: 'City'
+      }
+    },
+
+  }).populate({
     path: 'template',
     populate: {
       path: 'template',
       model: 'Template'
+    },
+  }).populate({
+    path: 'template',
+    populate: {
+      path: 'cost_center',
+      model: 'CostCenter'
     },
   }).exec((err, routes) => {
     if (err) {

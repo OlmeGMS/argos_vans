@@ -81,6 +81,11 @@ import { RouteTableActiveComponent } from './components/route-active.component';
 import { RouteTableInactiveComponent } from './components/route-inactive.component';
 import { RouteBillComponent } from './components/route-bill.component';
 
+//import  locationAdd;
+import { LocationAddTableComponent } from './components/locationadd-table.component';
+import { LocationAddAddComponent } from './components/locationadd-add.component';
+import { LocationAddEditComponent } from './components/locationadd-edit.component';
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'mis-datos', component: UserEditComponent},
@@ -134,6 +139,9 @@ const appRoutes: Routes = [
   {path: 'rutas-programadas', component: RouteTableActiveComponent},
   {path: 'rutas-finalizadas', component: RouteTableInactiveComponent},
   {path: 'ruta-factura', component: RouteBillComponent},
+  {path: 'precio-localidad-adicionales', component: LocationAddTableComponent},
+  {path: 'crear-precio-localidad-adicional', component: LocationAddAddComponent},
+  {path: 'editar-precio-localidad-adicional', component: LocationAddEditComponent},
   {path: '**', component: HomeComponent}
 ];
 

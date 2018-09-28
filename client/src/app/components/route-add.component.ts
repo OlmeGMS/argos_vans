@@ -23,6 +23,7 @@ export class RouteAddComponent implements OnInit {
 
     public titulo: string;
     public templates: Template[];
+    public template: Template;
     public rates: Rate[];
     public driverCars: DriverCar[];
     public route: Route;
@@ -30,6 +31,8 @@ export class RouteAddComponent implements OnInit {
     public precioTotal;
     public identity;
     public token;
+    public cantLocalidades;
+    public suma;
     public url: string;
     public alertMessage;
 
@@ -128,6 +131,115 @@ export class RouteAddComponent implements OnInit {
       console.log(this.route.locationAdd);
       var flag = true;
       console.log(flag);
+      console.log('ver');
+      console.log(this.route.template);
+      let id = this.route.template;
+
+      this._templateService.getTemplate(this.token, id).subscribe(
+          response => {
+            if(!response.template){
+              this._router.navigate(['/']);
+            }else{
+              this.template = response.template;
+              console.log(this.template);
+
+              console.log('il');
+              console.log(this.template);
+              if(this.template.canLocalidades != "1"){
+                this._rateService.getRate(this.token, this.route.rate).subscribe(
+                    response => {
+                      if(!response.rate){
+                        this._router.navigate(['/']);
+                      }else{
+                        this.precio = response.rate;
+                        this.precioTotal = this.precio.precio;
+
+                        this.cantLocalidades = this.template.canLocalidades;
+                        this.suma = this.cantLocalidades * 12490;
+
+                        this.precioTotal = this.precioTotal + this.suma;
+                        this.route.price = this.precioTotal;
+                        this._routeService.addRoute(this.token, this.route).subscribe(
+                          response => {
+                            if(!response.route){
+                              this.alertMessage = 'Error en el servidor';
+                            }else{
+                              this.alertMessage = 'La ruta fue creada correctamente';
+                              this.route = response.route;
+                            }
+                          },
+                          error => {
+                            var errorMessage = <any>error;
+                             if(errorMessage != null){
+                               var body = JSON.parse(error._body);
+                               this.alertMessage = body.message;
+                               console.log(error);
+                             }
+                          }
+                        );
+
+                      }
+                    },
+                    error => {
+                      var errorMessage = <any>error;
+                       if(errorMessage != null){
+                         var body = JSON.parse(error._body);
+                         console.log(error);
+                       }
+                    }
+                );
+
+
+              }else{
+                this._rateService.getRate(this.token, this.route.rate).subscribe(
+                    response => {
+                      if(!response.rate){
+                        this._router.navigate(['/']);
+                      }else{
+                        this.precio = response.rate;
+                        this.route.price = this.precio.precio;
+                        this._routeService.addRoute(this.token, this.route).subscribe(
+                          response => {
+                            if(!response.route){
+                              this.alertMessage = 'Error en el servidor';
+                            }else{
+                              this.alertMessage = 'La ruta fue creada correctamente';
+                              this.route = response.route;
+                            }
+                          },
+                          error => {
+                            var errorMessage = <any>error;
+                             if(errorMessage != null){
+                               var body = JSON.parse(error._body);
+                               this.alertMessage = body.message;
+                               console.log(error);
+                             }
+                          }
+                        );
+                      }
+                    },
+                    error => {
+                      var errorMessage = <any>error;
+                       if(errorMessage != null){
+                         var body = JSON.parse(error._body);
+                         console.log(error);
+                       }
+                    }
+                );
+              }
+            }
+          },
+          error => {
+            var errorMessage = <any>error;
+             if(errorMessage != null){
+               var body = JSON.parse(error._body);
+               console.log(error);
+             }
+          }
+      );
+
+
+      /*
       if(this.route.locationAdd == 'true'){
         console.log('bruja');
         this._rateService.getRate(this.token, this.route.rate).subscribe(
@@ -211,7 +323,7 @@ export class RouteAddComponent implements OnInit {
 
       }
 
-
+*/
 
 
 

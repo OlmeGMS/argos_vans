@@ -20,6 +20,7 @@ var employee_routes = require('./routes/employee');
 var arl_routes = require('./routes/arl');
 var eps_routes = require('./routes/eps');
 var driver_routes = require('./routes/driver');
+var locationadd_routes = require('./routes/locationAdd');
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -49,6 +50,7 @@ app.use('/api', employee_routes);
 app.use('/api', arl_routes);
 app.use('/api', eps_routes);
 app.use('/api', driver_routes);
+app.use('/api', locationadd_routes);
 
 
 
