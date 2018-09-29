@@ -7,16 +7,18 @@ import { TemplateService } from '../services/template.service';
 import { RateService } from '../services/rate.service';
 import { DriverCarService } from '../services/driverCar.service';
 import { RouteService } from '../services/route.service';
+import { LocationAddService } from '../services/locationadd.service';
 import { Template } from '../models/template';
 import { Rate } from '../models/rate';
 import { DriverCar } from '../models/driver_car';
 import { Route } from '../models/route';
+import { LocationAdd } from '../models/locationAdd';
 import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'route-add',
   templateUrl: '../views/route-add.html',
-  providers: [UserService, TemplateService, RateService, DriverCarService, RouteService]
+  providers: [UserService, TemplateService, RateService, DriverCarService, RouteService, LocationAddService]
 })
 
 export class RouteAddComponent implements OnInit {
@@ -27,6 +29,8 @@ export class RouteAddComponent implements OnInit {
     public rates: Rate[];
     public driverCars: DriverCar[];
     public route: Route;
+    public locationAddPrice: LocationAdd;
+    public precioLocalidadAdd;
     public precio;
     public precioTotal;
     public identity;
@@ -44,7 +48,8 @@ export class RouteAddComponent implements OnInit {
       private _templateService: TemplateService,
       private _rateService: RateService,
       private _driverCarService: DriverCarService,
-      private _routeService: RouteService
+      private _routeService: RouteService,
+      private _locationAddService: LocationAddService
     ){
       this.titulo = 'Crear Ruta';
       this.identity = this._userService.getIdentity();
@@ -53,6 +58,7 @@ export class RouteAddComponent implements OnInit {
       this.getRateList();
       this.getDriverCarList();
       this.getTempalteList();
+      this.getLocationAdd();
     }
 
     ngOnInit(){
@@ -79,6 +85,31 @@ export class RouteAddComponent implements OnInit {
              }
         }
       );
+    }
+
+    getLocationAdd(){
+
+        let id = '5baf8ab287653702b800ee9f';
+        this._locationAddService.getLocationAdd(this.token, id).subscribe(
+            response => {
+              if(!response.locationAdd){
+                this._router.navigate(['/']);
+              }else{
+                this.locationAddPrice = response.locationAdd;
+                console.log(this.locationAddPrice);
+                console.log(this.locationAddPrice.price);
+              }
+            },
+            error => {
+              var errorMessage = <any>error;
+               if(errorMessage != null){
+                 var body = JSON.parse(error._body);
+                 console.log(error);
+               }
+            }
+        );
+
+
     }
 
     getDriverCarList(){
@@ -144,7 +175,7 @@ export class RouteAddComponent implements OnInit {
               console.log(this.template);
 
               console.log('il');
-              console.log(this.template);
+
               if(this.template.canLocalidades != "1"){
                 this._rateService.getRate(this.token, this.route.rate).subscribe(
                     response => {
@@ -155,10 +186,14 @@ export class RouteAddComponent implements OnInit {
                         this.precioTotal = this.precio.precio;
 
                         this.cantLocalidades = this.template.canLocalidades;
-                        this.suma = this.cantLocalidades * 12490;
+                        this.precioLocalidadAdd = Number(this.locationAddPrice.price);
+                        this.suma = this.cantLocalidades * this.precioLocalidadAdd;
 
                         this.precioTotal = this.precioTotal + this.suma;
                         this.route.price = this.precioTotal;
+                        console.log(this.route.price);
+                        console.log(this.route);
+
                         this._routeService.addRoute(this.token, this.route).subscribe(
                           response => {
                             if(!response.route){
@@ -177,6 +212,7 @@ export class RouteAddComponent implements OnInit {
                              }
                           }
                         );
+
 
                       }
                     },

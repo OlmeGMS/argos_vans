@@ -103,6 +103,8 @@
               <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-dollar sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Factura</span></a>
               <ul>
                 <li><a [routerLink]="['/ruta-factura']"><i class="fa fa-circle-o"></i> Ruta factura</a></li>
+                <li><a [routerLink]="['/precio-localidad-adicionales']"><i class="fa fa-circle-o"></i> Valor localidad adicional</a></li>
+                <li><a [routerLink]="['/crear-precio-localidad-adicional']"><i class="fa fa-circle-o"></i> Crear localidad adicional</a></li>
               </ul>
 
            </ul>
@@ -119,10 +121,16 @@
                <li><a [routerLink]="['/empleados']"><i class="fa fa-circle-o"></i> Lista Empleado</a></li>
                <li><a [routerLink]="['/crear-empleado']"><i class="fa fa-circle-o"></i> Crear Empleado</a></li>
              </ul>
+             <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-road sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Ruta</span></a>
+             <ul>
+               <li><a [routerLink]="['/rutas-programadas']"><i class="fa fa-circle-o"></i> Rutas programadas</a></li>
+               <li><a [routerLink]="['/rutas-finalizadas']"><i class="fa fa-circle-o"></i> Rutas finalizadas</a></li>
+
+             </ul>
 
           </ul>
           <!-- END Sidebar Navigation ClientAdmin-->
-          <!-- Sidebar Navigation ClientAdmin -->
+          <!-- Sidebar Navigation Coodinador -->
           <ul class="sidebar-nav" *ngIf="identity && identity.rol.name == 'Coordinador'">
 
 
@@ -136,7 +144,26 @@
             </ul>
 
          </ul>
-         <!-- END Sidebar Navigation ClientAdmin-->
+         <!-- END Sidebar Navigation Coodinador-->
+         <!-- Sidebar Navigation Facturador -->
+         <ul class="sidebar-nav" *ngIf="identity && identity.rol.name == 'Facturador'">
+
+
+           <a href="#" class="sidebar-nav-menu"><span class="sidebar-nav-mini-hide">MENU DE NAVEGACIÓN</span></a>
+
+           <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-road sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Ruta</span></a>
+           <ul>
+             <li><a [routerLink]="['/rutas-programadas']"><i class="fa fa-circle-o"></i> Rutas programadas</a></li>
+             <li><a [routerLink]="['/rutas-finalizadas']"><i class="fa fa-circle-o"></i> Rutas finalizadas</a></li>
+
+           </ul>
+           <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-dollar sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Factura</span></a>
+           <ul>
+             <li><a [routerLink]="['/ruta-factura']"><i class="fa fa-circle-o"></i> Ruta factura</a></li>
+           </ul>
+
+        </ul>
+        <!-- END Sidebar Navigation Facturador-->
 
            <!-- Sidebar Notifications -->
 

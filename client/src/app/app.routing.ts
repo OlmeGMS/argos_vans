@@ -141,7 +141,7 @@ const appRoutes: Routes = [
   {path: 'ruta-factura', component: RouteBillComponent},
   {path: 'precio-localidad-adicionales', component: LocationAddTableComponent},
   {path: 'crear-precio-localidad-adicional', component: LocationAddAddComponent},
-  {path: 'editar-precio-localidad-adicional', component: LocationAddEditComponent},
+  {path: 'editar-precio-localidad-adicional/:id', component: LocationAddEditComponent},
   {path: '**', component: HomeComponent}
 ];
 

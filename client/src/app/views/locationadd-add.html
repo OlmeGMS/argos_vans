@@ -34,7 +34,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="price">precio<span class="text-danger">*</span></label>
           <div class="col-md-6">
-            <input type="text" id="price" #price="ngModel" name="price" class="form-control" [(ngModel)]="city.name" placeholder="Digite el nombre de la ciudad" value="" required>
+            <input type="text" id="price" #price="ngModel" name="price" class="form-control" [(ngModel)]="locationAdd.price" placeholder="Digite el precio de la loclaidad adicional" value="" required>
             <span *ngIf="!price.valid && price.touched"><p style="color:#b61922;">El precio es obligatorio.</p></span>
           </div>
         </div>

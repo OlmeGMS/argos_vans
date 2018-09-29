@@ -29,7 +29,7 @@ export class LocationAddEditComponent implements OnInit {
     private _userService: UserService,
     private _locationAddService: LocationAddService
   ){
-    this.titulo = "Editar ciudad";
+    this.titulo = "Editar valor localidad adicional";
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
