@@ -105,6 +105,48 @@ function updateUser(req, res)
 
 }
 
+function updatePassword(req, res)
+{
+  var user = new User();
+  var userId = req.params.id;
+  var update = req.body;
+  var password = update.password;
+  //console.log(update);
+  console.log(userId);
+  //console.log(password);
+
+
+    if (password) {
+      // Cifrar las contraseñas
+      bcrypt.hash(password, null, null, function(err, hash){
+      user.password = hash;
+          // Actualizar pass usuario
+          update.password = hash;
+          //console.log(hash);
+          //console.log(update);
+
+          User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
+            if (err) {
+              res.status(500).send({message: 'Error no se puedo acutalizar el usuario'});
+            }else {
+              if (!userUpdated) {
+                res.status(404).send({message: 'El usuario no ha podido actualizarse'});
+              }else {
+                res.status(200).send({user: userUpdated});
+              }
+            }
+          });
+          
+      });
+
+    }else {
+      res.status(500).send({message: 'Introduce la contraseña'});
+    }
+
+
+
+}
+
 function deleteUser(req, res)
 {
   var userId = req.params.id;
@@ -221,6 +263,7 @@ module.exports = {
   updateUser,
   deleteUser,
   uploadImage,
+  updatePassword,
   getImageFile,
   getListUser,
   searchUser

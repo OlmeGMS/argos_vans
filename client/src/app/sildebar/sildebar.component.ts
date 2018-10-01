@@ -16,12 +16,14 @@ export class SildebarComponent implements OnInit {
   public identity;
   public token;
   public url: string;
+  public alertMessage;
 
 
   constructor(
     private _userService: UserService
   ) {
     this.user = new User('','','','','','','','','', true);
+    //
   }
 
   ngOnInit() {
@@ -30,6 +32,8 @@ export class SildebarComponent implements OnInit {
     this.url = GLOBAL.url;
     console.log('o');
     console.log(this.identity);
+    this.user = this.identity;
+    console.log(this.user);
   }
 
 
@@ -39,6 +43,29 @@ export class SildebarComponent implements OnInit {
       localStorage.clear();
       this.identity = null;
       this.token = null;
+  }
+
+  onSubmit(){
+    console.log(this.user.password);
+    this._userService.updatePassword(this.user).subscribe(
+      response => {
+        if (!response.user) {
+            this.alertMessage = 'No se pudo actualizar el password';
+        }else{
+            this.alertMessage = '¡¡¡ Cambio de contraseña exitoso !!!';
+            this.user = response.user;
+            console.log(this.user);
+        }
+      },
+      error => {
+        var errorMessage = <any>error;
+        if (errorMessage != null) {
+            var body = JSON.parse(error._body);
+            this.alertMessage = body.message;
+            console.log(error);
+        }
+      }
+    );
   }
 
 }

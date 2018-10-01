@@ -27,6 +27,7 @@
         <div class="sidebar-user-links">
           <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
           <a href="javascript:void(0)" [routerLink]="['/mis-datos']" class="enable-tooltip" data-placement="bottom" title="Configuración" ><i class="gi gi-user"></i></a>
+          <a href="javascript:void(0)" class="enable-tooltip" data-placement="bottom" title="Settings" onclick="$('#modal-user-settings').modal('show');"><i class="gi gi-cogwheel"></i></a>
           <a href="index.html" data-toggle="tooltip" data-placement="bottom" title="Cerrar Sesión " (click)="logout()"><i class="gi gi-exit"></i></a>
         </div>
       </div>
@@ -184,3 +185,64 @@
        <!-- END Wrapper for scrolling functionality -->
      </div>
      <!-- END Main Sidebar -->
+
+     <div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <!-- Modal Header -->
+                 <div class="modal-header text-center">
+                     <h2 class="modal-title"><i class="fa fa-pencil"></i> Configuración</h2>
+                 </div>
+                 <!-- END Modal Header -->
+
+                 <!-- Modal Body -->
+                 <div class="modal-body">
+                   <div *ngIf="alertMessage">
+                       <div class="alert alert-info">
+                         {{alertMessage}}
+                       </div>
+                   </div>
+                     <form #userUpdateForm = "ngForm" class="form-horizontal form-bordered" (ngSubmit)="onSubmit()">
+                         <fieldset>
+                             <legend>Información</legend>
+                             <div class="form-group">
+                                 <label class="col-md-4 control-label">Nombre</label>
+                                 <div class="col-md-8">
+                                     <p class="form-control-static">{{identity.name}} {{identity.surname}}</p>
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <label class="col-md-4 control-label" for="user-settings-email">Email</label>
+                                 <div class="col-md-8">
+                                     <p class="form-control-static">{{identity.email}}</p>
+                                 </div>
+                             </div>
+                         </fieldset>
+                         <fieldset>
+                             <legend>Cambiar Password</legend>
+                             <div class="form-group">
+                                 <label class="col-md-4 control-label" for="user-settings-password">Nuevo Password</label>
+                                 <div class="col-md-8">
+                                     <input type="password" #password = "ngModel" id="user-settings-password" name="password" class="form-control" [(ngModel)]="user.password" placeholder="Digita tu nuevo password">
+                                 </div>
+                                 <span *ngIf="!password.valid && password.touched">El password es obligatorio</span>
+                             </div>
+                             <!--<div class="form-group">
+                                 <label class="col-md-4 control-label" for="user-settings-repassword">Confirmar Nuevo Password</label>
+                                 <div class="col-md-8">
+                                     <input type="password" id="user-settings-repassword" name="user-settings-repassword" class="form-control" placeholder="Confirma tu nuevo password!">
+                                 </div>
+                             </div>-->
+                         </fieldset>
+                         <div class="form-group form-actions">
+                             <div class="col-xs-12 text-right">
+                                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cerrar</button>
+                                 <button type="submit" class="btn btn-sm btn-primary" [disabled]="!userUpdateForm.valid" >Guardar cambios</button>
+                             </div>
+                         </div>
+                     </form>
+                 </div>
+                 <!-- END Modal Body -->
+             </div>
+         </div>
+     </div>
