@@ -1,4 +1,4 @@
-<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador'">
+<div class="" *ngIf="identity && identity.rol.name == 'Super Administrador' || identity.rol.name == 'Administrador' || identity.rol.name == 'Coordinador'|| identity.rol.name == 'Facturador'">
   <!-- Blank Header -->
   <div class="content-header">
       <div class="header-section">
@@ -63,7 +63,7 @@
   </div>
   <!-- END Example Block -->
 </div>
-<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador'">
+<div class="" *ngIf="!identity || identity.rol.name != 'Super Administrador' && identity.rol.name != 'Administrador' && identity.rol.name != 'Coordinador' && identity.rol.name != 'Facturador'">
   <h2>ERROR: Permisos</h2>
   <br>
   <p style=" color: #333;">No tienes acceso a esta parte de la aplicación.</p>
