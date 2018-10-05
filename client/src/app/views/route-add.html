@@ -63,7 +63,7 @@
           <div class="col-md-6">
             <select class="form-control" #template="ngModel" name="template" id="template" [(ngModel)]="route.template" required>
                 <option value="" disabled>Selecione la tarifa</option>
-                <option *ngFor="let template of templates" value="{{template._id}}">{{template.title}} | {{template.location_start}} - {{template.location_end}} | {{template.date_start}}</option>
+                <option *ngFor="let template of templates" value="{{template._id}}">{{template.location_start}} - {{template.location_end}}<span *ngIf="template.canLocalidades > 1"> | Tiene localidad adicional</span></option>
             </select>
             <span *ngIf="!driverCar.valid && driverCar.touched"><p style="color:#b61922;">El prestador es obligatorio.</p></span>
           </div>

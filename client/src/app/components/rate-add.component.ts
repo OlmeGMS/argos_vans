@@ -12,7 +12,7 @@ import { Location } from '../models/location';
 import { AppComponent } from '../app.component';
 
 @Component({
-  selector: 'car-add',
+  selector: 'rate-add',
   templateUrl: '../views/rate-add.html',
   providers: [UserService, RateService, CityService, LocationService]
 })
@@ -40,7 +40,7 @@ export class RateAddComponent implements OnInit {
     private _cityService: CityService,
     private _locationService: LocationService
   ){
-    this.titulo = 'Crear vehículo',
+    this.titulo = 'Crear tarifa',
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.rate = new Rate('', '', '');

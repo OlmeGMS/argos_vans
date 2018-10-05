@@ -2,6 +2,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 });
 
 // rutas base
+app.use('/', express.static('client', {redirect: false}));
 app.use('/api', rol_routes);
 app.use('/api', user_routes);
 app.use('/api', city_routes);
@@ -52,6 +54,9 @@ app.use('/api', eps_routes);
 app.use('/api', driver_routes);
 app.use('/api', locationadd_routes);
 
-
+//url amigable
+app.get('*', function(req, res, next){
+  res.sendFile(path.resolve('client/index.html'));
+});
 
 module.exports = app;

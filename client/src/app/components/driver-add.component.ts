@@ -17,7 +17,7 @@ import { AppComponent } from '../app.component';
 @Component({
   selector: 'driver-add',
   templateUrl: '../views/driver-add.html',
-  providers: [UserService, RolService, ArlService, , EpsService, DriverService]
+  providers: [UserService, RolService, ArlService, EpsService, DriverService]
 })
 
 export class DriverAddComponent implements OnInit {
@@ -31,7 +31,7 @@ export class DriverAddComponent implements OnInit {
   public identity;
   public token;
   public url: string;
-  public alertMessage
+  public alertMessage;
 
   constructor(
     private _route: ActivatedRoute,

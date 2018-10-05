@@ -119,11 +119,41 @@ function deleteRate(req, res)
   });
 }
 
+function searchRate(req, res)
+{
+  var params = req.body;
+  var origen = params.origin;
+  var destino = params.destination;
+  var yu;
+
+  var find = Rate.find().sort('Rate').where('origen').equals(origen);
+
+  find.populate('rate').exec((err, rates) => {
+  if(err){
+    res.status(500).send({message: 'Error en la petición'});
+  }else {
+    if (!rates) {
+      res.status(404).send({message: 'No hay tarifas creadas !!'});
+    }else{
+      res.status(200).send({rates: rates});
+    }
+
+  }
+  });
+
+
+
+
+
+
+}
+
 
 module.exports = {
   getRate,
   getRates,
   getListRates,
+  searchRate,
   saveRate,
   updateRate,
   deleteRate

@@ -68,6 +68,8 @@ import { RouteBillComponent } from './components/route-bill.component';
 import { LocationAddTableComponent } from './components/locationadd-table.component';
 import { LocationAddAddComponent } from './components/locationadd-add.component';
 import { LocationAddEditComponent } from './components/locationadd-edit.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -138,7 +140,8 @@ import { LocationAddEditComponent } from './components/locationadd-edit.componen
     FormsModule,
     HttpModule,
     Ng2SmartTableModule,
-    routing
+    routing,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

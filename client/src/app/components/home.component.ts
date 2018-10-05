@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit{
   public token;
   public url: string;
   public appComponent;
+  public myDate;
 
   constructor(
     private _route: ActivatedRoute,

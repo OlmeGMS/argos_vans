@@ -125,9 +125,9 @@
           <div class="col-md-6">
             <select class="form-control" #type_address_end="ngModel" name="type_address_end" id="type_address_end" [(ngModel)]="template.type_address_end" required>
 
-                <option value="unico_end">Unico Orgien</option>
-                <option value="varios_end">Varios Origenes</option>
-                <option value="" disabled>Selecione la tipo origen</option>
+                <option value="unico_end">Unico Destino</option>
+                <option value="varios_end">Varios Destino</option>
+                <option value="" disabled>Selecione la tipo destino</option>
             </select>
             <span *ngIf="!type_address_start.valid && type_address_start.touched"><p style="color:#b61922;">El tipo es obligatorio.</p></span>
           </div>
